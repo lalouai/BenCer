@@ -72,6 +72,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\Beneficiario.vb" />
+    <Compile Include="Entidades\Certificado.vb" />
+    <Compile Include="Entidades\Constructor.vb" />
+    <Compile Include="Entidades\Familiar.vb" />
+    <Compile Include="Entidades\Obra.vb" />
+    <Compile Include="Entidades\Postulante.vb" />
+    <Compile Include="Entidades\Presupuesto.vb" />
+    <Compile Include="Entidades\Programa.vb" />
+    <Compile Include="Entidades\RenglonCertificado.vb" />
+    <Compile Include="Entidades\RenglonPpto.vb" />
+    <Compile Include="Entidades\TipoObra.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +105,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Entidades\Persona.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
