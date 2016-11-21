@@ -72,6 +72,19 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controladores\ControladorConstructores.vb" />
+    <Compile Include="Controladores\ControladorObraAlta.vb" />
+    <Compile Include="Controladores\ControladorObras.vb" />
+    <Compile Include="Controladores\ControladorPersona.vb" />
+    <Compile Include="Controladores\ControladorPresupuestos.vb" />
+    <Compile Include="Helpers\ValidacionesExcepcion.vb" />
+    <Compile Include="Modelos\DaoObra.vb" />
+    <Compile Include="Modelos\DaoPrograma.vb" />
+    <Compile Include="Modelos\DaoBeneficiario.vb" />
+    <Compile Include="Modelos\DaoCertificado.vb" />
+    <Compile Include="Modelos\DaoConstructor.vb" />
+    <Compile Include="Modelos\DaoFamiliar.vb" />
+    <Compile Include="Modelos\DaoPresupuesto.vb" />
     <Compile Include="Entidades\Beneficiario.vb" />
     <Compile Include="Entidades\Certificado.vb" />
     <Compile Include="Entidades\Constructor.vb" />
@@ -82,12 +95,35 @@
     <Compile Include="Entidades\Programa.vb" />
     <Compile Include="Entidades\RenglonCertificado.vb" />
     <Compile Include="Entidades\RenglonPpto.vb" />
+    <Compile Include="Entidades\TipoDocumento.vb" />
     <Compile Include="Entidades\TipoObra.vb" />
-    <Compile Include="Form1.vb">
+    <Compile Include="Modelos\DaoEstadoCivil.vb" />
+    <Compile Include="Modelos\DaoPersona.vb" />
+    <Compile Include="Modelos\DaoPostulante.vb" />
+    <Compile Include="Modelos\DaoRenglonPpto.vb" />
+    <Compile Include="Modelos\DaoTipoDoc.vb" />
+    <Compile Include="Modelos\DataManager.vb" />
+    <Compile Include="Entidades\EstadoCivil.vb" />
+    <Compile Include="Modelos\InterfaceDao.vb" />
+    <Compile Include="Modelos\DaoTipoObra.vb" />
+    <Compile Include="Vistas\Constructores.Designer.vb">
+      <DependentUpon>Constructores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Constructores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Controladores\ControladorProgramas.vb" />
+    <Compile Include="Vistas\inner_tab.Designer.vb">
+      <DependentUpon>inner_tab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\inner_tab.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Inicio.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Inicio.Designer.vb">
+      <DependentUpon>Inicio.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -106,16 +142,67 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Entidades\Persona.vb" />
+    <Compile Include="Vistas\ObraAlta.Designer.vb">
+      <DependentUpon>ObraAlta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ObraAlta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Obras.Designer.vb">
+      <DependentUpon>Obras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Obras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Personas.Designer.vb">
+      <DependentUpon>Personas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Personas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Presupuestos.Designer.vb">
+      <DependentUpon>Presupuestos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Presupuestos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Programas.Designer.vb">
+      <DependentUpon>Programas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Programas.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="Vistas\Constructores.resx">
+      <DependentUpon>Constructores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\inner_tab.resx">
+      <DependentUpon>inner_tab.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Inicio.resx">
+      <DependentUpon>Inicio.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ObraAlta.resx">
+      <DependentUpon>ObraAlta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Obras.resx">
+      <DependentUpon>Obras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Personas.resx">
+      <DependentUpon>Personas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Presupuestos.resx">
+      <DependentUpon>Presupuestos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Programas.resx">
+      <DependentUpon>Programas.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +217,7 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

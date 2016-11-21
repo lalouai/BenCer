@@ -60,12 +60,12 @@
         End Set
     End Property
 
-    Public Property tipo_doc As Integer
+    Public Property tipo_doc As String
         Get
-            Return _cod_persona
+            Return _tipo_doc
         End Get
-        Set(value As Integer)
-            _cod_persona = value
+        Set(value As String)
+            _tipo_doc = value
         End Set
     End Property
 

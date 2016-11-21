@@ -3,6 +3,14 @@
     Private _nombre As String
     Private _cuit As String
 
+    Public Sub New()
+    End Sub
+
+    Public Sub New(nombre As String, cod_constructor As Integer)
+        _cod_constructor = cod_constructor
+        _nombre = nombre
+    End Sub
+
     Public Property cod_constructor As Integer
         Get
             Return _cod_constructor

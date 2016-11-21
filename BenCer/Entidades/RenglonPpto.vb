@@ -1,4 +1,4 @@
-﻿Friend Class RenglonPpto
+﻿Public Class RenglonPpto
 
     Private _cod_r_ppto As Integer
     Private _cod_ppto As Integer
@@ -53,4 +53,13 @@
             _descripcion = value
         End Set
     End Property
+
+    Public Overrides Function ToString() As String
+        Return "cod_r_ppto->" & _cod_r_ppto & vbCrLf &
+               "cod_ppto->" & _cod_ppto & vbCrLf &
+               "item->" & _item & vbCrLf &
+               "descripion->" & _descripcion & vbCrLf &
+               "costo->" & _costo & vbCrLf
+    End Function
+
 End Class
