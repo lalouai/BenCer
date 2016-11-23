@@ -145,9 +145,7 @@
             Else
                 MsgBox("Lo siento, pero tanto el programa" & vbCrLf &
                        "como el prototipo son datos requeridos" & vbCrLf &
-                       "Por favor revise el formulario y vuelva a intentar" & vbCrLf &
-                       "programa ->" & programa & vbCrLf &
-                       "prototipo->" & prototipo)
+                       "Por favor revise el formulario y vuelva a intentar")
                 Exit Sub
             End If
         ElseIf btn_obra_alta_crear.Text.Equals("Guardar") Then

@@ -5,6 +5,7 @@
     Private _cod_tipo_obra As Integer
     Private _cod_beneficiario As Integer
     Private _cod_constructor As Integer
+    Private _cod_ppto As Integer
     Private _fecha_inicio As String
     Private _fecha_fin As String
     Private _programa As String
@@ -115,7 +116,7 @@
         Get
             If fecha_inicio Is Nothing Then
                 Return "S/Inicio"
-            ElseIf fecha_inicio IsNot Nothing And fecha_inicio Is Nothing Then
+            ElseIf fecha_inicio IsNot Nothing And fecha_fin Is Nothing Then
                 Return "En curso"
             ElseIf fecha_inicio IsNot Nothing And fecha_fin IsNot Nothing Then
                 Return "Terminada"
@@ -123,5 +124,12 @@
         End Get
     End Property
 
-
+    Public Property cod_ppto As Integer
+        Get
+            Return _cod_ppto
+        End Get
+        Set(value As Integer)
+            _cod_ppto = value
+        End Set
+    End Property
 End Class

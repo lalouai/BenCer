@@ -36,6 +36,7 @@ Partial Class Constructores
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txt_cons_cod_constructor = New System.Windows.Forms.TextBox()
+        Me.btn_cons_cerrar = New System.Windows.Forms.Button()
         CType(Me.dvg_cons, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,7 +50,7 @@ Partial Class Constructores
         Me.dvg_cons.RowHeadersVisible = False
         Me.dvg_cons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dvg_cons.Size = New System.Drawing.Size(755, 426)
-        Me.dvg_cons.TabIndex = 0
+        Me.dvg_cons.TabIndex = 3
         '
         'ID
         '
@@ -81,7 +82,7 @@ Partial Class Constructores
         Me.btn_cons_editar.Location = New System.Drawing.Point(773, 12)
         Me.btn_cons_editar.Name = "btn_cons_editar"
         Me.btn_cons_editar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_cons_editar.TabIndex = 1
+        Me.btn_cons_editar.TabIndex = 4
         Me.btn_cons_editar.Text = "Editar"
         Me.btn_cons_editar.UseVisualStyleBackColor = True
         '
@@ -90,7 +91,7 @@ Partial Class Constructores
         Me.btn_cons_eliminar.Location = New System.Drawing.Point(773, 41)
         Me.btn_cons_eliminar.Name = "btn_cons_eliminar"
         Me.btn_cons_eliminar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_cons_eliminar.TabIndex = 2
+        Me.btn_cons_eliminar.TabIndex = 5
         Me.btn_cons_eliminar.Text = "Eliminar"
         Me.btn_cons_eliminar.UseVisualStyleBackColor = True
         '
@@ -99,7 +100,7 @@ Partial Class Constructores
         Me.btn_cons_agregar.Location = New System.Drawing.Point(773, 465)
         Me.btn_cons_agregar.Name = "btn_cons_agregar"
         Me.btn_cons_agregar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_cons_agregar.TabIndex = 3
+        Me.btn_cons_agregar.TabIndex = 2
         Me.btn_cons_agregar.Text = "Agregar"
         Me.btn_cons_agregar.UseVisualStyleBackColor = True
         '
@@ -108,14 +109,14 @@ Partial Class Constructores
         Me.txt_cons_cuit.Location = New System.Drawing.Point(628, 467)
         Me.txt_cons_cuit.Name = "txt_cons_cuit"
         Me.txt_cons_cuit.Size = New System.Drawing.Size(137, 20)
-        Me.txt_cons_cuit.TabIndex = 4
+        Me.txt_cons_cuit.TabIndex = 1
         '
         'txt_cons_nombre
         '
         Me.txt_cons_nombre.Location = New System.Drawing.Point(374, 467)
         Me.txt_cons_nombre.Name = "txt_cons_nombre"
         Me.txt_cons_nombre.Size = New System.Drawing.Size(248, 20)
-        Me.txt_cons_nombre.TabIndex = 5
+        Me.txt_cons_nombre.TabIndex = 0
         '
         'lbl_cons_error
         '
@@ -155,11 +156,21 @@ Partial Class Constructores
         Me.txt_cons_cod_constructor.TabIndex = 9
         Me.txt_cons_cod_constructor.Visible = False
         '
+        'btn_cons_cerrar
+        '
+        Me.btn_cons_cerrar.Location = New System.Drawing.Point(773, 415)
+        Me.btn_cons_cerrar.Name = "btn_cons_cerrar"
+        Me.btn_cons_cerrar.Size = New System.Drawing.Size(142, 23)
+        Me.btn_cons_cerrar.TabIndex = 6
+        Me.btn_cons_cerrar.Text = "Cerrar"
+        Me.btn_cons_cerrar.UseVisualStyleBackColor = True
+        '
         'Constructores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(925, 531)
+        Me.Controls.Add(Me.btn_cons_cerrar)
         Me.Controls.Add(Me.txt_cons_cod_constructor)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -191,4 +202,5 @@ Partial Class Constructores
     Friend WithEvents Ape_Nom As DataGridViewTextBoxColumn
     Friend WithEvents cuit As DataGridViewTextBoxColumn
     Friend WithEvents txt_cons_cod_constructor As TextBox
+    Friend WithEvents btn_cons_cerrar As Button
 End Class

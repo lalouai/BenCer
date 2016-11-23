@@ -108,7 +108,12 @@
 
     End Sub
 
-
+    Private Sub btn_cons_cerrar_Click(sender As Object, e As EventArgs) Handles btn_cons_cerrar.Click
+        Dim resultado As Integer = MessageBox.Show("Esta seguro que desea cerrar el modulo?", "Por favor confirme", MessageBoxButtons.YesNo)
+        If resultado = DialogResult.Yes Then
+            Me.Close()
+        End If
+    End Sub
 End Class
 
 

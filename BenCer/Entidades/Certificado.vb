@@ -1,8 +1,11 @@
 ﻿Public Class Certificado
     Private _cod_certificado As Integer
-    Private _cod_tipo_obra As Integer
+    Private _cod_obra As Integer
     Private _fecha_alta As Date
     Private _monto As Decimal
+    Private _estado As String
+    Private _cod_estado As Integer
+    Private _numero As Integer
 
     Public Sub Certificado()
 
@@ -16,12 +19,12 @@
         End Set
     End Property
 
-    Public Property cod_tipo_obra As Integer
+    Public Property cod_obra As Integer
         Get
-            Return _cod_tipo_obra
+            Return _cod_obra
         End Get
         Set(value As Integer)
-            _cod_tipo_obra = value
+            _cod_obra = value
         End Set
     End Property
 
@@ -40,6 +43,33 @@
         End Get
         Set(value As Decimal)
             _monto = value
+        End Set
+    End Property
+
+    Public Property estado As String
+        Get
+            Return _estado
+        End Get
+        Set(value As String)
+            _estado = value
+        End Set
+    End Property
+
+    Public Property cod_estado As Integer
+        Get
+            Return _cod_estado
+        End Get
+        Set(value As Integer)
+            _cod_estado = value
+        End Set
+    End Property
+
+    Public Property numero As Integer
+        Get
+            Return _numero
+        End Get
+        Set(value As Integer)
+            _numero = value
         End Set
     End Property
 End Class

@@ -5,6 +5,8 @@
     Private _cod_tipo_obra As Integer
     Private _fecha_alta As Date
     Private _items As List(Of RenglonPpto)
+    Private _estado As Integer
+
 
     Public Sub Presupuesto()
 
@@ -54,6 +56,12 @@
         End Set
     End Property
 
-
-
+    Public Property estado As Integer
+        Get
+            Return _estado
+        End Get
+        Set(value As Integer)
+            _estado = value
+        End Set
+    End Property
 End Class

@@ -5,15 +5,21 @@ Public Class DaoTipoObra
     Implements InterfaceDao(Of TipoObra)
 
     Public Sub eliminar(cod As Integer) Implements InterfaceDao(Of TipoObra).eliminar
-        Throw New NotImplementedException()
+        Dim consulta As String
+        consulta = "UPDATE dbo.TIPO_OBRA SET activo = 0 WHERE cod_tipo_obra =" & cod
+        Me.execnq(consulta)
     End Sub
 
     Public Function modificar(elemento As TipoObra, cod As Integer) As Integer Implements InterfaceDao(Of TipoObra).modificar
-        Throw New NotImplementedException()
+        Dim consulta As String
+        consulta = "UPDATE dbo.TIPO_OBRA SET descripcion = '" & elemento.descripcion & "' WHERE cod_constructor =" & cod
+        Return Me.execnq(consulta)
     End Function
 
     Public Function guardar(elemento As TipoObra) As Integer Implements InterfaceDao(Of TipoObra).guardar
-        Throw New NotImplementedException()
+        Dim consulta = "INSERT INTO dbo.TIPO_OBRA (descripcion, fecha_alta) OUTPUT INSERTED.COD_TIPO_OBRA VALUES ('" &
+                       elemento.descripcion & "','" & DateTime.Now.ToString("yyyy-MM-dd") & "')"
+        Return Me.ExecM(consulta)
     End Function
 
     Public Function listar() As List(Of TipoObra) Implements InterfaceDao(Of TipoObra).listar

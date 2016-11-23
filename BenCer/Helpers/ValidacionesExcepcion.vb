@@ -1,4 +1,5 @@
-﻿Public Class ValidacionesExcepcion
+﻿Imports System
+Public Class ValidacionesExcepcion
 
     Inherits Exception
 

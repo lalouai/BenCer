@@ -54,25 +54,18 @@ Public Class DataManager
         Dim ds As New DataSet
         Dim da As SqlDataAdapter
         Dim Index As Integer = 0
-
         Begin()
-
         Dim cmd As New SqlCommand(query, m_Conn, m_Trans)
-
         Try
             da = New SqlDataAdapter(cmd)
-
             da.Fill(ds)
             da.Dispose()
             da = Nothing
-
             Return ds
-
         Catch ex As Exception
             m_Trans.Rollback()
             Throw New Exception("Execute Failed - Rollback called " & ex.Message, ex)
         End Try
-
         Commit()
 
     End Function
@@ -80,20 +73,15 @@ Public Class DataManager
     Public Function ExecM(ByVal query As String) As Int32
         Dim codigo As Int32 = 0
         Begin()
-
         Dim cmd As New System.Data.SqlClient.SqlCommand
         cmd.CommandType = System.Data.CommandType.Text
         cmd.CommandText = query
         cmd.Connection = m_Conn
         cmd.Transaction = m_Trans
-
         codigo = cmd.ExecuteScalar()
-
         Commit()
-
         cmd.Dispose()
         cmd = Nothing
-
         Return codigo
     End Function
 
@@ -109,6 +97,40 @@ Public Class DataManager
         cmd.Dispose()
         cmd = Nothing
         Return affectedRows
+    End Function
+
+
+    Public Function execSp(ByVal sp As String, cod_ppto As Integer) As Integer
+
+        Dim resultado As Integer = 0
+
+        Try
+            Begin()
+            Dim cmd As New SqlCommand
+            cmd.Connection = m_Conn
+            cmd.CommandTimeout = TIMEOUT
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.CommandText = sp
+
+            Dim parameter As New SqlParameter()
+            parameter.ParameterName = "@cod_presu"
+            parameter.Direction = ParameterDirection.Input
+            parameter.Value = cod_ppto
+
+            cmd.Parameters.Add(parameter)
+
+
+            cmd.Transaction = m_Trans
+            SqlCommandBuilder.DeriveParameters(cmd)
+            resultado = cmd.ExecuteNonQuery()
+            Commit()
+            cmd.Dispose()
+            cmd = Nothing
+        Catch ex As ValidacionesExcepcion
+            Throw New ValidacionesExcepcion("Lo siento no he podido actualizar las incidencias")
+        End Try
+
+        Return resultado
     End Function
 
 End Class

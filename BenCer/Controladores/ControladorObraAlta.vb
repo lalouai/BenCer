@@ -8,6 +8,7 @@ Public Class ControladorObraAlta
     Private daoTipoObra As DaoTipoObra
     Private daoConstructor As DaoConstructor
     Private daoObra As DaoObra
+    Private daoPresupuesto As DaoPresupuesto
 
 
     Private postulantes As List(Of Postulante)
@@ -22,6 +23,7 @@ Public Class ControladorObraAlta
         daoConstructor = New DaoConstructor
         daoPrograma = New DaoPrograma
         daoTipoObra = New DaoTipoObra
+        daoPresupuesto = New DaoPresupuesto
         daoObra = New DaoObra
 
         programas = daoPrograma.listar()
@@ -70,17 +72,19 @@ Public Class ControladorObraAlta
                              constructor As String,
                              fecha_inicio As String) As Integer
 
-
+        Dim cod_tipo_obra As Integer = listaTipoObra.Find(Function(p) p.descripcion = prototipo).cod_tipo_obra
+        Dim ppto As Presupuesto = daoPresupuesto.obtener_ppto_cod_tipo(cod_tipo_obra)
 
         Dim obra As Obra = New Obra
         With obra
             .cod_beneficiario = cod_beneficiario
             .cod_programa = listaProgramas.Find(Function(p) p.nombre = programa).cod_programa
-            .cod_tipo_obra = listaTipoObra.Find(Function(p) p.descripcion = prototipo).cod_tipo_obra
+            .cod_tipo_obra = cod_tipo_obra
             .cod_constructor = If(constructor IsNot Nothing,
                                   listaConstructores.Find(Function(p) p.nombre = constructor).cod_constructor,
                                   Nothing)
             .fecha_inicio = fecha_inicio
+            .cod_ppto = ppto.cod_ppto
         End With
 
         Return daoObra.guardar(obra)

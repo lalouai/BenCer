@@ -13,7 +13,7 @@ Public Class DaoConstructor
     Public Function modificar(elemento As Constructor, cod As Integer) As Integer Implements InterfaceDao(Of Constructor).modificar
         Dim consulta As String
         consulta = "UPDATE dbo.CONSTRUCTOR SET nombre = '" & elemento.nombre & "', cuit = '" & elemento.cuit & "' WHERE cod_constructor =" & cod
-        Me.execnq(consulta)
+        Return Me.execnq(consulta)
     End Function
 
     Public Function guardar(elemento As Constructor) As Integer Implements InterfaceDao(Of Constructor).guardar

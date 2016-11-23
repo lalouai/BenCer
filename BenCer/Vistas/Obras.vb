@@ -38,6 +38,34 @@
     End Sub
 
     Private Sub btn_obra_certificar_Click(sender As Object, e As EventArgs) Handles btn_obra_certificar.Click
+        Dim obra As Obra
+        obra = Nothing
+        If dgv_obras.SelectedRows.Count = 1 Then
+            obra = dgv_obras.SelectedRows(0).DataBoundItem
+        Else
+            MsgBox("Debe seleccionar una fila para poder editarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+        End If
+
+        If obra IsNot Nothing Then
+
+            'Dim inicio As Inicio = 
+
+            Dim panel As Panel = btn_obra_certificar.FindForm().Parent()
+
+            Dim certAlta As CertificadoAlta = New CertificadoAlta(obra.cod_obra, obra.cod_ppto)
+            With certAlta
+                .TopLevel = False
+                .Visible = True
+                .FormBorderStyle = FormBorderStyle.None
+            End With
+
+            panel.Controls.Add(certAlta)
+
+            Me.Close()
+        End If
+
+
+
 
     End Sub
 

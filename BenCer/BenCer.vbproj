@@ -72,12 +72,15 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controladores\ControladorCertificacionesAlta.vb" />
     <Compile Include="Controladores\ControladorConstructores.vb" />
     <Compile Include="Controladores\ControladorObraAlta.vb" />
     <Compile Include="Controladores\ControladorObras.vb" />
     <Compile Include="Controladores\ControladorPersona.vb" />
     <Compile Include="Controladores\ControladorPresupuestos.vb" />
+    <Compile Include="Entidades\Parentezco.vb" />
     <Compile Include="Helpers\ValidacionesExcepcion.vb" />
+    <Compile Include="Modelos\DaoParentezco.vb" />
     <Compile Include="Modelos\DaoObra.vb" />
     <Compile Include="Modelos\DaoPrograma.vb" />
     <Compile Include="Modelos\DaoBeneficiario.vb" />
@@ -106,6 +109,24 @@
     <Compile Include="Entidades\EstadoCivil.vb" />
     <Compile Include="Modelos\InterfaceDao.vb" />
     <Compile Include="Modelos\DaoTipoObra.vb" />
+    <Compile Include="Vistas\Beneficiarios.Designer.vb">
+      <DependentUpon>Beneficiarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Beneficiarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Certificaciones.Designer.vb">
+      <DependentUpon>Certificaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Certificaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\CertificadoAlta.Designer.vb">
+      <DependentUpon>CertificadoAlta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\CertificadoAlta.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vistas\Constructores.Designer.vb">
       <DependentUpon>Constructores.vb</DependentUpon>
     </Compile>
@@ -113,10 +134,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controladores\ControladorProgramas.vb" />
-    <Compile Include="Vistas\inner_tab.Designer.vb">
-      <DependentUpon>inner_tab.vb</DependentUpon>
+    <Compile Include="Controladores\ControladorPrototipos.vb" />
+    <Compile Include="Controladores\ControladorFamiliares.vb" />
+    <Compile Include="Controladores\ControladorBeneficiarios.vb" />
+    <Compile Include="Controladores\ControladorCertificaciones.vb" />
+    <Compile Include="Vistas\Familiares.Designer.vb">
+      <DependentUpon>Familiares.vb</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\inner_tab.vb">
+    <Compile Include="Vistas\Familiares.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Inicio.vb">
@@ -154,10 +179,10 @@
     <Compile Include="Vistas\Obras.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Personas.Designer.vb">
-      <DependentUpon>Personas.vb</DependentUpon>
+    <Compile Include="Vistas\Postulantes.Designer.vb">
+      <DependentUpon>Postulantes.vb</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Personas.vb">
+    <Compile Include="Vistas\Postulantes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Presupuestos.Designer.vb">
@@ -172,13 +197,29 @@
     <Compile Include="Vistas\Programas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Vistas\Prototipos.Designer.vb">
+      <DependentUpon>Prototipos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Prototipos.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Vistas\Beneficiarios.resx">
+      <DependentUpon>Beneficiarios.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Certificaciones.resx">
+      <DependentUpon>Certificaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\CertificadoAlta.resx">
+      <DependentUpon>CertificadoAlta.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Constructores.resx">
       <DependentUpon>Constructores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\inner_tab.resx">
-      <DependentUpon>inner_tab.vb</DependentUpon>
+    <EmbeddedResource Include="Vistas\Familiares.resx">
+      <DependentUpon>Familiares.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Inicio.resx">
       <DependentUpon>Inicio.vb</DependentUpon>
@@ -195,14 +236,17 @@
     <EmbeddedResource Include="Vistas\Obras.resx">
       <DependentUpon>Obras.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Personas.resx">
-      <DependentUpon>Personas.vb</DependentUpon>
+    <EmbeddedResource Include="Vistas\Postulantes.resx">
+      <DependentUpon>Postulantes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Presupuestos.resx">
       <DependentUpon>Presupuestos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Programas.resx">
       <DependentUpon>Programas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Prototipos.resx">
+      <DependentUpon>Prototipos.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

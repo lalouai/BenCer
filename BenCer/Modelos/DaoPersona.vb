@@ -26,7 +26,30 @@ Public Class DaoPersona
     End Function
 
     Public Function obtener(cod As Integer) As Persona Implements InterfaceDao(Of Persona).obtener
-        Throw New NotImplementedException()
+        Dim consulta As String
+        consulta = "SELECT * FROM dbo.PERSONA AS P " &
+                   "INNER JOIN ESTADO_CIVIL AS EC ON P.cod_estado_civil = EC.cod_estado_civil " &
+                   "INNER JOIN TIPO_DOC AS TD ON P.cod_tipo_doc = TD.cod_tipo_doc " &
+                   "WHERE cod_persona = " & cod
+        Dim ds As Data.DataSet = Me.Exec(consulta)
+        Dim persona As Persona = Nothing
+
+        If ds.Tables(0).Rows.Count > 0 Then
+            For Each row In ds.Tables(0).Rows
+                persona = New Persona
+                With persona
+                    .cod_persona = row("cod_persona")
+                    .nombre = row("nombre")
+                    .apellido = row("apellido")
+                    .estado_civil = row("estado")
+                    .cod_estado_civil = row("cod_estado_civil")
+                    .cod_tipo_doc = row("cod_tipo_doc")
+                    .tipo_doc = row("tipo")
+                    .nro_doc = row("nro_doc")
+                End With
+            Next
+        End If
+        Return persona
     End Function
 
     Public Function existe(ByVal nro_doc As String) As Persona

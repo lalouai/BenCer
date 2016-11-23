@@ -22,8 +22,11 @@ Partial Class Programas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_prg = New System.Windows.Forms.DataGridView()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Ape_Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_prg_cod_programa = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -34,11 +37,9 @@ Partial Class Programas
         Me.btn_prg_eliminar = New System.Windows.Forms.Button()
         Me.btn_prg_editar = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Ape_Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lbl_prg_anio = New System.Windows.Forms.Label()
         Me.txt_prg_anio = New System.Windows.Forms.TextBox()
+        Me.btn_prg_cerrar = New System.Windows.Forms.Button()
         CType(Me.dgv_prg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,7 +53,32 @@ Partial Class Programas
         Me.dgv_prg.RowHeadersVisible = False
         Me.dgv_prg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_prg.Size = New System.Drawing.Size(755, 426)
-        Me.dgv_prg.TabIndex = 10
+        Me.dgv_prg.TabIndex = 4
+        '
+        'ID
+        '
+        Me.ID.DataPropertyName = "cod_programa"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle2
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        '
+        'Ape_Nom
+        '
+        Me.Ape_Nom.DataPropertyName = "nombre"
+        Me.Ape_Nom.HeaderText = "Nombre"
+        Me.Ape_Nom.Name = "Ape_Nom"
+        Me.Ape_Nom.ReadOnly = True
+        Me.Ape_Nom.Width = 500
+        '
+        'cuit
+        '
+        Me.cuit.DataPropertyName = "expediente"
+        Me.cuit.HeaderText = "Expediente"
+        Me.cuit.Name = "cuit"
+        Me.cuit.ReadOnly = True
+        Me.cuit.Width = 150
         '
         'txt_prg_cod_programa
         '
@@ -97,21 +123,21 @@ Partial Class Programas
         Me.txt_prg_nombre.Location = New System.Drawing.Point(98, 505)
         Me.txt_prg_nombre.Name = "txt_prg_nombre"
         Me.txt_prg_nombre.Size = New System.Drawing.Size(373, 20)
-        Me.txt_prg_nombre.TabIndex = 15
+        Me.txt_prg_nombre.TabIndex = 0
         '
         'txt_prg_expediente
         '
         Me.txt_prg_expediente.Location = New System.Drawing.Point(492, 505)
         Me.txt_prg_expediente.Name = "txt_prg_expediente"
         Me.txt_prg_expediente.Size = New System.Drawing.Size(137, 20)
-        Me.txt_prg_expediente.TabIndex = 14
+        Me.txt_prg_expediente.TabIndex = 1
         '
         'btn_prg_agregar
         '
         Me.btn_prg_agregar.Location = New System.Drawing.Point(773, 503)
         Me.btn_prg_agregar.Name = "btn_prg_agregar"
         Me.btn_prg_agregar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_prg_agregar.TabIndex = 13
+        Me.btn_prg_agregar.TabIndex = 3
         Me.btn_prg_agregar.Text = "Agregar"
         Me.btn_prg_agregar.UseVisualStyleBackColor = True
         '
@@ -120,7 +146,7 @@ Partial Class Programas
         Me.btn_prg_eliminar.Location = New System.Drawing.Point(773, 79)
         Me.btn_prg_eliminar.Name = "btn_prg_eliminar"
         Me.btn_prg_eliminar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_prg_eliminar.TabIndex = 12
+        Me.btn_prg_eliminar.TabIndex = 6
         Me.btn_prg_eliminar.Text = "Eliminar"
         Me.btn_prg_eliminar.UseVisualStyleBackColor = True
         '
@@ -129,7 +155,7 @@ Partial Class Programas
         Me.btn_prg_editar.Location = New System.Drawing.Point(773, 50)
         Me.btn_prg_editar.Name = "btn_prg_editar"
         Me.btn_prg_editar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_prg_editar.TabIndex = 11
+        Me.btn_prg_editar.TabIndex = 5
         Me.btn_prg_editar.Text = "Editar"
         Me.btn_prg_editar.UseVisualStyleBackColor = True
         '
@@ -142,31 +168,6 @@ Partial Class Programas
         Me.Label3.Size = New System.Drawing.Size(95, 20)
         Me.Label3.TabIndex = 20
         Me.Label3.Text = "Programas"
-        '
-        'ID
-        '
-        Me.ID.DataPropertyName = "cod_programa"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        '
-        'Ape_Nom
-        '
-        Me.Ape_Nom.DataPropertyName = "nombre"
-        Me.Ape_Nom.HeaderText = "Nombre"
-        Me.Ape_Nom.Name = "Ape_Nom"
-        Me.Ape_Nom.ReadOnly = True
-        Me.Ape_Nom.Width = 500
-        '
-        'cuit
-        '
-        Me.cuit.DataPropertyName = "expediente"
-        Me.cuit.HeaderText = "Expediente"
-        Me.cuit.Name = "cuit"
-        Me.cuit.ReadOnly = True
-        Me.cuit.Width = 150
         '
         'lbl_prg_anio
         '
@@ -182,13 +183,23 @@ Partial Class Programas
         Me.txt_prg_anio.Location = New System.Drawing.Point(651, 505)
         Me.txt_prg_anio.Name = "txt_prg_anio"
         Me.txt_prg_anio.Size = New System.Drawing.Size(64, 20)
-        Me.txt_prg_anio.TabIndex = 22
+        Me.txt_prg_anio.TabIndex = 2
+        '
+        'btn_prg_cerrar
+        '
+        Me.btn_prg_cerrar.Location = New System.Drawing.Point(773, 453)
+        Me.btn_prg_cerrar.Name = "btn_prg_cerrar"
+        Me.btn_prg_cerrar.Size = New System.Drawing.Size(142, 23)
+        Me.btn_prg_cerrar.TabIndex = 7
+        Me.btn_prg_cerrar.Text = "Cerrar"
+        Me.btn_prg_cerrar.UseVisualStyleBackColor = True
         '
         'Programas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(925, 546)
+        Me.Controls.Add(Me.btn_prg_cerrar)
         Me.Controls.Add(Me.txt_prg_anio)
         Me.Controls.Add(Me.lbl_prg_anio)
         Me.Controls.Add(Me.Label3)
@@ -226,4 +237,5 @@ Partial Class Programas
     Friend WithEvents cuit As DataGridViewTextBoxColumn
     Friend WithEvents lbl_prg_anio As Label
     Friend WithEvents txt_prg_anio As TextBox
+    Friend WithEvents btn_prg_cerrar As Button
 End Class

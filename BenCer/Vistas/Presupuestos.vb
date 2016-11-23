@@ -2,80 +2,100 @@
 
     Private WithEvents controlador As ControladorPresupuestos
     Private daoTipoObra As DaoTipoObra
-    Private grillas As List(Of DataGridView)
-    Private WithEvents formulario As inner_tab
-    Sub New()
+    Sub New(cod_tipo_obra As Integer)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-        controlador = New ControladorPresupuestos()
-        Dim tab As TabPage
-        TC.Alignment = TabAlignment.Left
-        TC.ItemSize = New Size(150, 50)
-        TC.SizeMode = TabSizeMode.Fixed
+        controlador = New ControladorPresupuestos(cod_tipo_obra)
 
-        grillas = New List(Of DataGridView)
+        lbl_presu_prototipo.Text = controlador.tipoObra
+        lbl_presu_costo.Text = controlador.total.ToString("C2")
+        If controlador.estado = 1 Then
+            Dim ctrl As Control
+            For Each ctrl In Me.Controls
+                ctrl.Enabled = False
+            Next
+            lbl_presu_costo.Enabled = True
+            lbl_presu_prototipo.Enabled = True
+            lbl_presu_titulo.Enabled = True
+            btn_presu_cerrar.Enabled = True
+        End If
+        dvg_presupuesto.AutoGenerateColumns = False
+        dvg_presupuesto.DataSource = controlador.listaItems
+    End Sub
 
-        TC.TabPages.Clear()
-        Dim indice As Integer = 0
 
-        For Each obra As TipoObra In controlador.tiposObra
-            tab = New TabPage
-            indice = obra.cod_tipo_obra
-            tab.Text = obra.descripcion
-            tab.Tag = indice
-            TC.TabPages.Add(tab)
-            Dim ppto = controlador.pptoObra(obra.cod_tipo_obra)
-            If Not ppto Is Nothing Then
-                formulario = New inner_tab(ppto.items, ppto.cod_ppto)
-                formulario.TopLevel = False
-                formulario.Visible = True
-                formulario.FormBorderStyle = FormBorderStyle.None
+    Private Sub btn_cerrar_Click(sender As Object, e As EventArgs) Handles btn_presu_cerrar.Click
 
-                TC.TabPages(indice - 1).Controls.Add(formulario)
+        Dim resultado As Integer = MessageBox.Show("Está seguro que desea salir?" & vbCrLf & "Puede perder los cambios no guardados", "Por favor confirme", MessageBoxButtons.YesNo)
+        If resultado = DialogResult.Yes Then
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub btn_presu_agregar_Click(sender As Object, e As EventArgs) Handles btn_presu_agregar.Click
+        If txt_presu_item.Text.Length > 0 And
+           txt_presu_subitem.Text.Length > 0 And
+           txt_presu_descripcion.Text.Length > 0 And
+           txt_presu_costo_m_obra.Text.Length > 0 Then
+
+            If btn_presu_agregar.Text.Equals("Agregar") Then
+                If controlador.guardarItem(txt_presu_item.Text, txt_presu_subitem.Text, txt_presu_descripcion.Text, txt_presu_costo_m_obra.Text) <= 0 Then
+                    MsgBox("Lo siento ha ocurrido un error, por favor vuelva a intentar")
+                    Exit Sub
+                End If
+            ElseIf btn_presu_agregar.Text.Equals("Actualizar") Then
+                If controlador.actualizarItem(txt_presu_item.Text, txt_presu_subitem.Text, txt_presu_descripcion.Text, txt_presu_costo_m_obra.Text) <= 0 Then
+                    MsgBox("Lo siento no he podido actualizar el registro, por favor vuelva a intentar")
+                    Exit Sub
+                End If
             End If
-
-        Next
-
-        tab = New TabPage
-        tab.Text = "Prototipos"
-        TC.TabPages.Add(tab)
-        TC.TabPages(TC.TabCount - 1).Controls.Add(crearGrilla())
+            actualizarLista()
+        End If
 
     End Sub
 
-    Private Function crearGrilla() As DataGridView
+    Private Sub btn_presu_consolidar_Click(sender As Object, e As EventArgs) Handles btn_presu_consolidar.Click
+        Dim resultado As Integer = MessageBox.Show("Está seguro que desea consolidarlo." & vbCrLf & "Una vez aceptado ya no podrá modificarlo.", "Por favor confirme", MessageBoxButtons.YesNo)
+        If resultado = DialogResult.Yes Then
+            If controlador.consolidar() > 0 Then
+                Me.Close()
+            End If
+        End If
 
-        Dim prototipos As DataGridView = New DataGridView()
-        prototipos.Location = New Point(50, 50)
-        prototipos.AutoGenerateColumns = True
-        prototipos.AutoSize = True
-        prototipos.DataSource = controlador.tiposObra
+    End Sub
 
-        Return prototipos
-    End Function
-
-    Private Sub guardarItem(ByVal r_ppto As RenglonPpto) Handles formulario.nuevo_item
-        If Not r_ppto Is Nothing Then
-            controlador.guardarItem(r_ppto)
+    Private Sub btn_presu_eliminar_Click(sender As Object, e As EventArgs) Handles btn_presu_eliminar.Click
+        If dvg_presupuesto.SelectedRows.Count = 1 Then
+            controlador.eliminarItem(DirectCast(dvg_presupuesto.SelectedRows(0).DataBoundItem, RenglonPpto).cod_ppto)
+            actualizarLista()
+        Else
+            MsgBox("Por favor, seleccione una fila para eliminar")
         End If
     End Sub
 
-    Private Sub modificarItem(ByVal r_ppto As RenglonPpto) Handles formulario.actualizar_item
-        If Not r_ppto Is Nothing Then
-            controlador.actualizarItem(r_ppto)
+    Private Sub btn_presu_editar_Click(sender As Object, e As EventArgs) Handles btn_presu_editar.Click
+        If dvg_presupuesto.SelectedRows.Count = 1 Then
+            Dim r_ppto As RenglonPpto = New RenglonPpto
+            r_ppto = dvg_presupuesto.SelectedRows(0).DataBoundItem
+            txt_presu_item.Text = r_ppto.item.Split(",")(0)
+            txt_presu_subitem.Text = r_ppto.item.Split(",")(1)
+            txt_presu_descripcion.Text = r_ppto.descripcion
+            txt_presu_costo_m_obra.Text = r_ppto.costo
+            btn_presu_agregar.Text = "Actualizar"
         End If
     End Sub
 
-    Private Sub eliminarItem(ByVal cod As Integer) Handles formulario.eliminar_item
-        If Not (cod = 0 Or cod = Nothing) Then
-            controlador.eliminarItem(cod)
-        End If
-    End Sub
+    Private Sub actualizarLista()
 
-    Private Sub btn_cerrar_Click(sender As Object, e As EventArgs) Handles btn_cerrar.Click
-        Me.Close()
+        txt_presu_item.Text = ""
+        txt_presu_subitem.Text = ""
+        txt_presu_descripcion.Text = ""
+        txt_presu_costo_m_obra.Text = ""
+
+        dvg_presupuesto.DataSource = Nothing
+        dvg_presupuesto.DataSource = controlador.listaItems
     End Sub
 
 End Class

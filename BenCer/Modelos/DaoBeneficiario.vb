@@ -30,7 +30,8 @@ Public Class DaoBeneficiario
         consulta = "SELECT * FROM dbo.BENEFICIARIO AS BEN" &
                    " INNER JOIN PERSONA as P ON BEN.cod_persona = P.cod_PERSONA" &
                    " INNER JOIN ESTADO_CIVIL as EC ON P.cod_estado_civil = EC.cod_estado_civil" &
-                   " INNER JOIN TIPO_DOC as TD ON P.cod_tipo_doc = TD.cod_tipo_doc"
+                   " INNER JOIN TIPO_DOC as TD ON P.cod_tipo_doc = TD.cod_tipo_doc" &
+                   " WHERE BEN.activo = 1"
 
         Dim ds As Data.DataSet = Me.Exec(consulta)
         Dim beneficiario As Beneficiario = Nothing

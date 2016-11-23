@@ -32,8 +32,8 @@ Public Class ControladorObras
         Dim beneficiario As Beneficiario = daoBeneficiario.obtener(obra.cod_beneficiario)
 
         Dim formulario As ObraAlta = New ObraAlta()
-        With formulario
 
+        With formulario
 
             .cod_obra = obra.cod_obra
             .Size = New Size(660, 585)
@@ -45,9 +45,7 @@ Public Class ControladorObras
             .txt_obra_alta_nombre.Enabled = False
             .txt_obra_alta_apellido.Text = beneficiario.apellido
             .txt_obra_alta_apellido.Enabled = False
-
             .txt_obra_alta_cod_persona.Text = beneficiario.cod_beneficiario
-
             .cmb_obra_alta_programa.DataSource = daoPrograma.listar()
             .cmb_obra_alta_programa.DisplayMember = "nombre"
             .cmb_obra_alta_programa.ValueMember = "cod_programa"
@@ -57,7 +55,6 @@ Public Class ControladorObras
             .cmb_obra_alta_prototipo.DisplayMember = "descripcion"
             .cmb_obra_alta_prototipo.ValueMember = "cod_tipo_obra"
             .cmb_obra_alta_prototipo.SelectedValue = obra.cod_tipo_obra
-
 
             Dim listaConstructores As List(Of Constructor) = daoConstructor.listar()
             listaConstructores.Insert(0, New Constructor("Seleccione un constructor", 0))
@@ -70,6 +67,7 @@ Public Class ControladorObras
         End With
 
         formulario.ShowDialog()
+
     End Sub
 
     Public Sub eliminarItem(cod As Integer)

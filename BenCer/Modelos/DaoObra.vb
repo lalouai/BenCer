@@ -19,16 +19,17 @@ Public Class DaoObra
                    "cod_constructor = " & elemento.cod_constructor & ", " &
                    "fecha_inicio = '" & elemento.fecha_inicio & "', " &
                    "fecha_fin = '" & elemento.fecha_fin & "' " &
+                   "cod_ppto = '" & elemento.cod_ppto & "' " &
                    " WHERE cod_obra =" & cod
         Return Me.execnq(consulta)
     End Function
 
     Public Function guardar(elemento As Obra) As Integer Implements InterfaceDao(Of Obra).guardar
         Dim consulta = "INSERT INTO dbo.OBRA " &
-                       "(cod_programa ,cod_tipo_obra, cod_beneficiario, cod_constructor, fecha_inicio) " &
-                       "OUTPUT INSERTED.COD_PROGRAMA VALUES " &
+                       "(cod_programa ,cod_tipo_obra, cod_beneficiario, cod_constructor, cod_ppto, fecha_inicio) " &
+                       "OUTPUT INSERTED.cod_obra VALUES " &
                        "(" & elemento.cod_programa & ", " & elemento.cod_tipo_obra & ", " & elemento.cod_beneficiario & ", " &
-                       elemento.cod_constructor & ", '" & elemento.fecha_inicio & "')"
+                       elemento.cod_constructor & ", " & elemento.cod_ppto & ", '" & elemento.fecha_inicio & "')"
         Return Me.ExecM(consulta)
     End Function
 
@@ -39,6 +40,7 @@ Public Class DaoObra
 	                                     O.cod_beneficiario as cod_beneficiario,
 	                                     O.cod_constructor as cod_constructor,
 	                                     O.cod_tipo_obra as cod_tipo_obra,
+                                         O.cod_ppto as cod_ppto,
 	                                     P.nombre as programa,
 	                                     CONCAT(Pe.apellido, ', ' ,Pe.nombre) as beneficiario,
 	                                     C.nombre as constructor,
@@ -68,6 +70,7 @@ Public Class DaoObra
                     .tipo_obra = row("prototipo")
                     .fecha_inicio = If(IsDBNull(row("fecha_inicio")), Nothing, row("fecha_inicio"))
                     .fecha_fin = If(IsDBNull(row("fecha_fin")), Nothing, row("fecha_inicio"))
+                    .cod_ppto = row("cod_ppto")
                 End With
                 lista.Add(aux)
             Next
@@ -76,6 +79,46 @@ Public Class DaoObra
     End Function
 
     Public Function obtener(cod As Integer) As Obra Implements InterfaceDao(Of Obra).obtener
-        Throw New NotImplementedException()
+        Dim obra As Obra = New Obra
+
+        Dim consulta As String = "SELECT O.cod_obra as cod_obra, 
+                                         O.cod_programa as cod_programa,
+	                                     O.cod_beneficiario as cod_beneficiario,
+	                                     O.cod_constructor as cod_constructor,
+	                                     O.cod_tipo_obra as cod_tipo_obra,
+                                         O.cod_ppto as cod_ppto,
+	                                     P.nombre as programa,
+	                                     CONCAT(Pe.apellido, ', ' ,Pe.nombre) as beneficiario,
+	                                     C.nombre as constructor,
+	                                     OT.descripcion as prototipo,
+	                                     O.fecha_inicio as fecha_inicio,
+	                                     O.fecha_fin as fecha_fin " &
+                                 "FROM dbo.OBRA as O " &
+                                 "INNER JOIN PROGRAMA as P ON O.cod_programa = P.cod_programa " &
+                                 "INNER JOIN TIPO_OBRA as OT ON O.cod_tipo_obra = OT.cod_tipo_obra " &
+                                 "LEFT JOIN CONSTRUCTOR as C ON O.cod_constructor = C.cod_constructor " &
+                                 "INNER JOIN BENEFICIARIO as B ON O.cod_beneficiario = B.cod_beneficiario " &
+                                 "INNER JOIN PERSONA as Pe ON B.cod_persona = Pe.cod_persona " &
+                                 "WHERE activa = 1 AND cod_obra = " & cod
+        Dim ds As Data.DataSet = Me.Exec(consulta)
+        If ds.Tables(0).Rows.Count > 0 Then
+            Dim row = ds.Tables(0).Rows(0)
+            With obra
+                .cod_obra = row("cod_obra")
+                .cod_programa = row("cod_programa")
+                .programa = row("programa")
+                .cod_beneficiario = row("cod_beneficiario")
+                .beneficiario = row("beneficiario")
+                .cod_constructor = row("cod_constructor")
+                .cod_tipo_obra = row("cod_tipo_obra")
+                .constructor = If(IsDBNull(row("constructor")), Nothing, row("constructor"))
+                .tipo_obra = row("prototipo")
+                .fecha_inicio = If(IsDBNull(row("fecha_inicio")), Nothing, row("fecha_inicio"))
+                .fecha_fin = If(IsDBNull(row("fecha_fin")), Nothing, row("fecha_inicio"))
+                .cod_ppto = row("cod_ppto")
+            End With
+
+        End If
+        Return obra
     End Function
 End Class

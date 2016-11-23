@@ -29,25 +29,22 @@ Partial Class Inicio
         Me.PostulantesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProyectosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PresupuestosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CargarCuadroAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CertificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BuscarToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListarToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CrearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ActualizarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrototiposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConstructoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObrasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AltaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.p_inicio = New System.Windows.Forms.Panel()
+        Me.CertificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndividuosToolStripMenuItem, Me.ProyectosToolStripMenuItem, Me.PresupuestosToolStripMenuItem, Me.CertificacionesToolStripMenuItem, Me.ConstructoresToolStripMenuItem, Me.ObrasToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndividuosToolStripMenuItem, Me.ProyectosToolStripMenuItem, Me.PresupuestosToolStripMenuItem, Me.ConstructoresToolStripMenuItem, Me.ObrasToolStripMenuItem, Me.SalirToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(636, 24)
@@ -81,47 +78,16 @@ Partial Class Inicio
         '
         'PresupuestosToolStripMenuItem
         '
-        Me.PresupuestosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CargarCuadroAToolStripMenuItem})
+        Me.PresupuestosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrototiposToolStripMenuItem})
         Me.PresupuestosToolStripMenuItem.Name = "PresupuestosToolStripMenuItem"
         Me.PresupuestosToolStripMenuItem.Size = New System.Drawing.Size(89, 20)
         Me.PresupuestosToolStripMenuItem.Text = "Presupuestos"
         '
-        'CargarCuadroAToolStripMenuItem
+        'PrototiposToolStripMenuItem
         '
-        Me.CargarCuadroAToolStripMenuItem.Name = "CargarCuadroAToolStripMenuItem"
-        Me.CargarCuadroAToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
-        Me.CargarCuadroAToolStripMenuItem.Text = "Cargar Cuadro A"
-        '
-        'CertificacionesToolStripMenuItem
-        '
-        Me.CertificacionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BuscarToolStripMenuItem1, Me.ListarToolStripMenuItem1, Me.CrearToolStripMenuItem, Me.ActualizarToolStripMenuItem})
-        Me.CertificacionesToolStripMenuItem.Name = "CertificacionesToolStripMenuItem"
-        Me.CertificacionesToolStripMenuItem.Size = New System.Drawing.Size(97, 20)
-        Me.CertificacionesToolStripMenuItem.Text = "Certificaciones"
-        '
-        'BuscarToolStripMenuItem1
-        '
-        Me.BuscarToolStripMenuItem1.Name = "BuscarToolStripMenuItem1"
-        Me.BuscarToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
-        Me.BuscarToolStripMenuItem1.Text = "Buscar"
-        '
-        'ListarToolStripMenuItem1
-        '
-        Me.ListarToolStripMenuItem1.Name = "ListarToolStripMenuItem1"
-        Me.ListarToolStripMenuItem1.Size = New System.Drawing.Size(126, 22)
-        Me.ListarToolStripMenuItem1.Text = "Listar"
-        '
-        'CrearToolStripMenuItem
-        '
-        Me.CrearToolStripMenuItem.Name = "CrearToolStripMenuItem"
-        Me.CrearToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.CrearToolStripMenuItem.Text = "Crear"
-        '
-        'ActualizarToolStripMenuItem
-        '
-        Me.ActualizarToolStripMenuItem.Name = "ActualizarToolStripMenuItem"
-        Me.ActualizarToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.ActualizarToolStripMenuItem.Text = "Actualizar"
+        Me.PrototiposToolStripMenuItem.Name = "PrototiposToolStripMenuItem"
+        Me.PrototiposToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.PrototiposToolStripMenuItem.Text = "Prototipos"
         '
         'ConstructoresToolStripMenuItem
         '
@@ -131,7 +97,7 @@ Partial Class Inicio
         '
         'ObrasToolStripMenuItem
         '
-        Me.ObrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoToolStripMenuItem, Me.AltaToolStripMenuItem})
+        Me.ObrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoToolStripMenuItem, Me.AltaToolStripMenuItem, Me.CertificacionesToolStripMenuItem})
         Me.ObrasToolStripMenuItem.Name = "ObrasToolStripMenuItem"
         Me.ObrasToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.ObrasToolStripMenuItem.Text = "Obras"
@@ -147,6 +113,13 @@ Partial Class Inicio
         Me.AltaToolStripMenuItem.Name = "AltaToolStripMenuItem"
         Me.AltaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AltaToolStripMenuItem.Text = "Alta"
+        '
+        'SalirToolStripMenuItem
+        '
+        Me.SalirToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(41, 20)
+        Me.SalirToolStripMenuItem.Text = "Salir"
         '
         'PictureBox1
         '
@@ -170,6 +143,12 @@ Partial Class Inicio
         Me.p_inicio.Name = "p_inicio"
         Me.p_inicio.Size = New System.Drawing.Size(636, 340)
         Me.p_inicio.TabIndex = 2
+        '
+        'CertificacionesToolStripMenuItem
+        '
+        Me.CertificacionesToolStripMenuItem.Name = "CertificacionesToolStripMenuItem"
+        Me.CertificacionesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CertificacionesToolStripMenuItem.Text = "Certificaciones"
         '
         'Inicio
         '
@@ -195,18 +174,15 @@ Partial Class Inicio
     Friend WithEvents IndividuosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProyectosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PresupuestosToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CertificacionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ConstructoresToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BuscarToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents ListarToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents CrearToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ActualizarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents BeneficiariosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PostulantesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CargarCuadroAToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ObrasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents p_inicio As Panel
     Friend WithEvents ListadoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AltaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SalirToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PrototiposToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CertificacionesToolStripMenuItem As ToolStripMenuItem
 End Class

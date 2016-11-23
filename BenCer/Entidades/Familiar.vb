@@ -4,6 +4,7 @@
     Private _fecha_alta As Date
     Private _cod_parentezco As Integer
     Private _parentezco As String
+    Private _jefe_flia As Integer
 
     Public Sub Familiar()
     End Sub
@@ -35,4 +36,12 @@
         End Set
     End Property
 
+    Public Property cod_jefe_flia As Integer
+        Get
+            Return _jefe_flia
+        End Get
+        Set(value As Integer)
+            _jefe_flia = value
+        End Set
+    End Property
 End Class
