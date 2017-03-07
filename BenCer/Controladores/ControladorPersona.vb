@@ -44,7 +44,7 @@ Public Class ControladorPersona
 
     Public ReadOnly Property listaPostulantes As List(Of Postulante)
         Get
-            Return postulantes
+            Return daoPostulante.listar()
         End Get
     End Property
 
@@ -68,9 +68,15 @@ Public Class ControladorPersona
         persona.apellido = apellido
         persona.cod_estado_civil = estadoCivil
 
-        daoPostulante.guardar(persona)
+        Dim resultado As Integer = daoPostulante.guardar(persona)
 
-        RaiseEvent cerrar()
+        If resultado < 0 Then
+            RaiseEvent error_persona("Lo siento ha habido un error con los datos ingresados, vuelva a intentarlo")
+            Exit Sub
+        Else
+            RaiseEvent cerrar()
+        End If
+
 
     End Sub
 
@@ -110,6 +116,17 @@ Public Class ControladorPersona
 
     End Function
 
+    Public Sub actualizarPersona(text1 As String, text2 As String, text3 As String, selectedIndex1 As Integer, selectedIndex2 As Integer)
+
+    End Sub
+
+    Public Sub eliminarPostulante(postu As Postulante)
+        daoPostulante.eliminar(postu.cod_persona)
+        daoPersona.eliminar(postu.cod_persona)
+        postulantes = daoPostulante.listar()
+        RaiseEvent actualizar()
+    End Sub
+
     '''
     ''' EVENTOS
     ''' 
@@ -117,4 +134,5 @@ Public Class ControladorPersona
     Event error_persona(ByVal text As String)
     Event error_dismiss()
     Event cerrar()
+    Event actualizar()
 End Class

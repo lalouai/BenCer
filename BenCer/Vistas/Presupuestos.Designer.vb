@@ -27,6 +27,10 @@ Partial Class Presupuestos
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btn_presu_cerrar = New System.Windows.Forms.Button()
         Me.dvg_presupuesto = New System.Windows.Forms.DataGridView()
+        Me.item = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Costo_M_Obra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.incidencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_presu_item = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbl_presupuesto_error = New System.Windows.Forms.Label()
@@ -46,10 +50,6 @@ Partial Class Presupuestos
         Me.btn_presu_consolidar = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.lbl_presu_costo = New System.Windows.Forms.Label()
-        Me.item = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Costo_M_Obra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.incidencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dvg_presupuesto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -74,12 +74,50 @@ Partial Class Presupuestos
         Me.dvg_presupuesto.Size = New System.Drawing.Size(755, 426)
         Me.dvg_presupuesto.TabIndex = 23
         '
+        'item
+        '
+        Me.item.DataPropertyName = "item"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.item.DefaultCellStyle = DataGridViewCellStyle1
+        Me.item.HeaderText = "Item"
+        Me.item.Name = "item"
+        Me.item.ReadOnly = True
+        Me.item.Width = 60
+        '
+        'descripcion
+        '
+        Me.descripcion.DataPropertyName = "descripcion"
+        Me.descripcion.HeaderText = "Descripcion"
+        Me.descripcion.Name = "descripcion"
+        Me.descripcion.ReadOnly = True
+        Me.descripcion.Width = 490
+        '
+        'Costo_M_Obra
+        '
+        Me.Costo_M_Obra.DataPropertyName = "costo"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "C2"
+        Me.Costo_M_Obra.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Costo_M_Obra.HeaderText = "Costo M de Obra"
+        Me.Costo_M_Obra.Name = "Costo_M_Obra"
+        Me.Costo_M_Obra.ReadOnly = True
+        '
+        'incidencia
+        '
+        Me.incidencia.DataPropertyName = "incidencia"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "P"
+        Me.incidencia.DefaultCellStyle = DataGridViewCellStyle3
+        Me.incidencia.HeaderText = "Incidencia"
+        Me.incidencia.Name = "incidencia"
+        Me.incidencia.ReadOnly = True
+        '
         'txt_presu_item
         '
         Me.txt_presu_item.Location = New System.Drawing.Point(93, 514)
         Me.txt_presu_item.Name = "txt_presu_item"
         Me.txt_presu_item.Size = New System.Drawing.Size(42, 20)
-        Me.txt_presu_item.TabIndex = 29
+        Me.txt_presu_item.TabIndex = 0
         '
         'Label1
         '
@@ -107,14 +145,14 @@ Partial Class Presupuestos
         Me.txt_presu_descripcion.Location = New System.Drawing.Point(205, 514)
         Me.txt_presu_descripcion.Name = "txt_presu_descripcion"
         Me.txt_presu_descripcion.Size = New System.Drawing.Size(451, 20)
-        Me.txt_presu_descripcion.TabIndex = 21
+        Me.txt_presu_descripcion.TabIndex = 2
         '
         'btn_presu_agregar
         '
         Me.btn_presu_agregar.Location = New System.Drawing.Point(773, 512)
         Me.btn_presu_agregar.Name = "btn_presu_agregar"
         Me.btn_presu_agregar.Size = New System.Drawing.Size(142, 23)
-        Me.btn_presu_agregar.TabIndex = 22
+        Me.btn_presu_agregar.TabIndex = 4
         Me.btn_presu_agregar.Text = "Agregar"
         Me.btn_presu_agregar.UseVisualStyleBackColor = True
         '
@@ -170,7 +208,7 @@ Partial Class Presupuestos
         Me.txt_presu_subitem.Location = New System.Drawing.Point(157, 514)
         Me.txt_presu_subitem.Name = "txt_presu_subitem"
         Me.txt_presu_subitem.Size = New System.Drawing.Size(42, 20)
-        Me.txt_presu_subitem.TabIndex = 34
+        Me.txt_presu_subitem.TabIndex = 1
         '
         'Label4
         '
@@ -186,7 +224,7 @@ Partial Class Presupuestos
         Me.txt_presu_costo_m_obra.Location = New System.Drawing.Point(662, 514)
         Me.txt_presu_costo_m_obra.Name = "txt_presu_costo_m_obra"
         Me.txt_presu_costo_m_obra.Size = New System.Drawing.Size(105, 20)
-        Me.txt_presu_costo_m_obra.TabIndex = 36
+        Me.txt_presu_costo_m_obra.TabIndex = 3
         '
         'Label5
         '
@@ -246,44 +284,6 @@ Partial Class Presupuestos
         Me.lbl_presu_costo.TabIndex = 41
         Me.lbl_presu_costo.Text = "Label1"
         Me.lbl_presu_costo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'item
-        '
-        Me.item.DataPropertyName = "item"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.item.DefaultCellStyle = DataGridViewCellStyle1
-        Me.item.HeaderText = "Item"
-        Me.item.Name = "item"
-        Me.item.ReadOnly = True
-        Me.item.Width = 60
-        '
-        'descripcion
-        '
-        Me.descripcion.DataPropertyName = "descripcion"
-        Me.descripcion.HeaderText = "Descripcion"
-        Me.descripcion.Name = "descripcion"
-        Me.descripcion.ReadOnly = True
-        Me.descripcion.Width = 490
-        '
-        'Costo_M_Obra
-        '
-        Me.Costo_M_Obra.DataPropertyName = "costo"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle2.Format = "C2"
-        Me.Costo_M_Obra.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Costo_M_Obra.HeaderText = "Costo M de Obra"
-        Me.Costo_M_Obra.Name = "Costo_M_Obra"
-        Me.Costo_M_Obra.ReadOnly = True
-        '
-        'incidencia
-        '
-        Me.incidencia.DataPropertyName = "incidencia"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Format = "P"
-        Me.incidencia.DefaultCellStyle = DataGridViewCellStyle3
-        Me.incidencia.HeaderText = "Incidencia"
-        Me.incidencia.Name = "incidencia"
-        Me.incidencia.ReadOnly = True
         '
         'Presupuestos
         '

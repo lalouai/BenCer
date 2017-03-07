@@ -34,17 +34,18 @@ Partial Class Inicio
         Me.ObrasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AltaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CertificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.p_inicio = New System.Windows.Forms.Panel()
-        Me.CertificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PagosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndividuosToolStripMenuItem, Me.ProyectosToolStripMenuItem, Me.PresupuestosToolStripMenuItem, Me.ConstructoresToolStripMenuItem, Me.ObrasToolStripMenuItem, Me.SalirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndividuosToolStripMenuItem, Me.ProyectosToolStripMenuItem, Me.PresupuestosToolStripMenuItem, Me.ConstructoresToolStripMenuItem, Me.ObrasToolStripMenuItem, Me.SalirToolStripMenuItem, Me.PagosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(636, 24)
@@ -114,6 +115,12 @@ Partial Class Inicio
         Me.AltaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AltaToolStripMenuItem.Text = "Alta"
         '
+        'CertificacionesToolStripMenuItem
+        '
+        Me.CertificacionesToolStripMenuItem.Name = "CertificacionesToolStripMenuItem"
+        Me.CertificacionesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CertificacionesToolStripMenuItem.Text = "Certificaciones"
+        '
         'SalirToolStripMenuItem
         '
         Me.SalirToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -144,11 +151,11 @@ Partial Class Inicio
         Me.p_inicio.Size = New System.Drawing.Size(636, 340)
         Me.p_inicio.TabIndex = 2
         '
-        'CertificacionesToolStripMenuItem
+        'PagosToolStripMenuItem
         '
-        Me.CertificacionesToolStripMenuItem.Name = "CertificacionesToolStripMenuItem"
-        Me.CertificacionesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CertificacionesToolStripMenuItem.Text = "Certificaciones"
+        Me.PagosToolStripMenuItem.Name = "PagosToolStripMenuItem"
+        Me.PagosToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
+        Me.PagosToolStripMenuItem.Text = "Pagos"
         '
         'Inicio
         '
@@ -185,4 +192,5 @@ Partial Class Inicio
     Friend WithEvents SalirToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrototiposToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CertificacionesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PagosToolStripMenuItem As ToolStripMenuItem
 End Class

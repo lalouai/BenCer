@@ -10,16 +10,13 @@
         daoCertificado = New DaoCertificado
         daoBeneficirario = New DaoBeneficiario
         daoObra = New DaoObra
-
         If cod_ben = 0 Then
             _beneficiarios = daoBeneficirario.listar()
         ElseIf cod_ben > 0 Then
             _beneficiarios = New List(Of Beneficiario)
             _beneficiarios.Add(daoBeneficirario.obtener(cod_ben))
         End If
-
         _certificados = daoCertificado.listar_by_ben(cod_ben)
-
     End Sub
 
     Public ReadOnly Property listaBeneficiarios As List(Of Beneficiario)

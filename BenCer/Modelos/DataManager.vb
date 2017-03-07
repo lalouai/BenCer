@@ -27,9 +27,8 @@ Public Class DataManager
             End If
 
         Catch exc As Exception
-
-            Throw New Exception("Sub Begin() Failed " & exc.Message, exc)
-
+            'Throw New Exception("Sub Begin() Failed " & exc.Message, exc)
+            Debug.Print("Sub Begin() Failed " & exc.Message, exc)
         End Try
     End Sub
     Protected Sub Commit()
@@ -43,7 +42,7 @@ Public Class DataManager
             m_Conn = Nothing
         Catch exc As Exception
             m_Trans.Rollback()
-            Throw New Exception("Sub Commit() Failed " & exc.Message, exc)
+            Debug.Print("Sub Commit() Failed " & exc.Message, exc)
         End Try
 
     End Sub
@@ -64,46 +63,57 @@ Public Class DataManager
             Return ds
         Catch ex As Exception
             m_Trans.Rollback()
-            Throw New Exception("Execute Failed - Rollback called " & ex.Message, ex)
+            Debug.Print("Execute Failed - Exec " & ex.Message, ex)
         End Try
         Commit()
 
     End Function
 
     Public Function ExecM(ByVal query As String) As Int32
-        Dim codigo As Int32 = 0
-        Begin()
-        Dim cmd As New System.Data.SqlClient.SqlCommand
-        cmd.CommandType = System.Data.CommandType.Text
-        cmd.CommandText = query
-        cmd.Connection = m_Conn
-        cmd.Transaction = m_Trans
-        codigo = cmd.ExecuteScalar()
-        Commit()
-        cmd.Dispose()
-        cmd = Nothing
-        Return codigo
+        Try
+            Dim codigo As Int32 = 0
+            Begin()
+            Dim cmd As New System.Data.SqlClient.SqlCommand
+            cmd.CommandType = System.Data.CommandType.Text
+            cmd.CommandText = query
+            cmd.Connection = m_Conn
+            cmd.Transaction = m_Trans
+            codigo = cmd.ExecuteScalar()
+            Commit()
+            cmd.Dispose()
+            cmd = Nothing
+            Return codigo
+        Catch ex As Exception
+            Debug.Print("Execute Failed - ExecM " & ex.Message, ex)
+            Return -1
+        End Try
+
     End Function
 
     Public Function execnq(ByVal query As String) As Integer
-        Begin()
-        Dim cmd As New System.Data.SqlClient.SqlCommand
-        cmd.CommandType = System.Data.CommandType.Text
-        cmd.CommandText = query
-        cmd.Connection = m_Conn
-        cmd.Transaction = m_Trans
-        Dim affectedRows As Integer = cmd.ExecuteNonQuery()
-        Commit()
-        cmd.Dispose()
-        cmd = Nothing
-        Return affectedRows
+        Try
+
+
+            Begin()
+            Dim cmd As New System.Data.SqlClient.SqlCommand
+            cmd.CommandType = System.Data.CommandType.Text
+            cmd.CommandText = query
+            cmd.Connection = m_Conn
+            cmd.Transaction = m_Trans
+            Dim affectedRows As Integer = cmd.ExecuteNonQuery()
+            Commit()
+            cmd.Dispose()
+            cmd = Nothing
+            Return affectedRows
+        Catch ex As Exception
+            Debug.Print("Execute Failed - exeqn" & ex.Message, ex)
+        End Try
+        Return -1
     End Function
 
 
     Public Function execSp(ByVal sp As String, cod_ppto As Integer) As Integer
-
         Dim resultado As Integer = 0
-
         Try
             Begin()
             Dim cmd As New SqlCommand
@@ -111,25 +121,18 @@ Public Class DataManager
             cmd.CommandTimeout = TIMEOUT
             cmd.CommandType = CommandType.StoredProcedure
             cmd.CommandText = sp
-
-            Dim parameter As New SqlParameter()
-            parameter.ParameterName = "@cod_presu"
-            parameter.Direction = ParameterDirection.Input
-            parameter.Value = cod_ppto
-
-            cmd.Parameters.Add(parameter)
-
-
+            Dim parametros As SqlParameter = cmd.Parameters.Add("@cod_presu", SqlDbType.Int)
+            parametros.Value = cod_ppto
             cmd.Transaction = m_Trans
-            SqlCommandBuilder.DeriveParameters(cmd)
             resultado = cmd.ExecuteNonQuery()
             Commit()
             cmd.Dispose()
             cmd = Nothing
-        Catch ex As ValidacionesExcepcion
-            Throw New ValidacionesExcepcion("Lo siento no he podido actualizar las incidencias")
+        Catch ex As Exception
+            'Throw New ValidacionesExcepcion("Lo siento no he podido actualizar las incidencias")
+            resultado = 1
+            MsgBox("Lo siento no he podido actualizar las incidencias")
         End Try
-
         Return resultado
     End Function
 

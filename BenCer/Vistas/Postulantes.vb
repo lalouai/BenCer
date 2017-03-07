@@ -1,24 +1,13 @@
 ﻿Public Class Postulantes
     Dim WithEvents controlador As ControladorPersona
+    Dim WithEvents alta As PostulantesAlta
 
     Public Sub New()
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
-
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
         controlador = New ControladorPersona()
-        cmbTipoDoc.Items.Insert(0, "Seleccione")
-        For Each item In controlador.listaTipos.ToArray
-            cmbTipoDoc.Items.Insert(item.cod_tipo_doc, item.descripcion)
-        Next
-        cmbTipoDoc.SelectedIndex = 0
-
-        cmbEstado.Items.Insert(0, "Seleccione")
-        For Each item In controlador.listaEstados.ToArray
-            cmbEstado.Items.Insert(item.cod_estado_civil, item.estado_civil)
-        Next
-        cmbEstado.SelectedIndex = 0
 
         dgv_postulantes.AutoGenerateColumns = False
         dgv_postulantes.DataSource = controlador.listaPostulantes
@@ -41,48 +30,9 @@
             cargasFamiliares.ShowDialog()
         End If
     End Sub
-
-
-    Private Sub txt_dni_TextChanged(sender As Object, e As EventArgs) Handles txt_pos_dni.TextChanged
-        If Not controlador.checkDni(txt_pos_dni.Text) Then
-            txt_pos_dni.BackColor = Color.Red
-        Else
-            txt_pos_dni.BackColor = Color.White
-        End If
-    End Sub
-
-    Private Sub texto_error(ByVal texto_error As String) Handles controlador.error_persona
-        lbl_error.Text = texto_error
-        lbl_error.Visible = True
-    End Sub
-
-    Private Sub dismiss_error() Handles controlador.error_dismiss
-        lbl_error.Visible = False
-        lbl_error.Text = ""
-    End Sub
-
     Private Sub btn_crear_Click(sender As Object, e As EventArgs) Handles btn_crear.Click
-        If txt_pos_dni.Text.Trim() IsNot "" And txtNombre.Text.Trim() IsNot "" And txtApellido.Text.Trim() IsNot "" Then
-            controlador.crearPersona(txt_pos_dni.Text, txtNombre.Text, txtApellido.Text, cmbTipoDoc.SelectedIndex, cmbEstado.SelectedIndex)
-        End If
-    End Sub
-
-    Private Sub cerrar() Handles controlador.cerrar
-        Me.Close()
-    End Sub
-
-    Private Sub cmbTipoDoc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTipoDoc.SelectedIndexChanged
-        txt_pos_dni.Focus()
-    End Sub
-
-
-
-    Private Sub txt_dni_valida(sender As Object, e As EventArgs) Handles txt_pos_dni.LostFocus
-        If Not controlador.existeDni(txt_pos_dni.Text) Then
-            txt_pos_dni.BackColor = Color.LightCoral
-        Else
-            txt_pos_dni.BackColor = Color.White
-        End If
+        alta = New PostulantesAlta()
+        alta.ShowDialog()
     End Sub
 
     Private Sub btn_pos_cerrar_Click(sender As Object, e As EventArgs) Handles btn_pos_cerrar.Click
@@ -92,11 +42,46 @@
         End If
     End Sub
 
+    Private Sub actualizarLista() Handles alta.guardado, controlador.actualizar
+        dgv_postulantes.DataSource = controlador.listaPostulantes
+    End Sub
+
     Private Sub btn_pos_editar_Click(sender As Object, e As EventArgs) Handles btn_pos_editar.Click
+        If dgv_postulantes.SelectedRows.Count = 1 Then
+            Dim postu As Postulante = dgv_postulantes.SelectedRows(0).DataBoundItem
+            If postu IsNot Nothing Then
+
+                alta = New PostulantesAlta()
+
+                With alta
+                    .txtNombre.Text = postu.nombre
+                    .txtApellido.Text = postu.apellido
+                    .txt_pos_dni.Text = postu.nro_doc
+                    .cmbTipoDoc.SelectedIndex = postu.cod_tipo_doc
+                    .cmbEstado.SelectedIndex = postu.cod_estado_civil
+                    .titulo.Text = "Editar"
+                    .editar = True
+                    .ShowDialog()
+                End With
+            End If
+        End If
 
     End Sub
 
     Private Sub btn_pos_eliminar_Click(sender As Object, e As EventArgs) Handles btn_pos_eliminar.Click
-
+        If dgv_postulantes.SelectedRows.Count = 1 Then
+            Dim postu As Postulante = dgv_postulantes.SelectedRows(0).DataBoundItem
+            If postu IsNot Nothing Then
+                Dim result As Integer = MessageBox.Show("Esta seguro de eliminar a " + postu.apellido + ", " + postu.nombre, "Por favor confirme", MessageBoxButtons.YesNo)
+                If result = DialogResult.Yes Then
+                    controlador.eliminarPostulante(postu)
+                End If
+            Else
+                MsgBox("Lo siento, pero para eliminar un registro primero debe seleccionarlo.")
+            End If
+        End If
     End Sub
+
+
+
 End Class

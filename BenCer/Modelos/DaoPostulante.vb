@@ -4,17 +4,17 @@ Public Class DaoPostulante
     Inherits DaoPersona
     Implements InterfaceDao(Of Postulante)
 
-    Public Function guardar(elemento As Postulante) As Integer Implements InterfaceDao(Of Postulante).guardar
+    Public Overloads Function guardar(elemento As Postulante) As Integer Implements InterfaceDao(Of Postulante).guardar
         Throw New NotImplementedException()
     End Function
 
-    Public Function guardar(elemento As Persona) As Integer
+    Public Overloads Function guardar(elemento As Persona) As Integer
         Dim consulta As String = "INSERT INTO dbo.POSTULANTE (cod_persona, fecha_alta) OUTPUT INSERTED.cod_postulante" &
                                  " VALUES (" & MyBase.guardar(elemento) & ", '" & DateTime.Now.ToString("yyyy-MM-dd") & "')"
         Return Me.ExecM(consulta)
     End Function
 
-    Public Function modificar(elemento As Postulante, cod As Integer) As Integer Implements InterfaceDao(Of Postulante).modificar
+    Public Overloads Function modificar(elemento As Postulante, cod As Integer) As Integer Implements InterfaceDao(Of Postulante).modificar
         Throw New NotImplementedException()
     End Function
 
@@ -52,12 +52,12 @@ Public Class DaoPostulante
         Return lista
     End Function
 
-    Public Sub eliminar(cod As Integer) Implements InterfaceDao(Of Postulante).eliminar
+    Public Overloads Sub eliminar(cod As Integer) Implements InterfaceDao(Of Postulante).eliminar
         Dim consulta As String = "DELETE FROM POSTULANTE WHERE cod_persona = " & cod
         execnq(consulta)
     End Sub
 
-    Public Function listar() As List(Of Postulante) Implements InterfaceDao(Of Postulante).listar
+    Public Overloads Function listar() As List(Of Postulante) Implements InterfaceDao(Of Postulante).listar
         Dim lista As List(Of Postulante) = New List(Of Postulante)
 
         Dim consulta As String = "SELECT * FROM dbo.POSTULANTE as POS" &
@@ -89,7 +89,7 @@ Public Class DaoPostulante
         Return lista
     End Function
 
-    Public Function obtener(cod As Integer) As Postulante Implements InterfaceDao(Of Postulante).obtener
+    Public Overloads Function obtener(cod As Integer) As Postulante Implements InterfaceDao(Of Postulante).obtener
         Throw New NotImplementedException()
     End Function
 

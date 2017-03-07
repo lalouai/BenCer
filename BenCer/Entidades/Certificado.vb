@@ -8,7 +8,6 @@
     Private _numero As Integer
 
     Public Sub Certificado()
-
     End Sub
     Public Property cod_certificado As Integer
         Get

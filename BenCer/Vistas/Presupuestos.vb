@@ -37,16 +37,22 @@
     Private Sub btn_presu_agregar_Click(sender As Object, e As EventArgs) Handles btn_presu_agregar.Click
         If txt_presu_item.Text.Length > 0 And
            txt_presu_subitem.Text.Length > 0 And
-           txt_presu_descripcion.Text.Length > 0 And
-           txt_presu_costo_m_obra.Text.Length > 0 Then
+           txt_presu_descripcion.Text.Length > 0 Then 'And txt_presu_costo_m_obra.Text.Length > 0
 
             If btn_presu_agregar.Text.Equals("Agregar") Then
-                If controlador.guardarItem(txt_presu_item.Text, txt_presu_subitem.Text, txt_presu_descripcion.Text, txt_presu_costo_m_obra.Text) <= 0 Then
+
+                Dim costo As Decimal
+                Decimal.TryParse(If(txt_presu_costo_m_obra.Text.Equals(""), 0D, txt_presu_costo_m_obra.Text.Replace(".", ",")), costo)
+
+                If controlador.guardarItem(txt_presu_item.Text,
+                                           txt_presu_subitem.Text,
+                                           txt_presu_descripcion.Text,
+                                           costo) > 0 Then
                     MsgBox("Lo siento ha ocurrido un error, por favor vuelva a intentar")
                     Exit Sub
                 End If
             ElseIf btn_presu_agregar.Text.Equals("Actualizar") Then
-                If controlador.actualizarItem(txt_presu_item.Text, txt_presu_subitem.Text, txt_presu_descripcion.Text, txt_presu_costo_m_obra.Text) <= 0 Then
+                If controlador.actualizarItem(txt_presu_item.Text, txt_presu_subitem.Text, txt_presu_descripcion.Text, txt_presu_costo_m_obra.Text) > 0 Then
                     MsgBox("Lo siento no he podido actualizar el registro, por favor vuelva a intentar")
                     Exit Sub
                 End If

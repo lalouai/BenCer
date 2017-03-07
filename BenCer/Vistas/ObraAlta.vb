@@ -1,4 +1,6 @@
-﻿Public Class ObraAlta
+﻿Imports System.Windows.Forms.DataVisualization.Charting
+
+Public Class ObraAlta
 
     Private WithEvents controlador As ControladorObraAlta
     Private seleccionado As Boolean
@@ -42,6 +44,32 @@
         End Set
     End Property
 
+    Public Sub grafico(total As Decimal, cobrado As Decimal, certificado As Decimal)
+        With Me.obra_alta_grafico
+            .Legends.Clear()
+            .Series.Clear()
+            .ChartAreas.Clear()
+        End With
+
+        Dim areas1 As ChartArea = Me.obra_alta_grafico.ChartAreas.Add("Avance")
+        Dim series1 As Series = Me.obra_alta_grafico.Series.Add("Datos")
+
+        With series1
+            .ChartType = SeriesChartType.Pie
+            .Points.AddXY("Total a cobrar", total)
+            .Points.AddXY("Cobrado", cobrado)
+            .Points.AddXY("Certificado, sin cobrar", certificado)
+        End With
+
+        For i As Integer = 0 To 2
+            series1.Points(i)("PieLabelStyle") = "Disabled"
+        Next
+
+
+        Dim legends1 As Legend = Me.obra_alta_grafico.Legends.Add("Datos")
+
+    End Sub
+
 
     Private Sub txt_obra_alta_dni_TextChanged(sender As Object, e As EventArgs) Handles txt_obra_alta_dni.TextChanged
 
@@ -66,6 +94,12 @@
 
 
     Private Sub btn_obra_alta_cancelar_Click(sender As Object, e As EventArgs) Handles btn_obra_alta_cancelar.Click
+
+        If btn_obra_alta_cancelar.Text.Equals("Cerrar") Then
+            Me.Close()
+            Exit Sub
+        End If
+
         Dim result As Integer = MessageBox.Show("Desea cerrar y perder todas las modificaciones?", "Por favor confirme", MessageBoxButtons.YesNo)
 
         If result = DialogResult.Yes Then
@@ -149,14 +183,14 @@
                 Exit Sub
             End If
         ElseIf btn_obra_alta_crear.Text.Equals("Guardar") Then
-
             programa = cmb_obra_alta_programa.SelectedValue
             prototipo = cmb_obra_alta_prototipo.SelectedValue
             constructor = cmb_obra_alta_constructor.SelectedValue
-
             If cmb_obra_alta_constructor.SelectedIndex > 0 Then
                 controlador.actualizarObra(_cod_obra, txt_obra_alta_cod_persona.Text, programa, prototipo, constructor, fecha_inicio)
             End If
+        ElseIf btn_obra_alta_crear.Text.Equals("Imprimir") Then
+            'TODO imprimir resumen
         End If
 
     End Sub
@@ -173,4 +207,5 @@
     Private Sub cerrar() Handles controlador.cerrarVentana
         Me.Close()
     End Sub
+
 End Class

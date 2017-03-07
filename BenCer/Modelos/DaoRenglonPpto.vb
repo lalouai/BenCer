@@ -26,7 +26,7 @@ Public Class DaoRenglonPpto
         consulta = "INSERT INTO dbo.R_PRESUPUESTO (cod_ppto ,item ,costo ,descripcion) OUTPUT INSERTED.COD_R_PPTO " &
                    "VALUES (" & elemento.cod_ppto & ",'" & elemento.item & "'," & elemento.costo.ToString.Replace(",", ".") & ",'" & elemento.descripcion & "')"
         Dim sal As Integer = Me.ExecM(consulta)
-        'Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
+        Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
     End Function
 
     Public Function listar() As List(Of RenglonPpto) Implements InterfaceDao(Of RenglonPpto).listar
@@ -46,6 +46,7 @@ Public Class DaoRenglonPpto
             aux.costo = row("costo")
             aux.descripcion = row("descripcion")
             aux.item = row("item")
+            aux.incidencia = row("incidencia")
 
             lista.Add(aux)
         Next

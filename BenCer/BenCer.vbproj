@@ -47,11 +47,13 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -76,8 +78,15 @@
     <Compile Include="Controladores\ControladorConstructores.vb" />
     <Compile Include="Controladores\ControladorObraAlta.vb" />
     <Compile Include="Controladores\ControladorObras.vb" />
+    <Compile Include="Controladores\ControladorPagos.vb" />
     <Compile Include="Controladores\ControladorPersona.vb" />
     <Compile Include="Controladores\ControladorPresupuestos.vb" />
+    <Compile Include="Entidades\CertificadoSinOrden.vb" />
+    <Compile Include="Entidades\FormaPago.vb" />
+    <Compile Include="Entidades\Pago.vb" />
+    <Compile Include="Entidades\PagoConOrden.vb" />
+    <Compile Include="Entidades\Costos.vb" />
+    <Compile Include="Modelos\DaoPago.vb" />
     <Compile Include="Entidades\Parentezco.vb" />
     <Compile Include="Helpers\ValidacionesExcepcion.vb" />
     <Compile Include="Modelos\DaoParentezco.vb" />
@@ -138,10 +147,17 @@
     <Compile Include="Controladores\ControladorFamiliares.vb" />
     <Compile Include="Controladores\ControladorBeneficiarios.vb" />
     <Compile Include="Controladores\ControladorCertificaciones.vb" />
+    <Compile Include="Modelos\DaoFormaPago.vb" />
     <Compile Include="Vistas\Familiares.Designer.vb">
       <DependentUpon>Familiares.vb</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Familiares.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Imp_cert.Designer.vb">
+      <DependentUpon>Imp_cert.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Imp_cert.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Inicio.vb">
@@ -167,6 +183,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Entidades\Persona.vb" />
+    <Compile Include="Vistas\ModoPago.Designer.vb">
+      <DependentUpon>ModoPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ModoPago.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vistas\ObraAlta.Designer.vb">
       <DependentUpon>ObraAlta.vb</DependentUpon>
     </Compile>
@@ -179,10 +201,22 @@
     <Compile Include="Vistas\Obras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Vistas\Pagos.Designer.vb">
+      <DependentUpon>Pagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Pagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vistas\Postulantes.Designer.vb">
       <DependentUpon>Postulantes.vb</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Postulantes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\PostulantesAlta.Designer.vb">
+      <DependentUpon>PostulantesAlta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\PostulantesAlta.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Presupuestos.Designer.vb">
@@ -221,6 +255,9 @@
     <EmbeddedResource Include="Vistas\Familiares.resx">
       <DependentUpon>Familiares.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Imp_cert.resx">
+      <DependentUpon>Imp_cert.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Inicio.resx">
       <DependentUpon>Inicio.vb</DependentUpon>
     </EmbeddedResource>
@@ -230,14 +267,23 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ModoPago.resx">
+      <DependentUpon>ModoPago.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ObraAlta.resx">
       <DependentUpon>ObraAlta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Obras.resx">
       <DependentUpon>Obras.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Pagos.resx">
+      <DependentUpon>Pagos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Postulantes.resx">
       <DependentUpon>Postulantes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\PostulantesAlta.resx">
+      <DependentUpon>PostulantesAlta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Presupuestos.resx">
       <DependentUpon>Presupuestos.vb</DependentUpon>
@@ -261,7 +307,12 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\uep.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pie.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

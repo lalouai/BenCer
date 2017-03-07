@@ -22,20 +22,20 @@ Partial Class Obras
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_obras = New System.Windows.Forms.DataGridView()
-        Me.btn_obra_editar = New System.Windows.Forms.Button()
-        Me.btn_obra_certificar = New System.Windows.Forms.Button()
-        Me.btn_obra_alta = New System.Windows.Forms.Button()
-        Me.btn_obra_finalizar = New System.Windows.Forms.Button()
-        Me.btn_obra_cerrar = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.beneficiario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.prototipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.programa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.constructor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_obra_editar = New System.Windows.Forms.Button()
+        Me.btn_obra_certificar = New System.Windows.Forms.Button()
+        Me.btn_obra_alta = New System.Windows.Forms.Button()
+        Me.btn_obra_ver = New System.Windows.Forms.Button()
+        Me.btn_obra_cerrar = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dgv_obras, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -50,66 +50,11 @@ Partial Class Obras
         Me.dgv_obras.Size = New System.Drawing.Size(798, 557)
         Me.dgv_obras.TabIndex = 0
         '
-        'btn_obra_editar
-        '
-        Me.btn_obra_editar.Location = New System.Drawing.Point(816, 92)
-        Me.btn_obra_editar.Name = "btn_obra_editar"
-        Me.btn_obra_editar.Size = New System.Drawing.Size(110, 23)
-        Me.btn_obra_editar.TabIndex = 1
-        Me.btn_obra_editar.Text = "Editar"
-        Me.btn_obra_editar.UseVisualStyleBackColor = True
-        '
-        'btn_obra_certificar
-        '
-        Me.btn_obra_certificar.Location = New System.Drawing.Point(817, 239)
-        Me.btn_obra_certificar.Name = "btn_obra_certificar"
-        Me.btn_obra_certificar.Size = New System.Drawing.Size(110, 23)
-        Me.btn_obra_certificar.TabIndex = 2
-        Me.btn_obra_certificar.Text = "Certificar"
-        Me.btn_obra_certificar.UseVisualStyleBackColor = True
-        '
-        'btn_obra_alta
-        '
-        Me.btn_obra_alta.Location = New System.Drawing.Point(816, 63)
-        Me.btn_obra_alta.Name = "btn_obra_alta"
-        Me.btn_obra_alta.Size = New System.Drawing.Size(110, 23)
-        Me.btn_obra_alta.TabIndex = 3
-        Me.btn_obra_alta.Text = "Alta"
-        Me.btn_obra_alta.UseVisualStyleBackColor = True
-        '
-        'btn_obra_finalizar
-        '
-        Me.btn_obra_finalizar.Location = New System.Drawing.Point(816, 121)
-        Me.btn_obra_finalizar.Name = "btn_obra_finalizar"
-        Me.btn_obra_finalizar.Size = New System.Drawing.Size(110, 23)
-        Me.btn_obra_finalizar.TabIndex = 4
-        Me.btn_obra_finalizar.Text = "Finalizar"
-        Me.btn_obra_finalizar.UseVisualStyleBackColor = True
-        '
-        'btn_obra_cerrar
-        '
-        Me.btn_obra_cerrar.Location = New System.Drawing.Point(817, 597)
-        Me.btn_obra_cerrar.Name = "btn_obra_cerrar"
-        Me.btn_obra_cerrar.Size = New System.Drawing.Size(110, 23)
-        Me.btn_obra_cerrar.TabIndex = 5
-        Me.btn_obra_cerrar.Text = "Cerrar"
-        Me.btn_obra_cerrar.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(817, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(110, 37)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Obras"
-        '
         'id
         '
         Me.id.DataPropertyName = "cod_obra"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.id.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
         Me.id.HeaderText = "ID"
         Me.id.Name = "id"
         Me.id.ReadOnly = True
@@ -155,6 +100,61 @@ Partial Class Obras
         Me.estado.ReadOnly = True
         Me.estado.Width = 80
         '
+        'btn_obra_editar
+        '
+        Me.btn_obra_editar.Location = New System.Drawing.Point(816, 92)
+        Me.btn_obra_editar.Name = "btn_obra_editar"
+        Me.btn_obra_editar.Size = New System.Drawing.Size(110, 23)
+        Me.btn_obra_editar.TabIndex = 1
+        Me.btn_obra_editar.Text = "Editar"
+        Me.btn_obra_editar.UseVisualStyleBackColor = True
+        '
+        'btn_obra_certificar
+        '
+        Me.btn_obra_certificar.Location = New System.Drawing.Point(817, 239)
+        Me.btn_obra_certificar.Name = "btn_obra_certificar"
+        Me.btn_obra_certificar.Size = New System.Drawing.Size(110, 23)
+        Me.btn_obra_certificar.TabIndex = 2
+        Me.btn_obra_certificar.Text = "Certificar"
+        Me.btn_obra_certificar.UseVisualStyleBackColor = True
+        '
+        'btn_obra_alta
+        '
+        Me.btn_obra_alta.Location = New System.Drawing.Point(816, 63)
+        Me.btn_obra_alta.Name = "btn_obra_alta"
+        Me.btn_obra_alta.Size = New System.Drawing.Size(110, 23)
+        Me.btn_obra_alta.TabIndex = 3
+        Me.btn_obra_alta.Text = "Alta"
+        Me.btn_obra_alta.UseVisualStyleBackColor = True
+        '
+        'btn_obra_ver
+        '
+        Me.btn_obra_ver.Location = New System.Drawing.Point(816, 121)
+        Me.btn_obra_ver.Name = "btn_obra_ver"
+        Me.btn_obra_ver.Size = New System.Drawing.Size(110, 23)
+        Me.btn_obra_ver.TabIndex = 4
+        Me.btn_obra_ver.Text = "Ver Detalle"
+        Me.btn_obra_ver.UseVisualStyleBackColor = True
+        '
+        'btn_obra_cerrar
+        '
+        Me.btn_obra_cerrar.Location = New System.Drawing.Point(817, 597)
+        Me.btn_obra_cerrar.Name = "btn_obra_cerrar"
+        Me.btn_obra_cerrar.Size = New System.Drawing.Size(110, 23)
+        Me.btn_obra_cerrar.TabIndex = 5
+        Me.btn_obra_cerrar.Text = "Cerrar"
+        Me.btn_obra_cerrar.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(817, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(110, 37)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Obras"
+        '
         'Obras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -162,7 +162,7 @@ Partial Class Obras
         Me.ClientSize = New System.Drawing.Size(939, 675)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btn_obra_cerrar)
-        Me.Controls.Add(Me.btn_obra_finalizar)
+        Me.Controls.Add(Me.btn_obra_ver)
         Me.Controls.Add(Me.btn_obra_alta)
         Me.Controls.Add(Me.btn_obra_certificar)
         Me.Controls.Add(Me.btn_obra_editar)
@@ -179,7 +179,7 @@ Partial Class Obras
     Friend WithEvents btn_obra_editar As Button
     Friend WithEvents btn_obra_certificar As Button
     Friend WithEvents btn_obra_alta As Button
-    Friend WithEvents btn_obra_finalizar As Button
+    Friend WithEvents btn_obra_ver As Button
     Friend WithEvents btn_obra_cerrar As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents id As DataGridViewTextBoxColumn

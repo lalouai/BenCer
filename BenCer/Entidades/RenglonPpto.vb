@@ -5,6 +5,7 @@
     Private _item As String
     Private _costo As Decimal
     Private _descripcion As String
+    Private _incidencia As Decimal
 
     Public Sub RenglonPpto()
     End Sub
@@ -51,6 +52,15 @@
         End Get
         Set(value As String)
             _descripcion = value
+        End Set
+    End Property
+
+    Public Property incidencia As Decimal
+        Get
+            Return _incidencia / 100
+        End Get
+        Set(value As Decimal)
+            _incidencia = value
         End Set
     End Property
 

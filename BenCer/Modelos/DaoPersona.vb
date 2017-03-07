@@ -5,7 +5,8 @@ Public Class DaoPersona
     Implements InterfaceDao(Of Persona)
 
     Public Sub eliminar(cod As Integer) Implements InterfaceDao(Of Persona).eliminar
-        Throw New NotImplementedException()
+        Dim consulta As String = "DELETE FROM dbo.PERSONA WHERE cod_persona = " & cod
+        execnq(consulta)
     End Sub
 
     Public Function guardar(elemento As Persona) As Integer Implements InterfaceDao(Of Persona).guardar

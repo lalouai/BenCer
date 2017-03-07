@@ -52,7 +52,11 @@ Public Class ControladorPresupuestos
 
     Public ReadOnly Property total As Decimal
         Get
-            Return _ppto.items.Sum(Function(p) p.costo)
+            Try
+                Return _ppto.items.Sum(Function(p) p.costo)
+            Catch ex As Exception
+                Return 0D
+            End Try
         End Get
     End Property
 
