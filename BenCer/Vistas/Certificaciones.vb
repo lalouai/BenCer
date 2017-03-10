@@ -30,7 +30,31 @@
     End Sub
 
     Private Sub dgv_cert_certificados_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_cert_certificados.CellContentClick
-        ' TODO
+        Dim senderGrid = DirectCast(sender, DataGridView)
+        If TypeOf senderGrid.Columns(e.ColumnIndex) Is DataGridViewButtonColumn AndAlso e.RowIndex >= 0 Then
+            Dim imprime As Imp_cert = New Imp_cert
+
+            Dim certificado As Certificado = senderGrid.Rows(e.RowIndex).DataBoundItem
+            Dim _obra As Obra = controlador.getObraImprimir(certificado.cod_obra)
+
+            With imprime
+                .lbl_imp_beneficiario.Text = _obra.beneficiario
+                .lbl_imp_monto.Text = certificado.monto.ToString("C2")
+                .lbl_imp_numero.Text = certificado.numero
+                .lbl_imp_porc_cert.Text = controlador.porcentaje_avance(certificado.monto).ToString("P")
+                .lbl_imp_programa.Text = _obra.programa
+                .lbl_imp_tipo_obra.Text = _obra.tipo_obra
+                .lbl_imp_total.Text = controlador.total.ToString("C2")
+                .dgv_imp_renglones.AutoGenerateColumns = False
+                .dgv_imp_renglones.DataSource = controlador.listarRenglonesCert(_obra.cod_obra, certificado.cod_certificado)
+                .Show()
+                .imprimir()
+                .cerrar()
+            End With
+
+        End If
+
+
     End Sub
 
     Private Sub btn_cert_ver_Click(sender As Object, e As EventArgs) Handles btn_cert_ver.Click

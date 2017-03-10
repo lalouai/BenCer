@@ -41,29 +41,12 @@
         Else
             MsgBox("Debe seleccionar una fila para poder editarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
         End If
-
         If obra IsNot Nothing Then
-
-            'Dim panel As Panel = btn_obra_certificar.FindForm().Parent()
-
             Dim certAlta As CertificadoAlta = New CertificadoAlta(obra.cod_obra, obra.cod_ppto)
             With certAlta
                 .Show()
             End With
-            'With certAlta
-            '    .TopLevel = False
-            '    .Visible = True
-            '    .FormBorderStyle = FormBorderStyle.None
-            'End With
-            '
-            'panel.Controls.Add(certAlta)
-            'Me.Close()
-
         End If
-
-
-
-
     End Sub
 
     Private Sub btn_obra_cerrar_Click(sender As Object, e As EventArgs) Handles btn_obra_cerrar.Click

@@ -10,8 +10,6 @@
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         controlador = New ControladorCertificacionesAlta(cod_obra, cod_ppto)
 
-
-
         With txt_cert_alta_item
             .AutoCompleteCustomSource = controlador.listaAC
             .AutoCompleteMode = AutoCompleteMode.SuggestAppend

@@ -26,8 +26,11 @@
         For Each item As RenglonPpto In itemsPpto
             listaAutoComplete.Add(item.descripcion)
         Next
+
         _certificado = daoCertificado.ultimo_certificado(obra.cod_obra)
         _num_orden = daoCertificado.proximo_numero(obra.cod_obra)
+
+
         If _certificado Is Nothing Then
             _propio = True
             _certificado = New Certificado
@@ -59,7 +62,6 @@
         End If
 
         itemsCertificado = daoCertificado.listarRenglones(cod_obra, _certificado.cod_certificado)
-
 
     End Sub
 
