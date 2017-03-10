@@ -8,7 +8,7 @@ Public Class DaoRenglonPpto
         Dim consulta As String
         consulta = "DELETE FROM dbo.R_PRESUPUESTO OUTPUT DELETED.cod_ppto WHERE cod_r_ppto =" & cod
         Dim cod_ppto As Integer = Me.ExecM(consulta)
-        'Me.execSp("dbo.actualizar_incidencia", cod_ppto)
+        Me.execSp("dbo.actualizar_incidencia", cod_ppto)
     End Sub
 
     Public Function modificar(elemento As RenglonPpto, cod As Integer) As Integer Implements InterfaceDao(Of RenglonPpto).modificar
@@ -16,8 +16,9 @@ Public Class DaoRenglonPpto
         consulta = "UPDATE dbo.R_PRESUPUESTO SET cod_ppto = " & elemento.cod_ppto & ", item = '" & elemento.item & "',costo = " & elemento.costo.ToString.Replace(",", ".") &
             ", descripcion = '" & elemento.descripcion & "' WHERE cod_r_ppto =" & cod
         Dim sal As Integer = Me.execnq(consulta)
-        MsgBox(elemento.cod_ppto)
-        'Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
+        If elemento.costo > 0 Then
+            Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
+        End If
         Return sal
     End Function
 
@@ -26,7 +27,10 @@ Public Class DaoRenglonPpto
         consulta = "INSERT INTO dbo.R_PRESUPUESTO (cod_ppto ,item ,costo ,descripcion) OUTPUT INSERTED.COD_R_PPTO " &
                    "VALUES (" & elemento.cod_ppto & ",'" & elemento.item & "'," & elemento.costo.ToString.Replace(",", ".") & ",'" & elemento.descripcion & "')"
         Dim sal As Integer = Me.ExecM(consulta)
-        Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
+        If elemento.costo > 0 Then
+            Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
+        End If
+        Return sal
     End Function
 
     Public Function listar() As List(Of RenglonPpto) Implements InterfaceDao(Of RenglonPpto).listar
@@ -41,12 +45,12 @@ Public Class DaoRenglonPpto
         For Each row In ds.Tables(0).Rows
             Dim aux As RenglonPpto = New RenglonPpto
 
-            aux.cod_ppto = row("cod_ppto")
-            aux.cod_r_ppto = row("cod_r_ppto")
-            aux.costo = row("costo")
-            aux.descripcion = row("descripcion")
-            aux.item = row("item")
-            aux.incidencia = row("incidencia")
+            aux.cod_ppto = If(Not IsDBNull(row("cod_ppto")), row("cod_ppto"), 0)
+            aux.cod_r_ppto = If(Not IsDBNull(row("cod_r_ppto")), row("cod_r_ppto"), 0)
+            aux.costo = If(Not IsDBNull(row("costo")), row("costo"), 0)
+            aux.descripcion = If(Not IsDBNull(row("descripcion")), row("descripcion"), "")
+            aux.item = If(Not IsDBNull(row("item")), row("item"), 0)
+            aux.incidencia = If(Not IsDBNull(row("incidencia")), row("incidencia"), 0)
 
             lista.Add(aux)
         Next

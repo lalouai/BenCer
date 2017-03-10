@@ -55,6 +55,13 @@ Public Class DaoPostulante
     Public Overloads Sub eliminar(cod As Integer) Implements InterfaceDao(Of Postulante).eliminar
         Dim consulta As String = "DELETE FROM POSTULANTE WHERE cod_persona = " & cod
         execnq(consulta)
+        consulta = "DELETE FROM dbo.PERSONA WHERE cod_persona=" & cod
+        execnq(consulta)
+    End Sub
+
+    Public Overloads Sub eliminarPostulante(cod As Integer)
+        Dim consulta As String = "DELETE FROM POSTULANTE WHERE cod_persona = " & cod
+        execnq(consulta)
     End Sub
 
     Public Overloads Function listar() As List(Of Postulante) Implements InterfaceDao(Of Postulante).listar
@@ -63,7 +70,8 @@ Public Class DaoPostulante
         Dim consulta As String = "SELECT * FROM dbo.POSTULANTE as POS" &
                                  " INNER JOIN PERSONA as P ON POS.cod_persona = P.cod_PERSONA" &
                                  " INNER JOIN ESTADO_CIVIL as EC ON P.cod_estado_civil = EC.cod_estado_civil" &
-                                 " INNER JOIN TIPO_DOC as TD ON P.cod_tipo_doc = TD.cod_tipo_doc"
+                                 " INNER JOIN TIPO_DOC as TD ON P.cod_tipo_doc = TD.cod_tipo_doc" &
+                                 " WHERE pos.ACTIVO = 1"
 
         Dim ds As Data.DataSet = Me.Exec(consulta)
 

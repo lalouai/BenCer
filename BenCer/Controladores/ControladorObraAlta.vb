@@ -12,9 +12,6 @@ Public Class ControladorObraAlta
 
 
     Private postulantes As List(Of Postulante)
-    Private programas As List(Of Programa)
-    Private constructores As List(Of Constructor)
-    Private tipoObra As List(Of TipoObra)
 
     Public Sub New()
 
@@ -26,10 +23,6 @@ Public Class ControladorObraAlta
         daoPresupuesto = New DaoPresupuesto
         daoObra = New DaoObra
 
-        programas = daoPrograma.listar()
-        tipoObra = daoTipoObra.listar()
-        constructores = daoConstructor.listar()
-
     End Sub
 
     Public Function listaPostulantes(ByVal termino As String) As List(Of Postulante)
@@ -38,26 +31,35 @@ Public Class ControladorObraAlta
 
     Public ReadOnly Property listaProgramas As List(Of Programa)
         Get
-            Return programas
+            Return daoPrograma.listar()
         End Get
     End Property
 
     Public ReadOnly Property listaTipoObra As List(Of TipoObra)
         Get
-            Return tipoObra
+            Return daoTipoObra.listarValidas()
         End Get
     End Property
 
     Public ReadOnly Property listaConstructores As List(Of Constructor)
         Get
-            Return constructores
+            Return daoConstructor.listar()
         End Get
     End Property
 
+    Public ReadOnly Property hayPostulantes As Boolean
+        Get
+            If daoPostulante.listar().Count = 0 Then
+                Return False
+            Else
+                Return True
+            End If
+        End Get
+    End Property
 
     Public Function altaBeneficiario(cod_persona As String) As Integer
 
-        daoPostulante.eliminar(cod_persona)
+        daoPostulante.eliminarPostulante(cod_persona)
 
         Dim cod_beneficiario = daoBeneficiario.guardar(cod_persona)
         If cod_beneficiario > 0 Then

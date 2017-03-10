@@ -22,13 +22,13 @@ Partial Class ObraAlta
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.lbl_obra_alta_titulo = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txt_obra_alta_cod_persona = New System.Windows.Forms.TextBox()
@@ -60,6 +60,10 @@ Partial Class ObraAlta
         Me.grp_postulantes = New System.Windows.Forms.GroupBox()
         Me.obra_avance = New System.Windows.Forms.GroupBox()
         Me.dgv_obra_alta_pagos = New System.Windows.Forms.DataGridView()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cod_pago = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cod_certificado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.monto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.obra_alta_avance_porcentual = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.obra_alta_avance_financiero = New System.Windows.Forms.Label()
@@ -67,10 +71,7 @@ Partial Class ObraAlta
         Me.obra_alta_grafico = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.obra_alta_costo_total = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cod_pago = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cod_certificado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.monto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lbl_obra_alta_error = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgv_obra_alta_resultados, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,7 +102,7 @@ Partial Class ObraAlta
         Me.GroupBox1.Controls.Add(Me.txt_obra_alta_nombre)
         Me.GroupBox1.Controls.Add(Me.txt_obra_alta_dni)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(38, 54)
+        Me.GroupBox1.Location = New System.Drawing.Point(27, 54)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(571, 174)
         Me.GroupBox1.TabIndex = 15
@@ -192,7 +193,7 @@ Partial Class ObraAlta
         Me.GroupBox2.Controls.Add(Me.cmb_obra_alta_programa)
         Me.GroupBox2.Controls.Add(Me.cmb_obra_alta_prototipo)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(38, 249)
+        Me.GroupBox2.Location = New System.Drawing.Point(27, 249)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(571, 229)
         Me.GroupBox2.TabIndex = 16
@@ -355,7 +356,7 @@ Partial Class ObraAlta
         '
         Me.grp_postulantes.Controls.Add(Me.dgv_obra_alta_resultados)
         Me.grp_postulantes.Controls.Add(Me.Label4)
-        Me.grp_postulantes.Location = New System.Drawing.Point(626, 54)
+        Me.grp_postulantes.Location = New System.Drawing.Point(656, 54)
         Me.grp_postulantes.Name = "grp_postulantes"
         Me.grp_postulantes.Size = New System.Drawing.Size(414, 277)
         Me.grp_postulantes.TabIndex = 21
@@ -389,6 +390,45 @@ Partial Class ObraAlta
         Me.dgv_obra_alta_pagos.RowHeadersVisible = False
         Me.dgv_obra_alta_pagos.Size = New System.Drawing.Size(458, 150)
         Me.dgv_obra_alta_pagos.TabIndex = 24
+        '
+        'fecha
+        '
+        Me.fecha.DataPropertyName = "fecha_pago"
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle9
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.ReadOnly = True
+        '
+        'cod_pago
+        '
+        Me.cod_pago.DataPropertyName = "cod_pago"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cod_pago.DefaultCellStyle = DataGridViewCellStyle10
+        Me.cod_pago.HeaderText = "Orden Pago"
+        Me.cod_pago.Name = "cod_pago"
+        Me.cod_pago.ReadOnly = True
+        '
+        'cod_certificado
+        '
+        Me.cod_certificado.DataPropertyName = "cod_certificado"
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cod_certificado.DefaultCellStyle = DataGridViewCellStyle11
+        Me.cod_certificado.HeaderText = "Certificado"
+        Me.cod_certificado.Name = "cod_certificado"
+        Me.cod_certificado.ReadOnly = True
+        '
+        'monto
+        '
+        Me.monto.DataPropertyName = "monto"
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Format = "C2"
+        DataGridViewCellStyle12.NullValue = Nothing
+        Me.monto.DefaultCellStyle = DataGridViewCellStyle12
+        Me.monto.HeaderText = "Monto"
+        Me.monto.Name = "monto"
+        Me.monto.ReadOnly = True
+        Me.monto.Width = 150
         '
         'obra_alta_avance_porcentual
         '
@@ -434,17 +474,17 @@ Partial Class ObraAlta
         '
         'obra_alta_grafico
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.obra_alta_grafico.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.obra_alta_grafico.Legends.Add(Legend1)
+        ChartArea3.Name = "ChartArea1"
+        Me.obra_alta_grafico.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.obra_alta_grafico.Legends.Add(Legend3)
         Me.obra_alta_grafico.Location = New System.Drawing.Point(9, 19)
         Me.obra_alta_grafico.Name = "obra_alta_grafico"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.obra_alta_grafico.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.obra_alta_grafico.Series.Add(Series3)
         Me.obra_alta_grafico.Size = New System.Drawing.Size(449, 182)
         Me.obra_alta_grafico.TabIndex = 19
         Me.obra_alta_grafico.Text = "Chart1"
@@ -471,50 +511,24 @@ Partial Class ObraAlta
         Me.Label5.TabIndex = 17
         Me.Label5.Text = "Costo total"
         '
-        'fecha
+        'lbl_obra_alta_error
         '
-        Me.fecha.DataPropertyName = "fecha_pago"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle1
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.Name = "fecha"
-        Me.fecha.ReadOnly = True
-        '
-        'cod_pago
-        '
-        Me.cod_pago.DataPropertyName = "cod_pago"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cod_pago.DefaultCellStyle = DataGridViewCellStyle2
-        Me.cod_pago.HeaderText = "Orden Pago"
-        Me.cod_pago.Name = "cod_pago"
-        Me.cod_pago.ReadOnly = True
-        '
-        'cod_certificado
-        '
-        Me.cod_certificado.DataPropertyName = "cod_certificado"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cod_certificado.DefaultCellStyle = DataGridViewCellStyle3
-        Me.cod_certificado.HeaderText = "Certificado"
-        Me.cod_certificado.Name = "cod_certificado"
-        Me.cod_certificado.ReadOnly = True
-        '
-        'monto
-        '
-        Me.monto.DataPropertyName = "monto"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "C2"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.monto.DefaultCellStyle = DataGridViewCellStyle4
-        Me.monto.HeaderText = "Monto"
-        Me.monto.Name = "monto"
-        Me.monto.ReadOnly = True
-        Me.monto.Width = 150
+        Me.lbl_obra_alta_error.AutoSize = True
+        Me.lbl_obra_alta_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_obra_alta_error.ForeColor = System.Drawing.Color.Red
+        Me.lbl_obra_alta_error.Location = New System.Drawing.Point(24, 534)
+        Me.lbl_obra_alta_error.Name = "lbl_obra_alta_error"
+        Me.lbl_obra_alta_error.Size = New System.Drawing.Size(38, 15)
+        Me.lbl_obra_alta_error.TabIndex = 23
+        Me.lbl_obra_alta_error.Text = "error"
+        Me.lbl_obra_alta_error.Visible = False
         '
         'ObraAlta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1102, 546)
+        Me.ClientSize = New System.Drawing.Size(1146, 701)
+        Me.Controls.Add(Me.lbl_obra_alta_error)
         Me.Controls.Add(Me.obra_avance)
         Me.Controls.Add(Me.grp_postulantes)
         Me.Controls.Add(Me.btn_obra_alta_reiniciar)
@@ -582,4 +596,5 @@ Partial Class ObraAlta
     Friend WithEvents cod_pago As DataGridViewTextBoxColumn
     Friend WithEvents cod_certificado As DataGridViewTextBoxColumn
     Friend WithEvents monto As DataGridViewTextBoxColumn
+    Friend WithEvents lbl_obra_alta_error As Label
 End Class

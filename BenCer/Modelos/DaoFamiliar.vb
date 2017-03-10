@@ -5,17 +5,20 @@ Public Class DaoFamiliar
     Implements InterfaceDao(Of Familiar)
 
     Public Function modificar(elemento As Familiar, cod As Integer) As Integer Implements InterfaceDao(Of Familiar).modificar
-        Throw New NotImplementedException()
+        Return Nothing
     End Function
 
-    Friend Function listar_por_persona(cod_persona As Integer) As List(Of Familiar)
+    Public Function listar_por_persona(cod_persona As Integer) As List(Of Familiar)
         Dim lista As List(Of Familiar) = New List(Of Familiar)
         Dim consulta As String
-        consulta = "SELECT * FROM dbo.FAMILIAR AS FAM" &
+        consulta = "SELECT FAM.cod_persona AS cod_persona, P.nombre as nombre, P.apellido as apellido, P.cod_estado_civil as cod_estado_civil," &
+                   " EC.ESTADO as estado, P.cod_tipo_doc as cod_tipo_doc, TD.tipo as tipo, P.nro_doc as nro_doc," &
+                   " FAM.cod_parentezco as cod_parentezco, PA.descripción as parentezco" &
+                   " FROM dbo.FAMILIAR AS FAM" &
                    " INNER JOIN PERSONA as P ON FAM.cod_persona = P.cod_PERSONA" &
                    " INNER JOIN ESTADO_CIVIL as EC ON P.cod_estado_civil = EC.cod_estado_civil" &
                    " INNER JOIN TIPO_DOC as TD ON P.cod_tipo_doc = TD.cod_tipo_doc" &
-                   " INNER JOIN PARENTEZCO as Pa ON FAM.cod_parentezco = Pa.cod_parentezco" &
+                   " INNER JOIN PARENTEZCO as PA ON FAM.cod_parentezco = PA.cod_parentezco" &
                    " WHERE FAM.cod_jefe_flia = " & cod_persona
 
         Dim ds As Data.DataSet = Me.Exec(consulta)
@@ -33,6 +36,8 @@ Public Class DaoFamiliar
                     .cod_tipo_doc = row("cod_tipo_doc")
                     .tipo_doc = row("tipo")
                     .nro_doc = row("nro_doc")
+                    .cod_parentezco = row("cod_parentezco")
+                    .parentezco = row("parentezco")
                 End With
                 lista.Add(familiar)
             Next
@@ -40,12 +45,14 @@ Public Class DaoFamiliar
         Return lista
     End Function
 
-    Private Sub InterfaceDao_eliminar(cod As Integer) Implements InterfaceDao(Of Familiar).eliminar
-        Throw New NotImplementedException()
+    Private Sub eliminar(cod As Integer) Implements InterfaceDao(Of Familiar).eliminar
+        Dim consulta = "DELETE FROM dbo.FAMILIAR WHERE cod_persona =" & cod
+        Me.execnq(consulta)
+        consulta = "DELETE FROM dbo.PERSONA WHERE cod_persona=" & cod
+        Me.execnq(consulta)
     End Sub
 
     Public Function guardar(elemento As Familiar) As Integer Implements InterfaceDao(Of Familiar).guardar
-
         Dim consulta As String = "INSERT INTO dbo.FAMILIAR (cod_persona, fecha_alta, cod_parentezco, cod_jefe_flia) OUTPUT INSERTED.cod_familiar" &
                                  " VALUES (" & MyBase.guardar(elemento) & ", '" & DateTime.Now.ToString("yyyy-MM-dd") &
                                  "', " & elemento.cod_parentezco & "," & elemento.cod_jefe_flia & ")"
@@ -66,7 +73,7 @@ Public Class DaoFamiliar
                    " INNER JOIN PERSONA as P ON FAM.cod_persona = P.cod_PERSONA" &
                    " INNER JOIN ESTADO_CIVIL as EC ON P.cod_estado_civil = EC.cod_estado_civil" &
                    " INNER JOIN TIPO_DOC as TD ON P.cod_tipo_doc = TD.cod_tipo_doc" &
-                   " WHERE FAM.cod_jefe_flia = " & persona
+                   " WHERE FAM.cod_persona = " & persona
 
         Dim ds As Data.DataSet = Me.Exec(consulta)
         Dim familiar As Familiar = Nothing

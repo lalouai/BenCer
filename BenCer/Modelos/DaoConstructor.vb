@@ -23,7 +23,7 @@ Public Class DaoConstructor
 
     Public Function listar() As List(Of Constructor) Implements InterfaceDao(Of Constructor).listar
         Dim lista As List(Of Constructor) = New List(Of Constructor)
-        Dim consulta As String = "SELECT * FROM dbo.CONSTRUCTOR"
+        Dim consulta As String = "SELECT * FROM dbo.CONSTRUCTOR WHERE activo=1"
         Dim ds As Data.DataSet = Me.Exec(consulta)
         If ds.Tables(0).Rows.Count > 0 Then
             For Each row In ds.Tables(0).Rows

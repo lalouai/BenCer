@@ -41,7 +41,12 @@ Public Class DataManager
             m_Conn.Dispose()
             m_Conn = Nothing
         Catch exc As Exception
-            m_Trans.Rollback()
+            Try
+                m_Trans.Rollback()
+            Catch ex As Exception
+                Debug.Print("Sub Commit() Failed " & exc.Message, exc)
+            End Try
+
             Debug.Print("Sub Commit() Failed " & exc.Message, exc)
         End Try
 

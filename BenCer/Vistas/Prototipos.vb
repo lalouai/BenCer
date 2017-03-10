@@ -1,6 +1,6 @@
 ﻿Public Class Prototipos
 
-    Private controlador As ControladorPrototipos
+    Private WithEvents controlador As ControladorPrototipos
     Dim modo As String
 
     Public Sub New()
@@ -12,7 +12,7 @@
         controlador = New ControladorPrototipos
         dvg_prototipo.AutoGenerateColumns = False
         dvg_prototipo.DataSource = controlador.listaPrototipos()
-        Me.modo = "agregar"
+        Me.modo = "Agregar"
 
     End Sub
 
@@ -20,7 +20,7 @@
         If dvg_prototipo.SelectedRows.Count = 1 Then
             modo = controlador.editar(Me, dvg_prototipo.SelectedRows(0).DataBoundItem)
         Else
-            MsgBox("Debe seleccionar una fila para poder editarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+            mostrarError("Debe seleccionar una fila para poder editarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
         End If
         btn_prototipo_agregar.Text = modo
     End Sub
@@ -30,7 +30,7 @@
         If dvg_prototipo.SelectedRows.Count = 1 Then
             proto = dvg_prototipo.SelectedRows(0).DataBoundItem
         Else
-            MsgBox("Debe seleccionar una fila para poder eliminarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+            mostrarError("Debe seleccionar una fila para poder eliminarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
             Exit Sub
         End If
 
@@ -45,47 +45,40 @@
             controlador.eliminarItem(proto.cod_tipo_obra)
 
         End If
-
+        actualizar()
     End Sub
 
     Private Sub btn_cons_agregar_Click(sender As Object, e As EventArgs) Handles btn_prototipo_agregar.Click
         Dim cod_prototipo As String
         Dim nombre As String
-
         Dim error_msg As String = ""
-
-        If txt_prototipo_nombre.Text = "" Then
+        If txt_prototipo_nombre.Text.Trim = "" Then
             error_msg += "nombre ,"
         End If
-
         If Not error_msg = "" Then
-            MsgBox("Lo siento pero " & error_msg & " no puede ser vacio")
+            mostrarError("Lo siento pero " & error_msg & " no puede ser vacio")
             Exit Sub
         End If
-
         cod_prototipo = txt_prototipo_cod_prototipo.Text.Trim
         nombre = txt_prototipo_nombre.Text.Trim
-
         Dim fila As TipoObra = New TipoObra
         With fila
             .descripcion = nombre
         End With
 
-        Dim dt As List(Of TipoObra) = DirectCast(dvg_prototipo.DataSource, List(Of TipoObra))
-        If modo.Equals("agregar") Then
+        If modo.Equals("Agregar") Then
             fila.cod_tipo_obra = controlador.guardarItem(fila)
-            dt.Add(fila)
-        ElseIf modo.Equals("actualizar") Then
-            fila.cod_tipo_obra = cod_prototipo
-            Dim prototipo As TipoObra = dt.Find(Function(el) el.cod_tipo_obra = fila.cod_tipo_obra)
-            dt.Remove(prototipo)
-            dt.Add(fila)
+
+        ElseIf modo.Equals("Actualizar") Then
+
+            fila = dvg_prototipo.SelectedRows(0).DataBoundItem
+            fila.descripcion = txt_prototipo_nombre.Text
+
             controlador.actualizarItem(fila)
-            modo = "agregar"
+            modo = "Agregar"
         End If
 
-        dvg_prototipo.DataSource = Nothing
-        dvg_prototipo.DataSource = dt
+        actualizar()
 
         txt_prototipo_nombre.Text = ""
         txt_prototipo_cod_prototipo.Text = ""
@@ -102,8 +95,31 @@
     End Sub
 
     Private Sub btn_proto_cargar_ppto_Click(sender As Object, e As EventArgs) Handles btn_proto_cargar_ppto.Click
-        Dim cod_prototipo As Integer = DirectCast(dvg_prototipo.SelectedRows(0).DataBoundItem, TipoObra).cod_tipo_obra
-        Dim presupuestador As Presupuestos = New Presupuestos(cod_prototipo)
-        presupuestador.ShowDialog()
+        If dvg_prototipo.SelectedRows.Count > 0 Then
+            Dim cod_prototipo As Integer = DirectCast(dvg_prototipo.SelectedRows(0).DataBoundItem, TipoObra).cod_tipo_obra
+            Dim presupuestador As Presupuestos = New Presupuestos(cod_prototipo)
+            presupuestador.ShowDialog()
+        Else
+            mostrarError("Debe seleccionar una fila para poder ver o crear un presupuesto." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+        End If
     End Sub
+
+    Private Sub actualizar()
+        dvg_prototipo.DataSource = controlador.listaPrototipos
+    End Sub
+
+    Private Sub mostrarError(txt As String) Handles controlador.mostrarError
+        lbl_prototipo_error.Text = txt
+        lbl_prototipo_error.Visible = True
+    End Sub
+
+    Private Sub dismissError() Handles controlador.dismissError
+        lbl_prototipo_error.Visible = False
+        lbl_prototipo_error.Text = ""
+    End Sub
+
+    Private Sub cambia() Handles dvg_prototipo.RowLeave
+        dismissError()
+    End Sub
+
 End Class

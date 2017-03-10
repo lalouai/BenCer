@@ -1,7 +1,8 @@
 ﻿Public Class Programas
 
-    Private controlador As ControladorProgramas
+    Private WithEvents controlador As ControladorProgramas
     Dim modo As String
+    Dim years As List(Of String)
 
     Public Sub New()
 
@@ -12,7 +13,13 @@
         controlador = New ControladorProgramas
         dgv_prg.AutoGenerateColumns = False
         dgv_prg.DataSource = controlador.listaProgramas
-        Me.modo = "agregar"
+        Me.modo = "Agregar"
+        years = New List(Of String)
+        Dim anio = Date.Now.Year
+        years.Add(anio - 1)
+        years.Add(anio)
+        years.Add(anio + 1)
+
         txt_prg_anio.Text = Date.Now.Year
 
     End Sub
@@ -20,9 +27,15 @@
 
     Private Sub btn_cons_editar_Click(sender As Object, e As EventArgs) Handles btn_prg_editar.Click
         If dgv_prg.SelectedRows.Count = 1 Then
-            modo = controlador.editar(Me, dgv_prg.SelectedRows(0).DataBoundItem)
+            dismiss()
+            Dim programa As Programa = dgv_prg.SelectedRows(0).DataBoundItem
+            txt_prg_cod_programa.Text = programa.cod_programa
+            txt_prg_nombre.Text = programa.nombre
+            txt_prg_expediente.Text = programa.expediente.Split("-")(0)
+            txt_prg_anio.Text = programa.expediente.Split("-")(1)
+            modo = controlador.editar(programa)
         Else
-            MsgBox("Debe seleccionar una fila para poder editarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+            mostrarError("Debe seleccionar una fila para poder editarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
         End If
         btn_prg_agregar.Text = modo
     End Sub
@@ -33,7 +46,14 @@
         If dgv_prg.SelectedRows.Count = 1 Then
             prog = dgv_prg.SelectedRows(0).DataBoundItem
         Else
-            MsgBox("Debe seleccionar una fila para poder eliminarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+            mostrarError("Debe seleccionar una fila para poder eliminarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
+            Exit Sub
+        End If
+
+        Dim asignadas As Integer = controlador.programaAsignado(prog.cod_programa)
+
+        If asignadas > 0 Then
+            mostrarError("Lo siento, este programa tiene " & asignadas & " viviendas asociadas, no puede ser eliminado")
             Exit Sub
         End If
 
@@ -56,22 +76,44 @@
         Dim expediente As String
         Dim anio As String
 
-        Dim error_msg As String = ""
+        Dim error_msg As List(Of String) = New List(Of String)
 
-        If txt_prg_nombre.Text = "" Then
-            error_msg += "nombre ,"
+        If txt_prg_nombre.Text.Trim = "" Then
+            error_msg.Add("nombre")
         End If
 
-        If txt_prg_expediente.Text = "" Then
-            error_msg += "expediente ,"
+        If txt_prg_expediente.Text.Trim = "" Then
+            error_msg.Add("expediente")
         End If
 
-        If txt_prg_anio.Text = "" Then
-            error_msg += "año ,"
+        If txt_prg_anio.Text.Trim = "" Then
+            error_msg.Add("año")
         End If
 
-        If Not error_msg = "" Then
-            MsgBox("Lo siento pero " & error_msg & " no puede ser vacio")
+        If Not IsNumeric(txt_prg_expediente.Text.Trim) Then
+            error_msg.Add("NUM")
+        End If
+
+
+        If error_msg.Count > 0 Then
+            Dim fin As String
+            If error_msg.Count = 1 Then
+                If error_msg(0).Equals("NUM") Then
+                    fin = "expediente debe ser numérico"
+                    error_msg.Clear()
+                Else
+                    fin = " no puede ser vacio"
+                End If
+            Else
+                If error_msg(error_msg.Count - 1).Equals("NUM") Then
+                    error_msg.Remove("NUM")
+                    fin = " no pueden ser vacios y expediente debe ser numérico"
+                Else
+                    fin = " no pueden ser vacios"
+                End If
+
+            End If
+            mostrarError("Lo siento pero " & String.Join(",", error_msg.ToArray()) & "," & fin)
             Exit Sub
         End If
 
@@ -86,21 +128,18 @@
             .expediente = expediente & "-" & anio
         End With
 
-        Dim dt As List(Of Programa) = DirectCast(dgv_prg.DataSource, List(Of Programa))
-        If modo.Equals("agregar") Then
+        If modo.Equals("Agregar") Then
             fila.cod_programa = controlador.guardarItem(fila)
-            dt.Add(fila)
-        ElseIf modo.Equals("actualizar") Then
-            fila.cod_programa = cod_programa
-            Dim programa As Programa = dt.Find(Function(el) el.cod_programa = fila.cod_programa)
-            dt.Remove(programa)
-            dt.Add(fila)
-            controlador.actualizarItem(fila)
-            modo = "agregar"
-        End If
+        ElseIf modo.Equals("Actualizar") Then
 
-        dgv_prg.DataSource = Nothing
-        dgv_prg.DataSource = dt
+            If dgv_prg.SelectedRows.Count = 1 Then
+                fila = dgv_prg.SelectedRows(0).DataBoundItem
+                fila.nombre = nombre
+                fila.expediente = expediente & "-" & anio
+                controlador.actualizarItem(fila)
+                modo = "Agregar"
+            End If
+        End If
 
         txt_prg_nombre.Text = ""
         txt_prg_expediente.Text = ""
@@ -117,4 +156,36 @@
             Me.Close()
         End If
     End Sub
+
+    Private Sub actualizar() Handles controlador.actualizar
+        dgv_prg.DataSource = controlador.listaProgramas
+    End Sub
+
+    Private Sub txt_prg_anio_TextChanged(sender As Object, e As EventArgs) Handles txt_prg_anio.TextChanged
+        If txt_prg_anio.Text.Trim.Length = 4 Then
+            If years.IndexOf(txt_prg_anio.Text.Trim) < 0 Then
+                mostrarError("Lo siento, el año del expediente sólo puede ser el anterior, el corriente o el próximo" & vbCrLf &
+                             "(" & String.Join(",", years.ToArray()) & ")")
+            Else
+                dismiss()
+            End If
+        Else
+            dismiss()
+        End If
+    End Sub
+
+    Private Sub mostrarError(texto As String)
+        lbl_prg_error.Text = texto
+        lbl_prg_error.Visible = True
+    End Sub
+
+    Private Sub dismiss()
+        lbl_prg_error.Text = ""
+        lbl_prg_error.Visible = False
+    End Sub
+
+    Private Sub dgv_seleccion() Handles dgv_prg.RowLeave
+        Me.dismiss()
+    End Sub
+
 End Class

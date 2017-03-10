@@ -64,6 +64,7 @@ Partial Class Presupuestos
         '
         'dvg_presupuesto
         '
+        Me.dvg_presupuesto.AllowUserToResizeRows = False
         Me.dvg_presupuesto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dvg_presupuesto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dvg_presupuesto.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.item, Me.descripcion, Me.Costo_M_Obra, Me.incidencia})
@@ -177,10 +178,10 @@ Partial Class Presupuestos
         'lbl_presu_titulo
         '
         Me.lbl_presu_titulo.AutoSize = True
-        Me.lbl_presu_titulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_presu_titulo.Location = New System.Drawing.Point(691, 9)
+        Me.lbl_presu_titulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.lbl_presu_titulo.Location = New System.Drawing.Point(758, 16)
         Me.lbl_presu_titulo.Name = "lbl_presu_titulo"
-        Me.lbl_presu_titulo.Size = New System.Drawing.Size(224, 37)
+        Me.lbl_presu_titulo.Size = New System.Drawing.Size(157, 26)
         Me.lbl_presu_titulo.TabIndex = 31
         Me.lbl_presu_titulo.Text = "Presupuestos"
         '

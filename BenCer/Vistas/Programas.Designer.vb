@@ -22,7 +22,7 @@ Partial Class Programas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_prg = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ape_Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,21 +45,22 @@ Partial Class Programas
         '
         'dgv_prg
         '
+        Me.dgv_prg.AllowUserToResizeRows = False
         Me.dgv_prg.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dgv_prg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_prg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Ape_Nom, Me.cuit})
-        Me.dgv_prg.Location = New System.Drawing.Point(12, 50)
+        Me.dgv_prg.Location = New System.Drawing.Point(12, 124)
         Me.dgv_prg.Name = "dgv_prg"
         Me.dgv_prg.RowHeadersVisible = False
         Me.dgv_prg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgv_prg.Size = New System.Drawing.Size(755, 426)
+        Me.dgv_prg.Size = New System.Drawing.Size(755, 352)
         Me.dgv_prg.TabIndex = 4
         '
         'ID
         '
         Me.ID.DataPropertyName = "cod_programa"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
         Me.ID.HeaderText = "ID"
         Me.ID.Name = "ID"
         Me.ID.ReadOnly = True
@@ -82,7 +83,7 @@ Partial Class Programas
         '
         'txt_prg_cod_programa
         '
-        Me.txt_prg_cod_programa.Location = New System.Drawing.Point(38, 505)
+        Me.txt_prg_cod_programa.Location = New System.Drawing.Point(37, 95)
         Me.txt_prg_cod_programa.Name = "txt_prg_cod_programa"
         Me.txt_prg_cod_programa.Size = New System.Drawing.Size(42, 20)
         Me.txt_prg_cod_programa.TabIndex = 19
@@ -91,7 +92,7 @@ Partial Class Programas
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(489, 486)
+        Me.Label2.Location = New System.Drawing.Point(544, 79)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(60, 13)
         Me.Label2.TabIndex = 18
@@ -100,7 +101,7 @@ Partial Class Programas
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(95, 486)
+        Me.Label1.Location = New System.Drawing.Point(116, 79)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(44, 13)
         Me.Label1.TabIndex = 17
@@ -111,7 +112,7 @@ Partial Class Programas
         Me.lbl_prg_error.AutoSize = True
         Me.lbl_prg_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_prg_error.ForeColor = System.Drawing.Color.Red
-        Me.lbl_prg_error.Location = New System.Drawing.Point(12, 479)
+        Me.lbl_prg_error.Location = New System.Drawing.Point(12, 41)
         Me.lbl_prg_error.Name = "lbl_prg_error"
         Me.lbl_prg_error.Size = New System.Drawing.Size(51, 15)
         Me.lbl_prg_error.TabIndex = 16
@@ -120,21 +121,21 @@ Partial Class Programas
         '
         'txt_prg_nombre
         '
-        Me.txt_prg_nombre.Location = New System.Drawing.Point(98, 505)
+        Me.txt_prg_nombre.Location = New System.Drawing.Point(119, 95)
         Me.txt_prg_nombre.Name = "txt_prg_nombre"
-        Me.txt_prg_nombre.Size = New System.Drawing.Size(373, 20)
+        Me.txt_prg_nombre.Size = New System.Drawing.Size(419, 20)
         Me.txt_prg_nombre.TabIndex = 0
         '
         'txt_prg_expediente
         '
-        Me.txt_prg_expediente.Location = New System.Drawing.Point(492, 505)
+        Me.txt_prg_expediente.Location = New System.Drawing.Point(544, 95)
         Me.txt_prg_expediente.Name = "txt_prg_expediente"
         Me.txt_prg_expediente.Size = New System.Drawing.Size(137, 20)
         Me.txt_prg_expediente.TabIndex = 1
         '
         'btn_prg_agregar
         '
-        Me.btn_prg_agregar.Location = New System.Drawing.Point(773, 503)
+        Me.btn_prg_agregar.Location = New System.Drawing.Point(771, 95)
         Me.btn_prg_agregar.Name = "btn_prg_agregar"
         Me.btn_prg_agregar.Size = New System.Drawing.Size(142, 23)
         Me.btn_prg_agregar.TabIndex = 3
@@ -143,7 +144,7 @@ Partial Class Programas
         '
         'btn_prg_eliminar
         '
-        Me.btn_prg_eliminar.Location = New System.Drawing.Point(773, 79)
+        Me.btn_prg_eliminar.Location = New System.Drawing.Point(771, 153)
         Me.btn_prg_eliminar.Name = "btn_prg_eliminar"
         Me.btn_prg_eliminar.Size = New System.Drawing.Size(142, 23)
         Me.btn_prg_eliminar.TabIndex = 6
@@ -152,7 +153,7 @@ Partial Class Programas
         '
         'btn_prg_editar
         '
-        Me.btn_prg_editar.Location = New System.Drawing.Point(773, 50)
+        Me.btn_prg_editar.Location = New System.Drawing.Point(771, 124)
         Me.btn_prg_editar.Name = "btn_prg_editar"
         Me.btn_prg_editar.Size = New System.Drawing.Size(142, 23)
         Me.btn_prg_editar.TabIndex = 5
@@ -172,7 +173,7 @@ Partial Class Programas
         'lbl_prg_anio
         '
         Me.lbl_prg_anio.AutoSize = True
-        Me.lbl_prg_anio.Location = New System.Drawing.Point(635, 508)
+        Me.lbl_prg_anio.Location = New System.Drawing.Point(687, 98)
         Me.lbl_prg_anio.Name = "lbl_prg_anio"
         Me.lbl_prg_anio.Size = New System.Drawing.Size(10, 13)
         Me.lbl_prg_anio.TabIndex = 21
@@ -180,14 +181,14 @@ Partial Class Programas
         '
         'txt_prg_anio
         '
-        Me.txt_prg_anio.Location = New System.Drawing.Point(651, 505)
+        Me.txt_prg_anio.Location = New System.Drawing.Point(703, 95)
         Me.txt_prg_anio.Name = "txt_prg_anio"
         Me.txt_prg_anio.Size = New System.Drawing.Size(64, 20)
         Me.txt_prg_anio.TabIndex = 2
         '
         'btn_prg_cerrar
         '
-        Me.btn_prg_cerrar.Location = New System.Drawing.Point(773, 453)
+        Me.btn_prg_cerrar.Location = New System.Drawing.Point(771, 182)
         Me.btn_prg_cerrar.Name = "btn_prg_cerrar"
         Me.btn_prg_cerrar.Size = New System.Drawing.Size(142, 23)
         Me.btn_prg_cerrar.TabIndex = 7
@@ -198,7 +199,7 @@ Partial Class Programas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(925, 546)
+        Me.ClientSize = New System.Drawing.Size(925, 486)
         Me.Controls.Add(Me.btn_prg_cerrar)
         Me.Controls.Add(Me.txt_prg_anio)
         Me.Controls.Add(Me.lbl_prg_anio)

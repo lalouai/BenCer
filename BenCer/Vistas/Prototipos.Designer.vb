@@ -22,7 +22,7 @@ Partial Class Prototipos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dvg_prototipo = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,12 +40,14 @@ Partial Class Prototipos
         '
         'dvg_prototipo
         '
+        Me.dvg_prototipo.AllowUserToResizeRows = False
         Me.dvg_prototipo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dvg_prototipo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dvg_prototipo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.nombre})
         Me.dvg_prototipo.Location = New System.Drawing.Point(12, 12)
         Me.dvg_prototipo.Name = "dvg_prototipo"
         Me.dvg_prototipo.RowHeadersVisible = False
+        Me.dvg_prototipo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dvg_prototipo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dvg_prototipo.Size = New System.Drawing.Size(755, 426)
         Me.dvg_prototipo.TabIndex = 2
@@ -53,8 +55,8 @@ Partial Class Prototipos
         'ID
         '
         Me.ID.DataPropertyName = "cod_tipo_obra"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
         Me.ID.HeaderText = "ID"
         Me.ID.Name = "ID"
         Me.ID.ReadOnly = True
@@ -89,7 +91,7 @@ Partial Class Prototipos
         Me.lbl_prototipo_error.AutoSize = True
         Me.lbl_prototipo_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_prototipo_error.ForeColor = System.Drawing.Color.Red
-        Me.lbl_prototipo_error.Location = New System.Drawing.Point(12, 470)
+        Me.lbl_prototipo_error.Location = New System.Drawing.Point(9, 500)
         Me.lbl_prototipo_error.Name = "lbl_prototipo_error"
         Me.lbl_prototipo_error.Size = New System.Drawing.Size(51, 15)
         Me.lbl_prototipo_error.TabIndex = 16
@@ -152,7 +154,7 @@ Partial Class Prototipos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(927, 606)
+        Me.ClientSize = New System.Drawing.Size(927, 532)
         Me.Controls.Add(Me.btn_proto_cargar_ppto)
         Me.Controls.Add(Me.btn_prototipo_cerrar)
         Me.Controls.Add(Me.dvg_prototipo)

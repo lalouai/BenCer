@@ -51,7 +51,7 @@ Partial Class PostulantesAlta
         Me.lbl_error.AutoSize = True
         Me.lbl_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_error.ForeColor = System.Drawing.Color.Red
-        Me.lbl_error.Location = New System.Drawing.Point(12, 199)
+        Me.lbl_error.Location = New System.Drawing.Point(12, 210)
         Me.lbl_error.Name = "lbl_error"
         Me.lbl_error.Size = New System.Drawing.Size(87, 13)
         Me.lbl_error.TabIndex = 90
@@ -61,7 +61,7 @@ Partial Class PostulantesAlta
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(292, 145)
+        Me.Label7.Location = New System.Drawing.Point(291, 180)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(62, 13)
         Me.Label7.TabIndex = 89
@@ -69,8 +69,9 @@ Partial Class PostulantesAlta
         '
         'cmbEstado
         '
+        Me.cmbEstado.Enabled = False
         Me.cmbEstado.FormattingEnabled = True
-        Me.cmbEstado.Location = New System.Drawing.Point(360, 142)
+        Me.cmbEstado.Location = New System.Drawing.Point(359, 177)
         Me.cmbEstado.Name = "cmbEstado"
         Me.cmbEstado.Size = New System.Drawing.Size(169, 21)
         Me.cmbEstado.TabIndex = 83
@@ -78,7 +79,7 @@ Partial Class PostulantesAlta
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 83)
+        Me.Label6.Location = New System.Drawing.Point(12, 129)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(49, 13)
         Me.Label6.TabIndex = 88
@@ -122,7 +123,7 @@ Partial Class PostulantesAlta
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 126)
+        Me.Label2.Location = New System.Drawing.Point(292, 129)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(49, 13)
         Me.Label2.TabIndex = 84
@@ -130,7 +131,8 @@ Partial Class PostulantesAlta
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(15, 99)
+        Me.txtApellido.Enabled = False
+        Me.txtApellido.Location = New System.Drawing.Point(15, 145)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(236, 20)
         Me.txtApellido.TabIndex = 82
@@ -144,7 +146,8 @@ Partial Class PostulantesAlta
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(15, 142)
+        Me.txtNombre.Enabled = False
+        Me.txtNombre.Location = New System.Drawing.Point(295, 145)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(236, 20)
         Me.txtNombre.TabIndex = 81
@@ -163,6 +166,7 @@ Partial Class PostulantesAlta
         '
         'btn_guardar
         '
+        Me.btn_guardar.Enabled = False
         Me.btn_guardar.Location = New System.Drawing.Point(453, 226)
         Me.btn_guardar.Name = "btn_guardar"
         Me.btn_guardar.Size = New System.Drawing.Size(75, 23)
@@ -187,6 +191,7 @@ Partial Class PostulantesAlta
         Me.btn_grupo_fliar.TabIndex = 94
         Me.btn_grupo_fliar.Text = "Grupo Familiar"
         Me.btn_grupo_fliar.UseVisualStyleBackColor = True
+        Me.btn_grupo_fliar.Visible = False
         '
         'dgv_familiares
         '
@@ -239,7 +244,7 @@ Partial Class PostulantesAlta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(905, 261)
+        Me.ClientSize = New System.Drawing.Size(544, 261)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btn_agregar_fliar)

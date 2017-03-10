@@ -1,18 +1,13 @@
 ﻿Public Class ControladorPrototipos
     Private daoPrototipo As DaoTipoObra
 
-    Private prototipos As List(Of TipoObra)
-
     Public Sub New()
         daoPrototipo = New DaoTipoObra
-
-        prototipos = daoPrototipo.listar()
-
     End Sub
 
     Public ReadOnly Property listaPrototipos As List(Of TipoObra)
         Get
-            Return prototipos
+            Return daoPrototipo.listar()
         End Get
     End Property
 
@@ -26,6 +21,7 @@
     End Function
 
     Public Sub eliminarItem(cod As Integer)
+
         daoPrototipo.eliminar(cod)
     End Sub
 
@@ -37,8 +33,12 @@
         If Not prototipo Is Nothing Then
             formulario.txt_prototipo_cod_prototipo.Text = prototipo.cod_tipo_obra
             formulario.txt_prototipo_nombre.Text = prototipo.descripcion
-            Return "actualizar"
+            Return "Actualizar"
         End If
-        Return "agregar"
+        Return "Agregar"
     End Function
+
+    Public Event mostrarError(txt As String)
+    Public Event dismissError()
+
 End Class

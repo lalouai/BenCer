@@ -3,19 +3,14 @@
     Private daoConstructor As DaoConstructor
     Private daoCertificacion As DaoCertificado
 
-    Private constructores As List(Of Constructor)
-
     Public Sub New()
         daoConstructor = New DaoConstructor
         daoCertificacion = New DaoCertificado
-
-        constructores = daoConstructor.listar()
-
     End Sub
 
     Public ReadOnly Property listaConstructores As List(Of Constructor)
         Get
-            Return constructores
+            Return daoConstructor.listar()
         End Get
     End Property
 
@@ -23,7 +18,7 @@
         Dim cod As Integer = 0
         cod = daoConstructor.guardar(elemento)
         If cod <= 0 Then
-            MsgBox("Lo siento ha ocurrido un error al guardar el ítem")
+            RaiseEvent mostrarError("Lo siento ha ocurrido un error al guardar el ítem")
         End If
         Return cod
     End Function
@@ -45,5 +40,8 @@
         End If
         Return "agregar"
     End Function
+
+    Public Event mostrarError(txt As String)
+    Public Event dismissError()
 
 End Class

@@ -28,8 +28,7 @@
             controlador.editar(obra)
         End If
 
-        dgv_obras.DataSource = Nothing
-        dgv_obras.DataSource = controlador.listaObras
+        actualizar()
 
     End Sub
 
@@ -86,5 +85,9 @@
         If obra IsNot Nothing Then
             controlador.ver(obra)
         End If
+    End Sub
+
+    Public Sub actualizar()
+        dgv_obras.DataSource = controlador.listaObras
     End Sub
 End Class

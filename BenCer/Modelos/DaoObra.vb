@@ -54,6 +54,10 @@ Public Class DaoObra
                                  "INNER JOIN BENEFICIARIO as B ON O.cod_beneficiario = B.cod_beneficiario " &
                                  "INNER JOIN PERSONA as Pe ON B.cod_persona = Pe.cod_persona " &
                                  "WHERE activa = 1"
+
+        Debug.Print(consulta)
+
+
         Dim ds As Data.DataSet = Me.Exec(consulta)
         If ds.Tables(0).Rows.Count > 0 Then
             For Each row In ds.Tables(0).Rows

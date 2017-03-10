@@ -15,7 +15,6 @@ Public Class ControladorObras
         daoPrograma = New DaoPrograma()
         daoTipoObra = New DaoTipoObra()
         daoConstructor = New DaoConstructor()
-        obras = daoObra.listar()
     End Sub
 
 
@@ -28,16 +27,12 @@ Public Class ControladorObras
 
     Public Sub editar(obra As Obra)
 
-
-
         Dim beneficiario As Beneficiario = daoBeneficiario.obtener(obra.cod_beneficiario)
-
         Dim formulario As ObraAlta = New ObraAlta()
 
         With formulario
-
             .cod_obra = obra.cod_obra
-            .Size = New Size(660, 585)
+            .Size = New Size(640, 585)
             .lbl_obra_alta_titulo.Text = "Editar Obra"
             .btn_obra_alta_crear.Text = "Guardar"
             .txt_obra_alta_dni.Text = beneficiario.nro_doc
@@ -92,12 +87,8 @@ Public Class ControladorObras
         Dim formulario As ObraAlta = New ObraAlta()
         Dim dPagos As DaoPago = New DaoPago()
 
-
-
         With formulario
-
             .dgv_obra_alta_pagos.AutoGenerateColumns = False
-
             .cod_obra = obra.cod_obra
             .Size = New Size(1100, 585)
             .lbl_obra_alta_titulo.Text = "Ver Obra"
@@ -114,7 +105,6 @@ Public Class ControladorObras
             .cmb_obra_alta_programa.DisplayMember = "nombre"
             .cmb_obra_alta_programa.ValueMember = "cod_programa"
             .cmb_obra_alta_programa.SelectedValue = obra.cod_programa
-
             .cmb_obra_alta_prototipo.DataSource = daoTipoObra.listar()
             .cmb_obra_alta_prototipo.DisplayMember = "descripcion"
             .cmb_obra_alta_prototipo.ValueMember = "cod_tipo_obra"

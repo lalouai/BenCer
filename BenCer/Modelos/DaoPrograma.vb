@@ -42,4 +42,15 @@ Public Class DaoPrograma
     Public Function obtener(cod As Integer) As Programa Implements InterfaceDao(Of Programa).obtener
         Throw New NotImplementedException()
     End Function
+
+    Public Function asignado(cod As Integer) As Integer
+        Dim resultado = 0
+        Dim consulta = "SELECT count(cod_obra) as asignadas from dbo.obra where cod_programa =" & cod
+        Dim ds As Data.DataSet = Me.Exec(consulta)
+        If ds.Tables(0).Rows.Count > 0 Then
+            Dim fila = ds.Tables(0).Rows(0)
+            resultado = fila("asignadas")
+        End If
+        Return resultado
+    End Function
 End Class

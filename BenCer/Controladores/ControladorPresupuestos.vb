@@ -81,7 +81,7 @@ Public Class ControladorPresupuestos
         If id > 0 Then
             Return id
         Else
-            MsgBox("Lo siento ha ocurrido un error al guardar el ítem")
+            RaiseEvent mostrarError("Lo siento ha ocurrido un error al guardar el ítem")
         End If
 
         Return 0
@@ -96,15 +96,18 @@ Public Class ControladorPresupuestos
         daoRenglonPresupuesto.eliminar(cod)
     End Sub
 
-    Public Function actualizarItem(item As String, subitem As String, descripcion As String, costo_m_obra As Decimal) As Integer
+    Public Function actualizarItem(item As String, subitem As String, descripcion As String, costo_m_obra As Decimal, cod_r_ppto As Integer) As Integer
         Dim r_ppto As RenglonPpto = New RenglonPpto
 
         r_ppto.item = item & "," & subitem
-        r_ppto.cod_r_ppto = listaItems.Find(Function(p) p.item = r_ppto.item).cod_r_ppto
+        r_ppto.cod_r_ppto = cod_r_ppto
         r_ppto.descripcion = descripcion
         r_ppto.costo = costo_m_obra
         r_ppto.cod_ppto = _ppto.cod_ppto
 
         Return daoRenglonPresupuesto.modificar(r_ppto, r_ppto.cod_r_ppto)
     End Function
+
+    Public Event mostrarError(texto As String)
+
 End Class

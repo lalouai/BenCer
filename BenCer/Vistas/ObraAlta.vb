@@ -11,7 +11,13 @@ Public Class ObraAlta
         InitializeComponent()
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         controlador = New ControladorObraAlta
+        Dim errorInicialicacion As Boolean = False
+        Dim error_msg As List(Of String) = New List(Of String)
 
+        If Not controlador.hayPostulantes Then
+            txt_obra_alta_dni.Enabled = False
+            error_msg.Add("No hay ningun postulante disponible, primero debe dar de alta uno.")
+        End If
 
         cmb_obra_alta_programa.Items.Insert(0, "Seleccione")
         For Each item In controlador.listaProgramas.ToArray
@@ -19,11 +25,22 @@ Public Class ObraAlta
         Next
         cmb_obra_alta_programa.SelectedIndex = 0
 
+        If cmb_obra_alta_programa.Items.Count = 1 Then
+            error_msg.Add("No hay ningún programa activo, antes de poder dar un alta deberá crear uno.")
+            errorInicialicacion = True
+        End If
+
         cmb_obra_alta_prototipo.Items.Insert(0, "Seleccione")
         For Each item In controlador.listaTipoObra.ToArray
             cmb_obra_alta_prototipo.Items.Add(item.descripcion)
         Next
         cmb_obra_alta_prototipo.SelectedIndex = 0
+
+        If cmb_obra_alta_prototipo.Items.Count = 1 Then
+            error_msg.Add("Es necesario que exista un prototipo de vivienda y tenga su presupuesto " & vbCrLf &
+                          "consolidado para dar de alta una nueva obra.")
+            errorInicialicacion = True
+        End If
 
         cmb_obra_alta_constructor.Items.Insert(0, "Seleccione")
         For Each item In controlador.listaConstructores.ToArray
@@ -31,10 +48,21 @@ Public Class ObraAlta
         Next
         cmb_obra_alta_constructor.SelectedIndex = 0
 
+        If cmb_obra_alta_constructor.Items.Count = 1 Then
+            error_msg.Add("Si bien no es requerimiento asignar el constructor al momento del alta" & vbCrLf &
+                          "recuerde que no podrá certificar hasta tanto haya uno asignado " & vbCrLf & "a la obra.")
+            errorInicialicacion = True
+        End If
+
         dgv_obra_alta_resultados.AutoGenerateColumns = False
         seleccionado = False
 
-        Me.Width = 660
+        If errorInicialicacion Then
+            btn_obra_alta_crear.Enabled = False
+            mostrarError(String.Join(vbCrLf, error_msg.ToArray))
+        End If
+
+        Me.Width = 640
 
     End Sub
 
@@ -50,24 +78,18 @@ Public Class ObraAlta
             .Series.Clear()
             .ChartAreas.Clear()
         End With
-
         Dim areas1 As ChartArea = Me.obra_alta_grafico.ChartAreas.Add("Avance")
         Dim series1 As Series = Me.obra_alta_grafico.Series.Add("Datos")
-
         With series1
             .ChartType = SeriesChartType.Pie
             .Points.AddXY("Total a cobrar", total)
             .Points.AddXY("Cobrado", cobrado)
             .Points.AddXY("Certificado, sin cobrar", certificado)
         End With
-
         For i As Integer = 0 To 2
             series1.Points(i)("PieLabelStyle") = "Disabled"
         Next
-
-
         Dim legends1 As Legend = Me.obra_alta_grafico.Legends.Add("Datos")
-
     End Sub
 
 
@@ -77,7 +99,7 @@ Public Class ObraAlta
         dgv_obra_alta_resultados.DataSource = Nothing
 
         If txt_obra_alta_dni.Text = "" Then
-            Me.Width = 660
+            Me.Width = 640
         ElseIf txt_obra_alta_dni.Text.Length > 2 Then
             dgv_obra_alta_resultados.DataSource = controlador.listaPostulantes(sender.Text)
         End If
@@ -85,7 +107,7 @@ Public Class ObraAlta
         If Not seleccionado And dgv_obra_alta_resultados.DataSource IsNot Nothing Then
             Me.Width = 1090
         Else
-            Me.Width = 660
+            Me.Width = 640
         End If
 
 
@@ -125,7 +147,7 @@ Public Class ObraAlta
 
         dgv_obra_alta_resultados.DataSource = Nothing
 
-        Me.Width = 660
+        Me.Width = 640
 
         btn_obra_alta_reiniciar.Visible = True
 
@@ -140,14 +162,13 @@ Public Class ObraAlta
         txt_obra_alta_dni.Enabled = True
         txt_obra_alta_dni.Focus()
 
-
         cmb_obra_alta_programa.Enabled = False
         cmb_obra_alta_prototipo.Enabled = False
         cmb_obra_alta_constructor.Enabled = False
 
         dgv_obra_alta_resultados.DataSource = Nothing
         btn_obra_alta_reiniciar.Visible = False
-        Me.Width = 660
+        Me.Width = 640
     End Sub
 
     Private Sub btn_obra_alta_crear_Click(sender As Object, e As EventArgs) Handles btn_obra_alta_crear.Click
@@ -207,5 +228,16 @@ Public Class ObraAlta
     Private Sub cerrar() Handles controlador.cerrarVentana
         Me.Close()
     End Sub
+
+    Private Sub mostrarError(txt As String)
+        lbl_obra_alta_error.Text = txt
+        lbl_obra_alta_error.Visible = True
+    End Sub
+
+    Private Sub dismissError()
+        lbl_obra_alta_error.Visible = False
+        lbl_obra_alta_error.Text = ""
+    End Sub
+
 
 End Class

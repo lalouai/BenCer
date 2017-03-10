@@ -36,9 +36,9 @@ Partial Class Inicio
         Me.AltaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CertificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PagosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.p_inicio = New System.Windows.Forms.Panel()
-        Me.PagosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,7 +54,7 @@ Partial Class Inicio
         '
         'IndividuosToolStripMenuItem
         '
-        Me.IndividuosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BeneficiariosToolStripMenuItem, Me.PostulantesToolStripMenuItem})
+        Me.IndividuosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PostulantesToolStripMenuItem, Me.BeneficiariosToolStripMenuItem})
         Me.IndividuosToolStripMenuItem.Name = "IndividuosToolStripMenuItem"
         Me.IndividuosToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
         Me.IndividuosToolStripMenuItem.Text = "Individuos"
@@ -62,13 +62,13 @@ Partial Class Inicio
         'BeneficiariosToolStripMenuItem
         '
         Me.BeneficiariosToolStripMenuItem.Name = "BeneficiariosToolStripMenuItem"
-        Me.BeneficiariosToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.BeneficiariosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.BeneficiariosToolStripMenuItem.Text = "Beneficiarios"
         '
         'PostulantesToolStripMenuItem
         '
         Me.PostulantesToolStripMenuItem.Name = "PostulantesToolStripMenuItem"
-        Me.PostulantesToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.PostulantesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PostulantesToolStripMenuItem.Text = "Postulantes"
         '
         'ProyectosToolStripMenuItem
@@ -87,7 +87,7 @@ Partial Class Inicio
         'PrototiposToolStripMenuItem
         '
         Me.PrototiposToolStripMenuItem.Name = "PrototiposToolStripMenuItem"
-        Me.PrototiposToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.PrototiposToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PrototiposToolStripMenuItem.Text = "Prototipos"
         '
         'ConstructoresToolStripMenuItem
@@ -98,7 +98,7 @@ Partial Class Inicio
         '
         'ObrasToolStripMenuItem
         '
-        Me.ObrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoToolStripMenuItem, Me.AltaToolStripMenuItem, Me.CertificacionesToolStripMenuItem})
+        Me.ObrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AltaToolStripMenuItem, Me.ListadoToolStripMenuItem, Me.CertificacionesToolStripMenuItem})
         Me.ObrasToolStripMenuItem.Name = "ObrasToolStripMenuItem"
         Me.ObrasToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.ObrasToolStripMenuItem.Text = "Obras"
@@ -128,6 +128,12 @@ Partial Class Inicio
         Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(41, 20)
         Me.SalirToolStripMenuItem.Text = "Salir"
         '
+        'PagosToolStripMenuItem
+        '
+        Me.PagosToolStripMenuItem.Name = "PagosToolStripMenuItem"
+        Me.PagosToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
+        Me.PagosToolStripMenuItem.Text = "Pagos"
+        '
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
@@ -150,12 +156,6 @@ Partial Class Inicio
         Me.p_inicio.Name = "p_inicio"
         Me.p_inicio.Size = New System.Drawing.Size(636, 340)
         Me.p_inicio.TabIndex = 2
-        '
-        'PagosToolStripMenuItem
-        '
-        Me.PagosToolStripMenuItem.Name = "PagosToolStripMenuItem"
-        Me.PagosToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
-        Me.PagosToolStripMenuItem.Text = "Pagos"
         '
         'Inicio
         '

@@ -74,6 +74,9 @@ Public Class DaoPresupuesto
     End Function
 
     Public Function consolidar(cod_ppto) As Integer
+
+        Me.execSp("dbo.actualizar_incidencia", cod_ppto)
+
         Dim consulta As String = "UPDATE dbo.PRESUPUESTO SET estado = 1 WHERE cod_ppto = " & cod_ppto
         Return Me.execnq(consulta)
     End Function
