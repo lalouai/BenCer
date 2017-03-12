@@ -7,7 +7,6 @@
     Public Sub Beneficiario()
     End Sub
 
-
     Public Property cod_beneficiario As Integer
         Get
             Return _cod_beneficiario

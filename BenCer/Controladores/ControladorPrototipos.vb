@@ -1,8 +1,10 @@
 ﻿Public Class ControladorPrototipos
     Private daoPrototipo As DaoTipoObra
+    Private daoPpto As DaoPresupuesto
 
     Public Sub New()
         daoPrototipo = New DaoTipoObra
+        daoPpto = New DaoPresupuesto
     End Sub
 
     Public ReadOnly Property listaPrototipos As List(Of TipoObra)
@@ -15,14 +17,20 @@
         Dim cod As Integer = 0
         cod = daoPrototipo.guardar(elemento)
         If cod <= 0 Then
-            MsgBox("Lo siento ha ocurrido un error al guardar el ítem")
+            RaiseEvent mostrarError("Lo siento ha ocurrido un error al guardar el ítem")
         End If
         Return cod
     End Function
 
     Public Sub eliminarItem(cod As Integer)
+        If Not daoPrototipo.verificarPpto(cod) Then
+            daoPrototipo.eliminar(cod)
+            RaiseEvent mostrarError("Eliminando...")
+        Else
+            RaiseEvent mostrarError("Lo siento, este prototipo no puede ser eliminado, posee un presupuesto consolidado" &
+                                    vbCrLf & "Elimine primero el presupuesto asociado y vuelva a intentarlo")
+        End If
 
-        daoPrototipo.eliminar(cod)
     End Sub
 
     Public Sub actualizarItem(elemento As TipoObra)
@@ -38,7 +46,22 @@
         Return "Agregar"
     End Function
 
+    Public Sub eliminarPptoAsociado(cod_proto As Object)
+        If daoPrototipo.verificarPpto(cod_proto) Then
+            RaiseEvent mostrarError("Eliminando el presupuesto asociado...")
+            daoPpto.eliminarPptoCompleto(cod_proto)
+        Else
+            RaiseEvent mostrarError("El prototipo seleccionado no tiene un presupuesto asociado" &
+                                    vbCrLf &
+                                    "Seleccione otro para elimiar el presupuesto asociado o" &
+                                    vbCrLf &
+                                    "elimínelo directamente")
+        End If
+    End Sub
+
+
     Public Event mostrarError(txt As String)
     Public Event dismissError()
+
 
 End Class

@@ -22,7 +22,8 @@ Partial Class Prototipos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dvg_prototipo = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -35,6 +36,8 @@ Partial Class Prototipos
         Me.btn_prototipo_editar = New System.Windows.Forms.Button()
         Me.btn_prototipo_cerrar = New System.Windows.Forms.Button()
         Me.btn_proto_cargar_ppto = New System.Windows.Forms.Button()
+        Me.btn_proto_liberar_ppto = New System.Windows.Forms.Button()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
         CType(Me.dvg_prototipo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,8 +58,8 @@ Partial Class Prototipos
         'ID
         '
         Me.ID.DataPropertyName = "cod_tipo_obra"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle3
         Me.ID.HeaderText = "ID"
         Me.ID.Name = "ID"
         Me.ID.ReadOnly = True
@@ -71,7 +74,7 @@ Partial Class Prototipos
         '
         'txt_prototipo_cod_prototipo
         '
-        Me.txt_prototipo_cod_prototipo.Location = New System.Drawing.Point(326, 468)
+        Me.txt_prototipo_cod_prototipo.Location = New System.Drawing.Point(471, 468)
         Me.txt_prototipo_cod_prototipo.Name = "txt_prototipo_cod_prototipo"
         Me.txt_prototipo_cod_prototipo.Size = New System.Drawing.Size(42, 20)
         Me.txt_prototipo_cod_prototipo.TabIndex = 19
@@ -80,7 +83,7 @@ Partial Class Prototipos
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(374, 448)
+        Me.Label1.Location = New System.Drawing.Point(519, 448)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 13)
         Me.Label1.TabIndex = 17
@@ -89,18 +92,19 @@ Partial Class Prototipos
         'lbl_prototipo_error
         '
         Me.lbl_prototipo_error.AutoSize = True
+        Me.lbl_prototipo_error.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.lbl_prototipo_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_prototipo_error.ForeColor = System.Drawing.Color.Red
-        Me.lbl_prototipo_error.Location = New System.Drawing.Point(9, 500)
+        Me.lbl_prototipo_error.Location = New System.Drawing.Point(9, 446)
         Me.lbl_prototipo_error.Name = "lbl_prototipo_error"
-        Me.lbl_prototipo_error.Size = New System.Drawing.Size(51, 15)
+        Me.lbl_prototipo_error.Size = New System.Drawing.Size(38, 15)
         Me.lbl_prototipo_error.TabIndex = 16
-        Me.lbl_prototipo_error.Text = "Label1"
+        Me.lbl_prototipo_error.Text = "error"
         Me.lbl_prototipo_error.Visible = False
         '
         'txt_prototipo_nombre
         '
-        Me.txt_prototipo_nombre.Location = New System.Drawing.Point(374, 467)
+        Me.txt_prototipo_nombre.Location = New System.Drawing.Point(519, 467)
         Me.txt_prototipo_nombre.Name = "txt_prototipo_nombre"
         Me.txt_prototipo_nombre.Size = New System.Drawing.Size(248, 20)
         Me.txt_prototipo_nombre.TabIndex = 0
@@ -150,11 +154,25 @@ Partial Class Prototipos
         Me.btn_proto_cargar_ppto.Text = "Cargar / Ver ppto"
         Me.btn_proto_cargar_ppto.UseVisualStyleBackColor = True
         '
+        'btn_proto_liberar_ppto
+        '
+        Me.btn_proto_liberar_ppto.Location = New System.Drawing.Point(774, 123)
+        Me.btn_proto_liberar_ppto.Name = "btn_proto_liberar_ppto"
+        Me.btn_proto_liberar_ppto.Size = New System.Drawing.Size(141, 23)
+        Me.btn_proto_liberar_ppto.TabIndex = 21
+        Me.btn_proto_liberar_ppto.Text = "Eliminar ppto asociado"
+        Me.btn_proto_liberar_ppto.UseVisualStyleBackColor = True
+        '
+        'dismisser
+        '
+        Me.dismisser.Interval = 3000
+        '
         'Prototipos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(927, 532)
+        Me.Controls.Add(Me.btn_proto_liberar_ppto)
         Me.Controls.Add(Me.btn_proto_cargar_ppto)
         Me.Controls.Add(Me.btn_prototipo_cerrar)
         Me.Controls.Add(Me.dvg_prototipo)
@@ -185,4 +203,6 @@ Partial Class Prototipos
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents nombre As DataGridViewTextBoxColumn
     Friend WithEvents btn_proto_cargar_ppto As Button
+    Friend WithEvents btn_proto_liberar_ppto As Button
+    Friend WithEvents dismisser As Timer
 End Class

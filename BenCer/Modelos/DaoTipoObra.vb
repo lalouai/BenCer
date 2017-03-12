@@ -50,7 +50,19 @@ Public Class DaoTipoObra
         Return lista
     End Function
 
+    Public Function verificarPpto(cod_prototipo As Integer) As Boolean
+        Dim ds As Data.DataSet = Me.Exec("select ot.cod_tipo_obra as cod_tipo_obra " &
+                                         "from TIPO_OBRA as ot " &
+                                         "inner join PRESUPUESTO as pe on ot.cod_tipo_obra = pe.cod_tipo_obra " &
+                                         "where ot.activo = 1 and pe.estado = 1 and ot.cod_tipo_obra = " & cod_prototipo)
+        If ds.Tables(0).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     Public Function obtener(cod As Integer) As TipoObra Implements InterfaceDao(Of TipoObra).obtener
-        Throw New NotImplementedException()
+        Return Nothing
     End Function
 End Class

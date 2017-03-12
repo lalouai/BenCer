@@ -104,16 +104,12 @@
         RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
         Dim prototipos As Prototipos = New Prototipos
-
         prototipos = New Prototipos()
-
         With prototipos
             .TopLevel = False
             .Visible = True
             .FormBorderStyle = FormBorderStyle.None
-
         End With
-
         p_inicio.Controls.Add(prototipos)
     End Sub
 
@@ -149,7 +145,7 @@
     End Sub
 
     Public Sub lanzarEvento()
-        MsgBox("lanzarEvento")
+        'MsgBox("lanzarEvento")
     End Sub
 
     Public Event cambioContenido()

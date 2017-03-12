@@ -11,6 +11,12 @@ Public Class DaoRenglonPpto
         Me.execSp("dbo.actualizar_incidencia", cod_ppto)
     End Sub
 
+    Public Sub eliminarPpto(ppto As Integer)
+        Dim consulta As String
+        consulta = "DELETE FROM dbo.R_PRESUPUESTO WHERE cod_ppto =" & ppto
+        Me.ExecM(consulta)
+    End Sub
+
     Public Function modificar(elemento As RenglonPpto, cod As Integer) As Integer Implements InterfaceDao(Of RenglonPpto).modificar
         Dim consulta As String
         consulta = "UPDATE dbo.R_PRESUPUESTO SET cod_ppto = " & elemento.cod_ppto & ", item = '" & elemento.item & "',costo = " & elemento.costo.ToString.Replace(",", ".") &

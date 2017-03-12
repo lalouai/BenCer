@@ -22,15 +22,18 @@ Partial Class Beneficiarios
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txt_ben_filtrar = New System.Windows.Forms.TextBox()
         Me.dvg_ben = New System.Windows.Forms.DataGridView()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btn_ben_cerrar = New System.Windows.Forms.Button()
         Me.DNI = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Apellido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btn_ben_cerrar = New System.Windows.Forms.Button()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
+        Me.lbl_error_ben = New System.Windows.Forms.Label()
         CType(Me.dvg_ben, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -65,30 +68,11 @@ Partial Class Beneficiarios
         Me.dvg_ben.Size = New System.Drawing.Size(987, 518)
         Me.dvg_ben.TabIndex = 50
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(786, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(212, 37)
-        Me.Label2.TabIndex = 53
-        Me.Label2.Text = "Beneficiarios"
-        '
-        'btn_ben_cerrar
-        '
-        Me.btn_ben_cerrar.Location = New System.Drawing.Point(922, 621)
-        Me.btn_ben_cerrar.Name = "btn_ben_cerrar"
-        Me.btn_ben_cerrar.Size = New System.Drawing.Size(75, 23)
-        Me.btn_ben_cerrar.TabIndex = 54
-        Me.btn_ben_cerrar.Text = "Cerrar"
-        Me.btn_ben_cerrar.UseVisualStyleBackColor = True
-        '
         'DNI
         '
         Me.DNI.DataPropertyName = "nro_doc"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DNI.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DNI.DefaultCellStyle = DataGridViewCellStyle1
         Me.DNI.HeaderText = "DNI"
         Me.DNI.Name = "DNI"
         Me.DNI.ReadOnly = True
@@ -110,11 +94,47 @@ Partial Class Beneficiarios
         Me.Nombre.ReadOnly = True
         Me.Nombre.Width = 335
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(786, 9)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(212, 37)
+        Me.Label2.TabIndex = 53
+        Me.Label2.Text = "Beneficiarios"
+        '
+        'btn_ben_cerrar
+        '
+        Me.btn_ben_cerrar.Location = New System.Drawing.Point(922, 621)
+        Me.btn_ben_cerrar.Name = "btn_ben_cerrar"
+        Me.btn_ben_cerrar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_ben_cerrar.TabIndex = 54
+        Me.btn_ben_cerrar.Text = "Cerrar"
+        Me.btn_ben_cerrar.UseVisualStyleBackColor = True
+        '
+        'dismisser
+        '
+        Me.dismisser.Interval = 3000
+        '
+        'lbl_error_ben
+        '
+        Me.lbl_error_ben.AutoSize = True
+        Me.lbl_error_ben.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_error_ben.ForeColor = System.Drawing.Color.Red
+        Me.lbl_error_ben.Location = New System.Drawing.Point(9, 626)
+        Me.lbl_error_ben.Name = "lbl_error_ben"
+        Me.lbl_error_ben.Size = New System.Drawing.Size(38, 15)
+        Me.lbl_error_ben.TabIndex = 55
+        Me.lbl_error_ben.Text = "error"
+        Me.lbl_error_ben.Visible = False
+        '
         'Beneficiarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1018, 688)
+        Me.Controls.Add(Me.lbl_error_ben)
         Me.Controls.Add(Me.btn_ben_cerrar)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -136,4 +156,6 @@ Partial Class Beneficiarios
     Friend WithEvents DNI As DataGridViewTextBoxColumn
     Friend WithEvents Apellido As DataGridViewTextBoxColumn
     Friend WithEvents Nombre As DataGridViewTextBoxColumn
+    Friend WithEvents dismisser As Timer
+    Friend WithEvents lbl_error_ben As Label
 End Class

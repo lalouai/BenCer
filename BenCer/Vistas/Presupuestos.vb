@@ -66,6 +66,7 @@
                 mostrar_error("Lo siento ha ocurrido un error, por favor vuelva a intentar")
                 Exit Sub
             End If
+            txt_presu_item.Focus()
         ElseIf btn_presu_agregar.Text.Equals("Actualizar") Then
             If controlador.actualizarItem(item, subitem, descripcion, costo, cod_r_ppto) < 0 Then
                 mostrar_error("Lo siento no he podido actualizar el registro, por favor vuelva a intentar")
@@ -147,5 +148,10 @@
         lbl_presupuesto_error.Text = ""
     End Sub
 
-
+    Private Sub item_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txt_presu_item.KeyDown
+        If e.KeyCode = Keys.Decimal Then
+            e.SuppressKeyPress = True
+            txt_presu_subitem.Focus()
+        End If
+    End Sub
 End Class

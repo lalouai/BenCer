@@ -4,16 +4,13 @@
     Dim modo As String
 
     Public Sub New()
-
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
-
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         controlador = New ControladorPrototipos
         dvg_prototipo.AutoGenerateColumns = False
         dvg_prototipo.DataSource = controlador.listaPrototipos()
         Me.modo = "Agregar"
-
     End Sub
 
     Private Sub btn_prototipo_editar_Click(sender As Object, e As EventArgs) Handles btn_prototipo_editar.Click
@@ -40,10 +37,7 @@
         If result = DialogResult.No Then
             Exit Sub
         ElseIf result = DialogResult.Yes Then
-            Dim dt As List(Of TipoObra) = DirectCast(dvg_prototipo.DataSource, List(Of TipoObra))
-            dt.Remove(dt.Find(Function(el) el.cod_tipo_obra = proto.cod_tipo_obra))
             controlador.eliminarItem(proto.cod_tipo_obra)
-
         End If
         actualizar()
     End Sub
@@ -68,21 +62,15 @@
 
         If modo.Equals("Agregar") Then
             fila.cod_tipo_obra = controlador.guardarItem(fila)
-
         ElseIf modo.Equals("Actualizar") Then
-
             fila = dvg_prototipo.SelectedRows(0).DataBoundItem
             fila.descripcion = txt_prototipo_nombre.Text
-
             controlador.actualizarItem(fila)
             modo = "Agregar"
         End If
-
         actualizar()
-
         txt_prototipo_nombre.Text = ""
         txt_prototipo_cod_prototipo.Text = ""
-
         btn_prototipo_agregar.Text = modo
 
     End Sub
@@ -104,6 +92,21 @@
         End If
     End Sub
 
+    Private Sub btn_proto_liberar_ppto_Click(sender As Object, e As EventArgs) Handles btn_proto_liberar_ppto.Click
+        If dvg_prototipo.SelectedRows.Count > 0 Then
+            Dim proto As TipoObra = dvg_prototipo.SelectedRows(0).DataBoundItem
+            Dim aviso As String = "Esta seguro que desea eliminar el presupuesto asociado a " & proto.descripcion & "?" &
+                                  vbCrLf &
+                                  "Recuerde que esta acción no se puede deshacer"
+            Dim resultado As Integer = MessageBox.Show(aviso, "Por favor confirme", MessageBoxButtons.YesNo)
+            If resultado = DialogResult.Yes Then
+                controlador.eliminarPptoAsociado(proto.cod_tipo_obra)
+            End If
+        Else
+            mostrarError("Seleccione un prototipo para continuar")
+        End If
+    End Sub
+
     Private Sub actualizar()
         dvg_prototipo.DataSource = controlador.listaPrototipos
     End Sub
@@ -111,15 +114,18 @@
     Private Sub mostrarError(txt As String) Handles controlador.mostrarError
         lbl_prototipo_error.Text = txt
         lbl_prototipo_error.Visible = True
+        dismisser.Enabled = True
     End Sub
 
     Private Sub dismissError() Handles controlador.dismissError
         lbl_prototipo_error.Visible = False
         lbl_prototipo_error.Text = ""
+        dismisser.Enabled = False
     End Sub
 
-    Private Sub cambia() Handles dvg_prototipo.RowLeave
+    Private Sub dismisserEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles dismisser.Tick
         dismissError()
     End Sub
+
 
 End Class

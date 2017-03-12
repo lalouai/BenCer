@@ -1,7 +1,5 @@
 ﻿Imports BenCer
 
-
-
 Public Class DaoPresupuesto
     Inherits DataManager
     Implements InterfaceDao(Of Presupuesto)
@@ -15,11 +13,13 @@ Public Class DaoPresupuesto
 
 
     Public Sub eliminar(cod As Integer) Implements InterfaceDao(Of Presupuesto).eliminar
-        Throw New NotImplementedException()
+        Dim consulta As String
+        consulta = "DELETE FROM dbo.PRESUPUESTO WHERE cod_ppto =" & cod
+        Dim cod_ppto As Integer = Me.ExecM(consulta)
     End Sub
 
     Public Function modificar(elemento As Presupuesto, cod As Integer) As Integer Implements InterfaceDao(Of Presupuesto).modificar
-        Throw New NotImplementedException()
+        Return Nothing
     End Function
 
     Public Function guardar(elemento As Presupuesto) As Integer Implements InterfaceDao(Of Presupuesto).guardar
@@ -29,7 +29,7 @@ Public Class DaoPresupuesto
     End Function
 
     Public Function listar() As List(Of Presupuesto) Implements InterfaceDao(Of Presupuesto).listar
-        Throw New NotImplementedException()
+        Return Nothing
     End Function
 
     Public Function obtener(cod As Integer) As Presupuesto Implements InterfaceDao(Of Presupuesto).obtener
@@ -50,6 +50,12 @@ Public Class DaoPresupuesto
         Return presu
 
     End Function
+
+    Public Sub eliminarPptoCompleto(cod_proto As Object)
+        Dim ppto As Presupuesto = obtener_ppto_cod_tipo(cod_proto)
+        daoRenglones.eliminarPpto(ppto.cod_ppto)
+        eliminar(ppto.cod_ppto)
+    End Sub
 
     Public Function obtener_ppto_cod_tipo(ByVal cod As Integer) As Presupuesto
         Dim presu As Presupuesto = New Presupuesto
@@ -74,9 +80,9 @@ Public Class DaoPresupuesto
     End Function
 
     Public Function consolidar(cod_ppto) As Integer
-
+        ' último recalculo de incidencias
         Me.execSp("dbo.actualizar_incidencia", cod_ppto)
-
+        ' consolido el ppto
         Dim consulta As String = "UPDATE dbo.PRESUPUESTO SET estado = 1 WHERE cod_ppto = " & cod_ppto
         Return Me.execnq(consulta)
     End Function
