@@ -22,19 +22,22 @@ Partial Class Obras
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_obras = New System.Windows.Forms.DataGridView()
-        Me.btn_obra_editar = New System.Windows.Forms.Button()
-        Me.btn_obra_certificar = New System.Windows.Forms.Button()
-        Me.btn_obra_ver = New System.Windows.Forms.Button()
-        Me.btn_obra_cerrar = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.beneficiario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.prototipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.programa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.constructor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_obra_editar = New System.Windows.Forms.Button()
+        Me.btn_obra_certificar = New System.Windows.Forms.Button()
+        Me.btn_obra_ver = New System.Windows.Forms.Button()
+        Me.btn_obra_cerrar = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lbl_obra_error = New System.Windows.Forms.Label()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
         CType(Me.dgv_obras, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,6 +52,57 @@ Partial Class Obras
         Me.dgv_obras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_obras.Size = New System.Drawing.Size(798, 557)
         Me.dgv_obras.TabIndex = 0
+        '
+        'id
+        '
+        Me.id.DataPropertyName = "cod_obra"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.id.DefaultCellStyle = DataGridViewCellStyle1
+        Me.id.HeaderText = "ID"
+        Me.id.Name = "id"
+        Me.id.ReadOnly = True
+        Me.id.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.id.Width = 50
+        '
+        'beneficiario
+        '
+        Me.beneficiario.DataPropertyName = "beneficiario"
+        Me.beneficiario.HeaderText = "Beneficiario"
+        Me.beneficiario.Name = "beneficiario"
+        Me.beneficiario.ReadOnly = True
+        Me.beneficiario.Width = 200
+        '
+        'prototipo
+        '
+        Me.prototipo.DataPropertyName = "tipo_obra"
+        Me.prototipo.HeaderText = "Prototipo"
+        Me.prototipo.Name = "prototipo"
+        Me.prototipo.ReadOnly = True
+        Me.prototipo.Width = 150
+        '
+        'programa
+        '
+        Me.programa.DataPropertyName = "programa"
+        Me.programa.HeaderText = "Programa"
+        Me.programa.Name = "programa"
+        Me.programa.ReadOnly = True
+        Me.programa.Width = 180
+        '
+        'constructor
+        '
+        Me.constructor.DataPropertyName = "constructor"
+        Me.constructor.HeaderText = "Constructor"
+        Me.constructor.Name = "constructor"
+        Me.constructor.ReadOnly = True
+        Me.constructor.Width = 130
+        '
+        'estado
+        '
+        Me.estado.DataPropertyName = "estado"
+        Me.estado.HeaderText = "Estado"
+        Me.estado.Name = "estado"
+        Me.estado.ReadOnly = True
+        Me.estado.Width = 80
         '
         'btn_obra_editar
         '
@@ -96,62 +150,28 @@ Partial Class Obras
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Obras"
         '
-        'id
+        'lbl_obra_error
         '
-        Me.id.DataPropertyName = "cod_obra"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.id.DefaultCellStyle = DataGridViewCellStyle2
-        Me.id.HeaderText = "ID"
-        Me.id.Name = "id"
-        Me.id.ReadOnly = True
-        Me.id.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.id.Width = 50
+        Me.lbl_obra_error.AutoSize = True
+        Me.lbl_obra_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_obra_error.ForeColor = System.Drawing.Color.Red
+        Me.lbl_obra_error.Location = New System.Drawing.Point(13, 627)
+        Me.lbl_obra_error.Name = "lbl_obra_error"
+        Me.lbl_obra_error.Size = New System.Drawing.Size(38, 15)
+        Me.lbl_obra_error.TabIndex = 7
+        Me.lbl_obra_error.Text = "error"
+        Me.lbl_obra_error.Visible = False
         '
-        'beneficiario
+        'dismisser
         '
-        Me.beneficiario.DataPropertyName = "beneficiario"
-        Me.beneficiario.HeaderText = "Beneficiario"
-        Me.beneficiario.Name = "beneficiario"
-        Me.beneficiario.ReadOnly = True
-        Me.beneficiario.Width = 200
-        '
-        'prototipo
-        '
-        Me.prototipo.DataPropertyName = "tipo_obra"
-        Me.prototipo.HeaderText = "Prototipo"
-        Me.prototipo.Name = "prototipo"
-        Me.prototipo.ReadOnly = True
-        Me.prototipo.Width = 150
-        '
-        'programa
-        '
-        Me.programa.DataPropertyName = "programa"
-        Me.programa.HeaderText = "Programa"
-        Me.programa.Name = "programa"
-        Me.programa.ReadOnly = True
-        Me.programa.Width = 180
-        '
-        'constructor
-        '
-        Me.constructor.DataPropertyName = "constructor"
-        Me.constructor.HeaderText = "Constructor"
-        Me.constructor.Name = "constructor"
-        Me.constructor.ReadOnly = True
-        Me.constructor.Width = 130
-        '
-        'estado
-        '
-        Me.estado.DataPropertyName = "estado"
-        Me.estado.HeaderText = "Estado"
-        Me.estado.Name = "estado"
-        Me.estado.ReadOnly = True
-        Me.estado.Width = 80
+        Me.dismisser.Interval = 3000
         '
         'Obras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(939, 675)
+        Me.Controls.Add(Me.lbl_obra_error)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btn_obra_cerrar)
         Me.Controls.Add(Me.btn_obra_ver)
@@ -178,4 +198,6 @@ Partial Class Obras
     Friend WithEvents programa As DataGridViewTextBoxColumn
     Friend WithEvents constructor As DataGridViewTextBoxColumn
     Friend WithEvents estado As DataGridViewTextBoxColumn
+    Friend WithEvents lbl_obra_error As Label
+    Friend WithEvents dismisser As Timer
 End Class

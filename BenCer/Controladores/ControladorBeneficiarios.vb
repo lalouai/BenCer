@@ -6,13 +6,12 @@ Public Class ControladorBeneficiarios
     Private daoObra As DaoObra
 
     Private _beneficiarios As List(Of Beneficiario)
+    Private _beneficiariosFinal As List(Of Beneficiario)
 
     Public Sub New()
 
         daoBeneficiario = New DaoBeneficiario
         daoObra = New DaoObra
-
-
 
     End Sub
 
@@ -30,5 +29,10 @@ Public Class ControladorBeneficiarios
 
     Public Function obtenerObra(cod_beneficiario As Integer) As Obra
         Return daoObra.obtenerObraPorBen(cod_beneficiario)
+    End Function
+
+    Public Function listarBeneficiariosConFinal() As Object
+        _beneficiarios = daoBeneficiario.listar_con_final
+        Return _beneficiarios
     End Function
 End Class

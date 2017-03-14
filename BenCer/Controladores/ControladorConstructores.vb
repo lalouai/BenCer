@@ -42,6 +42,15 @@
     End Function
 
     Public Event mostrarError(txt As String)
+
+    Public Function consAsociado(cod_constructor As Integer) As Boolean
+        If daoConstructor.asociado(cod_constructor) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     Public Event dismissError()
 
 End Class

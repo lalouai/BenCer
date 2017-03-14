@@ -22,12 +22,14 @@ Partial Class CertificadoAlta
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btn_cert_alta_descartar = New System.Windows.Forms.Button()
         Me.lbl_cert_alta_numero = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.lbl_cert_alta_programa = New System.Windows.Forms.Label()
@@ -67,6 +69,7 @@ Partial Class CertificadoAlta
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txt_cert_alta_avance = New System.Windows.Forms.TextBox()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgv_cert_alta_renglones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -74,6 +77,7 @@ Partial Class CertificadoAlta
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btn_cert_alta_descartar)
         Me.GroupBox1.Controls.Add(Me.lbl_cert_alta_numero)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.lbl_cert_alta_programa)
@@ -94,18 +98,28 @@ Partial Class CertificadoAlta
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(13, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(909, 189)
+        Me.GroupBox1.Size = New System.Drawing.Size(909, 164)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Datos de la Obra"
         '
+        'btn_cert_alta_descartar
+        '
+        Me.btn_cert_alta_descartar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_cert_alta_descartar.Location = New System.Drawing.Point(666, 131)
+        Me.btn_cert_alta_descartar.Name = "btn_cert_alta_descartar"
+        Me.btn_cert_alta_descartar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_cert_alta_descartar.TabIndex = 19
+        Me.btn_cert_alta_descartar.Text = "Descartar"
+        Me.btn_cert_alta_descartar.UseVisualStyleBackColor = True
+        '
         'lbl_cert_alta_numero
         '
         Me.lbl_cert_alta_numero.AutoSize = True
-        Me.lbl_cert_alta_numero.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_numero.Location = New System.Drawing.Point(801, 82)
+        Me.lbl_cert_alta_numero.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lbl_cert_alta_numero.Location = New System.Drawing.Point(809, 31)
         Me.lbl_cert_alta_numero.Name = "lbl_cert_alta_numero"
-        Me.lbl_cert_alta_numero.Size = New System.Drawing.Size(84, 15)
+        Me.lbl_cert_alta_numero.Size = New System.Drawing.Size(94, 17)
         Me.lbl_cert_alta_numero.TabIndex = 18
         Me.lbl_cert_alta_numero.Text = "Beneficiario"
         '
@@ -113,7 +127,7 @@ Partial Class CertificadoAlta
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(543, 84)
+        Me.Label14.Location = New System.Drawing.Point(543, 33)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(70, 13)
         Me.Label14.TabIndex = 17
@@ -123,7 +137,7 @@ Partial Class CertificadoAlta
         '
         Me.lbl_cert_alta_programa.AutoSize = True
         Me.lbl_cert_alta_programa.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_programa.Location = New System.Drawing.Point(227, 95)
+        Me.lbl_cert_alta_programa.Location = New System.Drawing.Point(227, 85)
         Me.lbl_cert_alta_programa.Name = "lbl_cert_alta_programa"
         Me.lbl_cert_alta_programa.Size = New System.Drawing.Size(84, 15)
         Me.lbl_cert_alta_programa.TabIndex = 16
@@ -133,7 +147,7 @@ Partial Class CertificadoAlta
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(6, 97)
+        Me.Label13.Location = New System.Drawing.Point(6, 87)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(52, 13)
         Me.Label13.TabIndex = 15
@@ -142,7 +156,7 @@ Partial Class CertificadoAlta
         'btn_cert_alta_cancelar
         '
         Me.btn_cert_alta_cancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_cert_alta_cancelar.Location = New System.Drawing.Point(666, 26)
+        Me.btn_cert_alta_cancelar.Location = New System.Drawing.Point(585, 131)
         Me.btn_cert_alta_cancelar.Name = "btn_cert_alta_cancelar"
         Me.btn_cert_alta_cancelar.Size = New System.Drawing.Size(75, 23)
         Me.btn_cert_alta_cancelar.TabIndex = 14
@@ -152,7 +166,7 @@ Partial Class CertificadoAlta
         'btn_cert_alta_guardar
         '
         Me.btn_cert_alta_guardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_cert_alta_guardar.Location = New System.Drawing.Point(747, 26)
+        Me.btn_cert_alta_guardar.Location = New System.Drawing.Point(747, 131)
         Me.btn_cert_alta_guardar.Name = "btn_cert_alta_guardar"
         Me.btn_cert_alta_guardar.Size = New System.Drawing.Size(75, 23)
         Me.btn_cert_alta_guardar.TabIndex = 13
@@ -162,7 +176,7 @@ Partial Class CertificadoAlta
         'btn_cert_alta_consolidar
         '
         Me.btn_cert_alta_consolidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_cert_alta_consolidar.Location = New System.Drawing.Point(828, 26)
+        Me.btn_cert_alta_consolidar.Location = New System.Drawing.Point(828, 131)
         Me.btn_cert_alta_consolidar.Name = "btn_cert_alta_consolidar"
         Me.btn_cert_alta_consolidar.Size = New System.Drawing.Size(75, 23)
         Me.btn_cert_alta_consolidar.TabIndex = 12
@@ -173,7 +187,7 @@ Partial Class CertificadoAlta
         '
         Me.lbl_cert_alta_porc_cert.AutoSize = True
         Me.lbl_cert_alta_porc_cert.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_porc_cert.Location = New System.Drawing.Point(801, 149)
+        Me.lbl_cert_alta_porc_cert.Location = New System.Drawing.Point(819, 58)
         Me.lbl_cert_alta_porc_cert.Name = "lbl_cert_alta_porc_cert"
         Me.lbl_cert_alta_porc_cert.Size = New System.Drawing.Size(84, 15)
         Me.lbl_cert_alta_porc_cert.TabIndex = 11
@@ -183,7 +197,7 @@ Partial Class CertificadoAlta
         '
         Me.lbl_cert_alta_monto.AutoSize = True
         Me.lbl_cert_alta_monto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_monto.Location = New System.Drawing.Point(227, 149)
+        Me.lbl_cert_alta_monto.Location = New System.Drawing.Point(227, 139)
         Me.lbl_cert_alta_monto.Name = "lbl_cert_alta_monto"
         Me.lbl_cert_alta_monto.Size = New System.Drawing.Size(84, 15)
         Me.lbl_cert_alta_monto.TabIndex = 10
@@ -193,7 +207,7 @@ Partial Class CertificadoAlta
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(543, 152)
+        Me.Label8.Location = New System.Drawing.Point(543, 60)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(181, 13)
         Me.Label8.TabIndex = 9
@@ -203,7 +217,7 @@ Partial Class CertificadoAlta
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(6, 151)
+        Me.Label9.Location = New System.Drawing.Point(6, 141)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(106, 13)
         Me.Label9.TabIndex = 8
@@ -213,7 +227,7 @@ Partial Class CertificadoAlta
         '
         Me.lbl_cert_alta_monto_total.AutoSize = True
         Me.lbl_cert_alta_monto_total.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_monto_total.Location = New System.Drawing.Point(227, 122)
+        Me.lbl_cert_alta_monto_total.Location = New System.Drawing.Point(227, 112)
         Me.lbl_cert_alta_monto_total.Name = "lbl_cert_alta_monto_total"
         Me.lbl_cert_alta_monto_total.Size = New System.Drawing.Size(84, 15)
         Me.lbl_cert_alta_monto_total.TabIndex = 6
@@ -223,7 +237,7 @@ Partial Class CertificadoAlta
         '
         Me.lbl_cert_alta_tipo_obra.AutoSize = True
         Me.lbl_cert_alta_tipo_obra.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_tipo_obra.Location = New System.Drawing.Point(227, 68)
+        Me.lbl_cert_alta_tipo_obra.Location = New System.Drawing.Point(227, 58)
         Me.lbl_cert_alta_tipo_obra.Name = "lbl_cert_alta_tipo_obra"
         Me.lbl_cert_alta_tipo_obra.Size = New System.Drawing.Size(84, 15)
         Me.lbl_cert_alta_tipo_obra.TabIndex = 5
@@ -233,7 +247,7 @@ Partial Class CertificadoAlta
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 124)
+        Me.Label4.Location = New System.Drawing.Point(6, 114)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(143, 13)
         Me.Label4.TabIndex = 3
@@ -243,7 +257,7 @@ Partial Class CertificadoAlta
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(6, 70)
+        Me.Label3.Location = New System.Drawing.Point(6, 60)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(49, 13)
         Me.Label3.TabIndex = 2
@@ -253,7 +267,7 @@ Partial Class CertificadoAlta
         '
         Me.lbl_cert_alta_beneficiario.AutoSize = True
         Me.lbl_cert_alta_beneficiario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_beneficiario.Location = New System.Drawing.Point(227, 41)
+        Me.lbl_cert_alta_beneficiario.Location = New System.Drawing.Point(227, 31)
         Me.lbl_cert_alta_beneficiario.Name = "lbl_cert_alta_beneficiario"
         Me.lbl_cert_alta_beneficiario.Size = New System.Drawing.Size(84, 15)
         Me.lbl_cert_alta_beneficiario.TabIndex = 1
@@ -263,7 +277,7 @@ Partial Class CertificadoAlta
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 43)
+        Me.Label1.Location = New System.Drawing.Point(6, 33)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(62, 13)
         Me.Label1.TabIndex = 0
@@ -273,7 +287,7 @@ Partial Class CertificadoAlta
         '
         Me.dgv_cert_alta_renglones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_cert_alta_renglones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.item, Me.descripcion, Me.avance_anterior, Me.avance_actual, Me.avance_total, Me.importe})
-        Me.dgv_cert_alta_renglones.Location = New System.Drawing.Point(13, 209)
+        Me.dgv_cert_alta_renglones.Location = New System.Drawing.Point(13, 184)
         Me.dgv_cert_alta_renglones.Name = "dgv_cert_alta_renglones"
         Me.dgv_cert_alta_renglones.RowHeadersVisible = False
         Me.dgv_cert_alta_renglones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -366,9 +380,9 @@ Partial Class CertificadoAlta
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.txt_cert_alta_avance)
         Me.GroupBox2.Controls.Add(Me.txt_cert_alta_item)
-        Me.GroupBox2.Location = New System.Drawing.Point(13, 511)
+        Me.GroupBox2.Location = New System.Drawing.Point(13, 486)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(909, 82)
+        Me.GroupBox2.Size = New System.Drawing.Size(909, 107)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Agregar item"
@@ -397,11 +411,11 @@ Partial Class CertificadoAlta
         'lbl_cert_alta_error
         '
         Me.lbl_cert_alta_error.AutoSize = True
-        Me.lbl_cert_alta_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_cert_alta_error.ForeColor = System.Drawing.Color.DarkRed
-        Me.lbl_cert_alta_error.Location = New System.Drawing.Point(461, 57)
+        Me.lbl_cert_alta_error.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_cert_alta_error.ForeColor = System.Drawing.Color.Red
+        Me.lbl_cert_alta_error.Location = New System.Drawing.Point(3, 70)
         Me.lbl_cert_alta_error.Name = "lbl_cert_alta_error"
-        Me.lbl_cert_alta_error.Size = New System.Drawing.Size(34, 13)
+        Me.lbl_cert_alta_error.Size = New System.Drawing.Size(39, 15)
         Me.lbl_cert_alta_error.TabIndex = 23
         Me.lbl_cert_alta_error.Text = "Error"
         Me.lbl_cert_alta_error.Visible = False
@@ -500,6 +514,10 @@ Partial Class CertificadoAlta
         Me.txt_cert_alta_avance.Size = New System.Drawing.Size(81, 20)
         Me.txt_cert_alta_avance.TabIndex = 3
         '
+        'dismisser
+        '
+        Me.dismisser.Interval = 3000
+        '
         'CertificadoAlta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -559,4 +577,6 @@ Partial Class CertificadoAlta
     Friend WithEvents avance_actual As DataGridViewTextBoxColumn
     Friend WithEvents avance_total As DataGridViewTextBoxColumn
     Friend WithEvents importe As DataGridViewTextBoxColumn
+    Friend WithEvents btn_cert_alta_descartar As Button
+    Friend WithEvents dismisser As Timer
 End Class

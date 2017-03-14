@@ -22,6 +22,7 @@ Partial Class Programas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dgv_prg = New System.Windows.Forms.DataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,6 +41,7 @@ Partial Class Programas
         Me.lbl_prg_anio = New System.Windows.Forms.Label()
         Me.txt_prg_anio = New System.Windows.Forms.TextBox()
         Me.btn_prg_cerrar = New System.Windows.Forms.Button()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
         CType(Me.dgv_prg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -195,6 +197,10 @@ Partial Class Programas
         Me.btn_prg_cerrar.Text = "Cerrar"
         Me.btn_prg_cerrar.UseVisualStyleBackColor = True
         '
+        'dismisser
+        '
+        Me.dismisser.Interval = 3000
+        '
         'Programas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -239,4 +245,5 @@ Partial Class Programas
     Friend WithEvents lbl_prg_anio As Label
     Friend WithEvents txt_prg_anio As TextBox
     Friend WithEvents btn_prg_cerrar As Button
+    Friend WithEvents dismisser As Timer
 End Class

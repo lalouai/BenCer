@@ -30,7 +30,12 @@
         End Set
     End Property
 
-    Public Sub Programa()
+    Public Sub New()
 
+    End Sub
+
+    Public Sub New(cod As Integer, nom As String)
+        _cod_programa = cod
+        _nombre = nom
     End Sub
 End Class

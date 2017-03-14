@@ -132,4 +132,9 @@
             _cod_ppto = value
         End Set
     End Property
+
+    Public Overrides Function ToString() As String
+        Return "Obra " & cod_obra
+    End Function
+
 End Class

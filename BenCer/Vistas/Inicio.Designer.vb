@@ -25,20 +25,25 @@ Partial Class Inicio
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Inicio))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.IndividuosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BeneficiariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PostulantesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BeneficiariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BeneficiariosConFinalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProyectosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PresupuestosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrototiposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConstructoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListarToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObrasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AltaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CertificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PagosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListarToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.p_inicio = New System.Windows.Forms.Panel()
+        Me.ListarPorProgramaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,28 +59,41 @@ Partial Class Inicio
         '
         'IndividuosToolStripMenuItem
         '
-        Me.IndividuosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PostulantesToolStripMenuItem, Me.BeneficiariosToolStripMenuItem})
+        Me.IndividuosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PostulantesToolStripMenuItem, Me.BeneficiariosToolStripMenuItem, Me.BeneficiariosConFinalToolStripMenuItem})
         Me.IndividuosToolStripMenuItem.Name = "IndividuosToolStripMenuItem"
         Me.IndividuosToolStripMenuItem.Size = New System.Drawing.Size(74, 20)
         Me.IndividuosToolStripMenuItem.Text = "Individuos"
         '
-        'BeneficiariosToolStripMenuItem
-        '
-        Me.BeneficiariosToolStripMenuItem.Name = "BeneficiariosToolStripMenuItem"
-        Me.BeneficiariosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.BeneficiariosToolStripMenuItem.Text = "Beneficiarios"
-        '
         'PostulantesToolStripMenuItem
         '
         Me.PostulantesToolStripMenuItem.Name = "PostulantesToolStripMenuItem"
-        Me.PostulantesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PostulantesToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.PostulantesToolStripMenuItem.Text = "Postulantes"
+        '
+        'BeneficiariosToolStripMenuItem
+        '
+        Me.BeneficiariosToolStripMenuItem.Name = "BeneficiariosToolStripMenuItem"
+        Me.BeneficiariosToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.BeneficiariosToolStripMenuItem.Text = "Beneficiarios"
+        '
+        'BeneficiariosConFinalToolStripMenuItem
+        '
+        Me.BeneficiariosConFinalToolStripMenuItem.Name = "BeneficiariosConFinalToolStripMenuItem"
+        Me.BeneficiariosConFinalToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
+        Me.BeneficiariosConFinalToolStripMenuItem.Text = "Beneficiarios con final de obra"
         '
         'ProyectosToolStripMenuItem
         '
+        Me.ProyectosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListarToolStripMenuItem, Me.ListarPorProgramaToolStripMenuItem})
         Me.ProyectosToolStripMenuItem.Name = "ProyectosToolStripMenuItem"
         Me.ProyectosToolStripMenuItem.Size = New System.Drawing.Size(76, 20)
         Me.ProyectosToolStripMenuItem.Text = "Programas"
+        '
+        'ListarToolStripMenuItem
+        '
+        Me.ListarToolStripMenuItem.Name = "ListarToolStripMenuItem"
+        Me.ListarToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.ListarToolStripMenuItem.Text = "Listar Programas"
         '
         'PresupuestosToolStripMenuItem
         '
@@ -87,14 +105,21 @@ Partial Class Inicio
         'PrototiposToolStripMenuItem
         '
         Me.PrototiposToolStripMenuItem.Name = "PrototiposToolStripMenuItem"
-        Me.PrototiposToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PrototiposToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
         Me.PrototiposToolStripMenuItem.Text = "Prototipos"
         '
         'ConstructoresToolStripMenuItem
         '
+        Me.ConstructoresToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListarToolStripMenuItem1})
         Me.ConstructoresToolStripMenuItem.Name = "ConstructoresToolStripMenuItem"
         Me.ConstructoresToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
         Me.ConstructoresToolStripMenuItem.Text = "Constructores"
+        '
+        'ListarToolStripMenuItem1
+        '
+        Me.ListarToolStripMenuItem1.Name = "ListarToolStripMenuItem1"
+        Me.ListarToolStripMenuItem1.Size = New System.Drawing.Size(102, 22)
+        Me.ListarToolStripMenuItem1.Text = "Listar"
         '
         'ObrasToolStripMenuItem
         '
@@ -103,17 +128,17 @@ Partial Class Inicio
         Me.ObrasToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.ObrasToolStripMenuItem.Text = "Obras"
         '
-        'ListadoToolStripMenuItem
-        '
-        Me.ListadoToolStripMenuItem.Name = "ListadoToolStripMenuItem"
-        Me.ListadoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ListadoToolStripMenuItem.Text = "Listado"
-        '
         'AltaToolStripMenuItem
         '
         Me.AltaToolStripMenuItem.Name = "AltaToolStripMenuItem"
         Me.AltaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AltaToolStripMenuItem.Text = "Alta"
+        '
+        'ListadoToolStripMenuItem
+        '
+        Me.ListadoToolStripMenuItem.Name = "ListadoToolStripMenuItem"
+        Me.ListadoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ListadoToolStripMenuItem.Text = "Listado"
         '
         'CertificacionesToolStripMenuItem
         '
@@ -130,9 +155,16 @@ Partial Class Inicio
         '
         'PagosToolStripMenuItem
         '
+        Me.PagosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListarToolStripMenuItem2})
         Me.PagosToolStripMenuItem.Name = "PagosToolStripMenuItem"
         Me.PagosToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
         Me.PagosToolStripMenuItem.Text = "Pagos"
+        '
+        'ListarToolStripMenuItem2
+        '
+        Me.ListarToolStripMenuItem2.Name = "ListarToolStripMenuItem2"
+        Me.ListarToolStripMenuItem2.Size = New System.Drawing.Size(102, 22)
+        Me.ListarToolStripMenuItem2.Text = "Listar"
         '
         'PictureBox1
         '
@@ -157,6 +189,12 @@ Partial Class Inicio
         Me.p_inicio.Size = New System.Drawing.Size(636, 340)
         Me.p_inicio.TabIndex = 2
         '
+        'ListarPorProgramaToolStripMenuItem
+        '
+        Me.ListarPorProgramaToolStripMenuItem.Name = "ListarPorProgramaToolStripMenuItem"
+        Me.ListarPorProgramaToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.ListarPorProgramaToolStripMenuItem.Text = "Listar Detalle Programa"
+        '
         'Inicio
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -165,6 +203,7 @@ Partial Class Inicio
         Me.Controls.Add(Me.p_inicio)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Inicio"
         Me.Text = "BenCer"
@@ -193,4 +232,9 @@ Partial Class Inicio
     Friend WithEvents PrototiposToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CertificacionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PagosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BeneficiariosConFinalToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ListarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ListarToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ListarToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents ListarPorProgramaToolStripMenuItem As ToolStripMenuItem
 End Class

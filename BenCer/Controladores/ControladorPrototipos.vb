@@ -46,6 +46,15 @@
         Return "Agregar"
     End Function
 
+    Public Function pptoAsociado(cod_proto As Integer) As Boolean
+        If daoPpto.pptoAsociado(cod_proto) > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+
     Public Sub eliminarPptoAsociado(cod_proto As Object)
         If daoPrototipo.verificarPpto(cod_proto) Then
             RaiseEvent mostrarError("Eliminando el presupuesto asociado...")

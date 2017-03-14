@@ -22,7 +22,7 @@ Partial Class Familiares
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btn_fam_cerrar = New System.Windows.Forms.Button()
         Me.lbl_fam_persona_nombre = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -31,6 +31,11 @@ Partial Class Familiares
         Me.btn_fam_eliminar = New System.Windows.Forms.Button()
         Me.btn_fam_editar = New System.Windows.Forms.Button()
         Me.dgv_familiares = New System.Windows.Forms.DataGridView()
+        Me.dni = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.apellido = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.estado_civil = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cod_parentezco = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cmb_fam_estado_civil = New System.Windows.Forms.ComboBox()
@@ -45,11 +50,6 @@ Partial Class Familiares
         Me.txt_fam_nombre = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmb_fam_parentezco = New System.Windows.Forms.ComboBox()
-        Me.dni = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.apellido = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.estado_civil = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cod_parentezco = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgv_familiares, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -134,6 +134,47 @@ Partial Class Familiares
         Me.dgv_familiares.Size = New System.Drawing.Size(805, 242)
         Me.dgv_familiares.TabIndex = 13
         '
+        'dni
+        '
+        Me.dni.DataPropertyName = "nro_doc"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.dni.DefaultCellStyle = DataGridViewCellStyle1
+        Me.dni.HeaderText = "DNI"
+        Me.dni.Name = "dni"
+        Me.dni.ReadOnly = True
+        '
+        'apellido
+        '
+        Me.apellido.DataPropertyName = "apellido"
+        Me.apellido.HeaderText = "Apellido"
+        Me.apellido.Name = "apellido"
+        Me.apellido.ReadOnly = True
+        Me.apellido.Width = 200
+        '
+        'nombre
+        '
+        Me.nombre.DataPropertyName = "nombre"
+        Me.nombre.HeaderText = "Nombre"
+        Me.nombre.Name = "nombre"
+        Me.nombre.ReadOnly = True
+        Me.nombre.Width = 200
+        '
+        'estado_civil
+        '
+        Me.estado_civil.DataPropertyName = "estado_civil"
+        Me.estado_civil.HeaderText = "Estado Civil"
+        Me.estado_civil.Name = "estado_civil"
+        Me.estado_civil.ReadOnly = True
+        Me.estado_civil.Width = 150
+        '
+        'cod_parentezco
+        '
+        Me.cod_parentezco.DataPropertyName = "parentezco"
+        Me.cod_parentezco.HeaderText = "Parentezco"
+        Me.cod_parentezco.Name = "cod_parentezco"
+        Me.cod_parentezco.ReadOnly = True
+        Me.cod_parentezco.Width = 150
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -155,6 +196,7 @@ Partial Class Familiares
         '
         'cmb_fam_estado_civil
         '
+        Me.cmb_fam_estado_civil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_fam_estado_civil.FormattingEnabled = True
         Me.cmb_fam_estado_civil.Location = New System.Drawing.Point(395, 140)
         Me.cmb_fam_estado_civil.Name = "cmb_fam_estado_civil"
@@ -199,6 +241,7 @@ Partial Class Familiares
         '
         'cmb_fam_tipo_doc
         '
+        Me.cmb_fam_tipo_doc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_fam_tipo_doc.FormattingEnabled = True
         Me.cmb_fam_tipo_doc.Location = New System.Drawing.Point(655, 73)
         Me.cmb_fam_tipo_doc.Name = "cmb_fam_tipo_doc"
@@ -246,52 +289,12 @@ Partial Class Familiares
         '
         'cmb_fam_parentezco
         '
+        Me.cmb_fam_parentezco.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_fam_parentezco.FormattingEnabled = True
         Me.cmb_fam_parentezco.Location = New System.Drawing.Point(648, 140)
         Me.cmb_fam_parentezco.Name = "cmb_fam_parentezco"
         Me.cmb_fam_parentezco.Size = New System.Drawing.Size(169, 21)
         Me.cmb_fam_parentezco.TabIndex = 90
-        '
-        'dni
-        '
-        Me.dni.DataPropertyName = "nro_doc"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.dni.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dni.HeaderText = "DNI"
-        Me.dni.Name = "dni"
-        Me.dni.ReadOnly = True
-        '
-        'apellido
-        '
-        Me.apellido.DataPropertyName = "apellido"
-        Me.apellido.HeaderText = "Apellido"
-        Me.apellido.Name = "apellido"
-        Me.apellido.ReadOnly = True
-        Me.apellido.Width = 200
-        '
-        'nombre
-        '
-        Me.nombre.DataPropertyName = "nombre"
-        Me.nombre.HeaderText = "Nombre"
-        Me.nombre.Name = "nombre"
-        Me.nombre.ReadOnly = True
-        Me.nombre.Width = 200
-        '
-        'estado_civil
-        '
-        Me.estado_civil.DataPropertyName = "estado_civil"
-        Me.estado_civil.HeaderText = "Estado Civil"
-        Me.estado_civil.Name = "estado_civil"
-        Me.estado_civil.ReadOnly = True
-        Me.estado_civil.Width = 150
-        '
-        'cod_parentezco
-        '
-        Me.cod_parentezco.DataPropertyName = "parentezco"
-        Me.cod_parentezco.HeaderText = "Parentezco"
-        Me.cod_parentezco.Name = "cod_parentezco"
-        Me.cod_parentezco.ReadOnly = True
-        Me.cod_parentezco.Width = 150
         '
         'Familiares
         '

@@ -22,9 +22,13 @@ Partial Class Constructores
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.dvg_cons = New System.Windows.Forms.DataGridView()
+        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Ape_Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btn_cons_editar = New System.Windows.Forms.Button()
         Me.btn_cons_eliminar = New System.Windows.Forms.Button()
         Me.btn_cons_agregar = New System.Windows.Forms.Button()
@@ -35,9 +39,7 @@ Partial Class Constructores
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txt_cons_cod_constructor = New System.Windows.Forms.TextBox()
         Me.btn_cons_cerrar = New System.Windows.Forms.Button()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Ape_Nom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
         CType(Me.dvg_cons, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -53,6 +55,33 @@ Partial Class Constructores
         Me.dvg_cons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dvg_cons.Size = New System.Drawing.Size(755, 426)
         Me.dvg_cons.TabIndex = 3
+        '
+        'ID
+        '
+        Me.ID.DataPropertyName = "cod_constructor"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ID.HeaderText = "ID"
+        Me.ID.Name = "ID"
+        Me.ID.ReadOnly = True
+        '
+        'Ape_Nom
+        '
+        Me.Ape_Nom.DataPropertyName = "nombre"
+        Me.Ape_Nom.HeaderText = "Apellido y Nombre"
+        Me.Ape_Nom.Name = "Ape_Nom"
+        Me.Ape_Nom.ReadOnly = True
+        Me.Ape_Nom.Width = 500
+        '
+        'cuit
+        '
+        Me.cuit.DataPropertyName = "cuit"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.cuit.DefaultCellStyle = DataGridViewCellStyle2
+        Me.cuit.HeaderText = "CUIT"
+        Me.cuit.Name = "cuit"
+        Me.cuit.ReadOnly = True
+        Me.cuit.Width = 150
         '
         'btn_cons_editar
         '
@@ -142,32 +171,9 @@ Partial Class Constructores
         Me.btn_cons_cerrar.Text = "Cerrar"
         Me.btn_cons_cerrar.UseVisualStyleBackColor = True
         '
-        'ID
+        'dismisser
         '
-        Me.ID.DataPropertyName = "cod_constructor"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ID.DefaultCellStyle = DataGridViewCellStyle1
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        '
-        'Ape_Nom
-        '
-        Me.Ape_Nom.DataPropertyName = "nombre"
-        Me.Ape_Nom.HeaderText = "Apellido y Nombre"
-        Me.Ape_Nom.Name = "Ape_Nom"
-        Me.Ape_Nom.ReadOnly = True
-        Me.Ape_Nom.Width = 500
-        '
-        'cuit
-        '
-        Me.cuit.DataPropertyName = "cuit"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.cuit.DefaultCellStyle = DataGridViewCellStyle2
-        Me.cuit.HeaderText = "CUIT"
-        Me.cuit.Name = "cuit"
-        Me.cuit.ReadOnly = True
-        Me.cuit.Width = 150
+        Me.dismisser.Interval = 3000
         '
         'Constructores
         '
@@ -207,4 +213,5 @@ Partial Class Constructores
     Friend WithEvents ID As DataGridViewTextBoxColumn
     Friend WithEvents Ape_Nom As DataGridViewTextBoxColumn
     Friend WithEvents cuit As DataGridViewTextBoxColumn
+    Friend WithEvents dismisser As Timer
 End Class

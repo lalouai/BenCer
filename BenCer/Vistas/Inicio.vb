@@ -4,7 +4,6 @@
     Private WithEvents presupuestos As Presupuestos
 
     Private Sub BeneficiariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BeneficiariosToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
 
         Dim beneficiarios As Beneficiarios = New Beneficiarios
@@ -19,7 +18,6 @@
     End Sub
 
     Private Sub PostulantesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PostulantesToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
 
         Dim postulantes As Postulantes = New Postulantes
@@ -34,36 +32,7 @@
 
     End Sub
 
-    Private Sub ConstructoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConstructoresToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
-        p_inicio.Controls.Clear()
-
-        Dim constructores As Constructores = New Constructores
-        With constructores
-            .TopLevel = False
-            .Visible = True
-            .FormBorderStyle = FormBorderStyle.None
-        End With
-
-        p_inicio.Controls.Add(constructores)
-    End Sub
-
-    Private Sub ProyectosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProyectosToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
-        p_inicio.Controls.Clear()
-
-        Dim programas As Programas = New Programas
-        With programas
-            .TopLevel = False
-            .Visible = True
-            .FormBorderStyle = FormBorderStyle.None
-        End With
-
-        p_inicio.Controls.Add(programas)
-    End Sub
-
     Private Sub AltaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
 
         Dim obraAlta As ObraAlta = New ObraAlta
@@ -77,7 +46,6 @@
     End Sub
 
     Private Sub ListadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
 
         Dim obras As Obras = New Obras
@@ -91,7 +59,6 @@
     End Sub
 
     Private Sub SalirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalirToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         Dim resultado As Integer = MessageBox.Show("Esta seguro que desea salir?", "Por favor confirme", MessageBoxButtons.YesNo)
 
         If resultado = DialogResult.Yes Then
@@ -101,7 +68,6 @@
     End Sub
 
     Private Sub PrototiposToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrototiposToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
         Dim prototipos As Prototipos = New Prototipos
         prototipos = New Prototipos()
@@ -114,7 +80,6 @@
     End Sub
 
     Private Sub CertificacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CertificacionesToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
         p_inicio.Controls.Clear()
         Dim certificaciones As Certificaciones
 
@@ -130,8 +95,46 @@
         p_inicio.Controls.Add(certificaciones)
     End Sub
 
-    Private Sub PagosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PagosToolStripMenuItem.Click
-        RaiseEvent cambioContenido()
+    Private Sub BeneficiariosConFinalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BeneficiariosConFinalToolStripMenuItem.Click
+        p_inicio.Controls.Clear()
+
+        Dim beneficiarios As Beneficiarios = New Beneficiarios(True)
+        With beneficiarios
+            .TopLevel = False
+            .Visible = True
+            .FormBorderStyle = FormBorderStyle.None
+        End With
+
+        p_inicio.Controls.Add(beneficiarios)
+    End Sub
+
+    Private Sub ListarToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ListarToolStripMenuItem1.Click
+        p_inicio.Controls.Clear()
+
+        Dim constructores As Constructores = New Constructores
+        With constructores
+            .TopLevel = False
+            .Visible = True
+            .FormBorderStyle = FormBorderStyle.None
+        End With
+
+        p_inicio.Controls.Add(constructores)
+    End Sub
+
+    Private Sub ListarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListarToolStripMenuItem.Click
+        p_inicio.Controls.Clear()
+
+        Dim programas As Programas = New Programas
+        With programas
+            .TopLevel = False
+            .Visible = True
+            .FormBorderStyle = FormBorderStyle.None
+        End With
+
+        p_inicio.Controls.Add(programas)
+    End Sub
+
+    Private Sub ListarToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ListarToolStripMenuItem2.Click
         p_inicio.Controls.Clear()
 
         Dim pagos As Pagos = New Pagos
@@ -144,9 +147,16 @@
         p_inicio.Controls.Add(pagos)
     End Sub
 
-    Public Sub lanzarEvento()
-        'MsgBox("lanzarEvento")
-    End Sub
+    Private Sub ListarPorProgramaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListarPorProgramaToolStripMenuItem.Click
+        p_inicio.Controls.Clear()
 
-    Public Event cambioContenido()
+        Dim prg_det As ProgramasDetalle = New ProgramasDetalle
+        With prg_det
+            .TopLevel = False
+            .Visible = True
+            .FormBorderStyle = FormBorderStyle.None
+        End With
+
+        p_inicio.Controls.Add(prg_det)
+    End Sub
 End Class

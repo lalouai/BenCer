@@ -90,7 +90,8 @@ Public Class ControladorObras
         With formulario
             .dgv_obra_alta_pagos.AutoGenerateColumns = False
             .cod_obra = obra.cod_obra
-            .Size = New Size(1100, 585)
+            .Width = 1200
+            .Height = 585
             .lbl_obra_alta_titulo.Text = "Ver Obra"
             .btn_obra_alta_crear.Text = "Imprimir"
             .btn_obra_alta_cancelar.Text = "Cerrar"
@@ -109,32 +110,26 @@ Public Class ControladorObras
             .cmb_obra_alta_prototipo.DisplayMember = "descripcion"
             .cmb_obra_alta_prototipo.ValueMember = "cod_tipo_obra"
             .cmb_obra_alta_prototipo.SelectedValue = obra.cod_tipo_obra
-
             Dim listaConstructores As List(Of Constructor) = daoConstructor.listar()
-
             .cmb_obra_alta_constructor.DataSource = listaConstructores
             .cmb_obra_alta_constructor.DisplayMember = "nombre"
             .cmb_obra_alta_constructor.ValueMember = "cod_constructor"
             .cmb_obra_alta_constructor.Enabled = False
-            .dtp_obra_alta_fecha_inicio.Text = obra.fecha_inicio
 
+            .dtp_obra_alta_fecha_inicio.Text = obra.fecha_inicio
             .obra_avance.Visible = True
             .grp_postulantes.Visible = False
             .btn_obra_alta_crear.Visible = False
-
-
             costos = dCert.costos(obra.cod_obra)
-
             .obra_alta_costo_total.Text = costos.total.ToString("C2")
             .obra_alta_avance_financiero.Text = costos.pagado.ToString("C2")
-            .obra_alta_avance_porcentual.Text = (costos.pagado / costos.total).ToString("P")
-
+            Try
+                .obra_alta_avance_porcentual.Text = (costos.pagado / costos.total).ToString("P")
+            Catch ex As DivideByZeroException
+                .obra_alta_avance_porcentual.Text = 0.ToString("P")
+            End Try
             .grafico(costos.total, costos.pagado, costos.certificado)
-
             .dgv_obra_alta_pagos.DataSource = dPagos.listar_por_obra(obra.cod_obra)
-
-
-
         End With
 
         formulario.ShowDialog()

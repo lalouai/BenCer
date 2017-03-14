@@ -94,13 +94,20 @@
 
     Private Sub btn_proto_liberar_ppto_Click(sender As Object, e As EventArgs) Handles btn_proto_liberar_ppto.Click
         If dvg_prototipo.SelectedRows.Count > 0 Then
+
             Dim proto As TipoObra = dvg_prototipo.SelectedRows(0).DataBoundItem
-            Dim aviso As String = "Esta seguro que desea eliminar el presupuesto asociado a " & proto.descripcion & "?" &
+
+            If Not controlador.pptoAsociado(proto.cod_tipo_obra) Then
+                mostrarError("No tiene obras asociadas")
+                Dim aviso As String = "Esta seguro que desea eliminar el presupuesto asociado a " & proto.descripcion & "?" &
                                   vbCrLf &
                                   "Recuerde que esta acción no se puede deshacer"
-            Dim resultado As Integer = MessageBox.Show(aviso, "Por favor confirme", MessageBoxButtons.YesNo)
-            If resultado = DialogResult.Yes Then
-                controlador.eliminarPptoAsociado(proto.cod_tipo_obra)
+                Dim resultado As Integer = MessageBox.Show(aviso, "Por favor confirme", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+                    controlador.eliminarPptoAsociado(proto.cod_tipo_obra)
+                End If
+            Else
+                mostrarError("Lo siento, este presupuesto ya tiene obras, no se puede eliminar")
             End If
         Else
             mostrarError("Seleccione un prototipo para continuar")

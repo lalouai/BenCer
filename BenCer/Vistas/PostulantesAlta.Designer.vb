@@ -69,12 +69,13 @@ Partial Class PostulantesAlta
         '
         'cmbEstado
         '
+        Me.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEstado.Enabled = False
         Me.cmbEstado.FormattingEnabled = True
         Me.cmbEstado.Location = New System.Drawing.Point(359, 177)
         Me.cmbEstado.Name = "cmbEstado"
         Me.cmbEstado.Size = New System.Drawing.Size(169, 21)
-        Me.cmbEstado.TabIndex = 83
+        Me.cmbEstado.TabIndex = 5
         '
         'Label6
         '
@@ -114,11 +115,12 @@ Partial Class PostulantesAlta
         '
         'cmbTipoDoc
         '
+        Me.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTipoDoc.FormattingEnabled = True
         Me.cmbTipoDoc.Location = New System.Drawing.Point(295, 99)
         Me.cmbTipoDoc.Name = "cmbTipoDoc"
         Me.cmbTipoDoc.Size = New System.Drawing.Size(106, 21)
-        Me.cmbTipoDoc.TabIndex = 79
+        Me.cmbTipoDoc.TabIndex = 1
         '
         'Label2
         '
@@ -135,14 +137,14 @@ Partial Class PostulantesAlta
         Me.txtApellido.Location = New System.Drawing.Point(15, 145)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(236, 20)
-        Me.txtApellido.TabIndex = 82
+        Me.txtApellido.TabIndex = 3
         '
         'txt_pos_dni
         '
         Me.txt_pos_dni.Location = New System.Drawing.Point(432, 100)
         Me.txt_pos_dni.Name = "txt_pos_dni"
         Me.txt_pos_dni.Size = New System.Drawing.Size(97, 20)
-        Me.txt_pos_dni.TabIndex = 80
+        Me.txt_pos_dni.TabIndex = 2
         '
         'txtNombre
         '
@@ -150,7 +152,7 @@ Partial Class PostulantesAlta
         Me.txtNombre.Location = New System.Drawing.Point(295, 145)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(236, 20)
-        Me.txtNombre.TabIndex = 81
+        Me.txtNombre.TabIndex = 4
         '
         'titulo
         '
@@ -170,7 +172,7 @@ Partial Class PostulantesAlta
         Me.btn_guardar.Location = New System.Drawing.Point(453, 226)
         Me.btn_guardar.Name = "btn_guardar"
         Me.btn_guardar.Size = New System.Drawing.Size(75, 23)
-        Me.btn_guardar.TabIndex = 92
+        Me.btn_guardar.TabIndex = 6
         Me.btn_guardar.Text = "Guardar"
         Me.btn_guardar.UseVisualStyleBackColor = True
         '
@@ -179,7 +181,7 @@ Partial Class PostulantesAlta
         Me.Button2.Location = New System.Drawing.Point(372, 226)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 93
+        Me.Button2.TabIndex = 7
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '

@@ -35,20 +35,7 @@
 
     End Sub
 
-    Private Sub btn_cert_alta_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cert_alta_cancelar.Click
-        If btn_cert_alta_cancelar.Text.Equals("Cancelar") Then
-            Dim resultado As Integer = MessageBox.Show("Si cierra va a perder todo el trabajo, desea cerrar?", "Por favor confirme", MessageBoxButtons.YesNo)
-            If resultado = DialogResult.Yes Then
-                controlador.eliminar()
-                Me.Close()
-            ElseIf resultado = DialogResult.No Then
-                Exit Sub
-            End If
-        Else
-            Me.Close()
-        End If
 
-    End Sub
 
     Private Sub txt_cert_alta_item_Lost_Focus(sender As Object, e As EventArgs) Handles txt_cert_alta_item.LostFocus
         txt_cert_alta_avance_ant.Text = controlador.avanceAnterior(txt_cert_alta_item.Text)
@@ -141,21 +128,27 @@
             Me.Close()
             Exit Sub
         End If
-        Dim resultado = MessageBox.Show("Esta seguro que desea consolidar la certificacion?" & vbCrLf & "Una vez consolidada ya no podra modificarla",
-                                        "Por favor confirme", MessageBoxButtons.YesNo)
-        If resultado = DialogResult.Yes Then
-            Dim monto As Decimal = CDec(lbl_cert_alta_monto.Text)
-            controlador.guardar(monto)
-            If controlador.consolidar() > 0 Then
-                If MessageBox.Show("Desea imprimirlo ahora?", "Impresión", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    imprimir()
+
+        If dgv_cert_alta_renglones.RowCount > 0 Then
+            Dim resultado = MessageBox.Show("Esta seguro que desea consolidar la certificacion?" & vbCrLf & "Una vez consolidada ya no podra modificarla",
+                                                    "Por favor confirme", MessageBoxButtons.YesNo)
+            If resultado = DialogResult.Yes Then
+                Dim monto As Decimal = CDec(lbl_cert_alta_monto.Text)
+                controlador.guardar(monto)
+                If controlador.consolidar() > 0 Then
+                    If MessageBox.Show("Desea imprimirlo ahora?", "Impresión", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                        imprimir()
+                    End If
+                    Me.Close()
                 End If
-                Me.Close()
             End If
         End If
+
+
     End Sub
 
     Private Sub imprimir()
+        Debug.Print("imprimir")
         Dim imprime As Imp_cert = New Imp_cert
         With imprime
             .lbl_imp_beneficiario.Text = lbl_cert_alta_beneficiario.Text
@@ -176,4 +169,42 @@
         Dim monto As Decimal = CDec(lbl_cert_alta_monto.Text)
         controlador.guardar(monto)
     End Sub
+
+    Private Sub btn_cert_alta_cancelar_Click(sender As Object, e As EventArgs) Handles btn_cert_alta_cancelar.Click
+        If btn_cert_alta_cancelar.Text.Equals("Cancelar") Then
+            Dim monto As Decimal = CDec(lbl_cert_alta_monto.Text)
+            controlador.guardar(monto)
+        End If
+        Me.Close()
+    End Sub
+    Private Sub btn_cert_alta_descartar_Click(sender As Object, e As EventArgs) Handles btn_cert_alta_descartar.Click
+        Dim resultado As Integer = MessageBox.Show("Desea descartar la foja de certificación?", "Por favor confirme", MessageBoxButtons.YesNo)
+        If resultado = DialogResult.Yes Then
+            controlador.eliminar()
+            Me.Close()
+        ElseIf resultado = DialogResult.No Then
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub txt_cert_alta_item_TextChanged(sender As Object, e As EventArgs) Handles txt_cert_alta_item.TextChanged
+        If controlador.yaIngresado(txt_cert_alta_item) Then
+            mostrarError("Lo siento pero este ítem ya está ingresado, si desea modificar el " & vbCrLf &
+                         "porcentaje de avance, por favor edítelo")
+            txt_cert_alta_item.Text = ""
+        End If
+    End Sub
+
+    Private Sub mostrarError(txt As String)
+        lbl_cert_alta_error.Text = txt
+        lbl_cert_alta_error.Visible = True
+        dismisser.Enabled = True
+    End Sub
+
+    Private Sub dismissError() Handles dismisser.Tick
+        dismisser.Enabled = False
+        lbl_cert_alta_error.Visible = False
+        lbl_cert_alta_error.Text = ""
+    End Sub
+
 End Class

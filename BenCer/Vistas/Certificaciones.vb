@@ -11,7 +11,9 @@
         controlador = New ControladorCertificaciones(cod_ben)
 
         dgv_cert_beneficiario.AutoGenerateColumns = False
+        dgv_cert_beneficiario.AllowUserToAddRows = False
         dgv_cert_certificados.AutoGenerateColumns = False
+        dgv_cert_certificados.AllowUserToAddRows = False
 
         dgv_cert_beneficiario.DataSource = controlador.listaBeneficiarios
         dgv_cert_certificados.DataSource = controlador.listaCertificados
@@ -72,11 +74,8 @@
         End If
     End Sub
 
-    Private Sub btn_cert_ver_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub txt_cert_filtrar_ben_TextChanged(sender As Object, e As EventArgs) Handles txt_cert_filtrar_ben.TextChanged
         dgv_cert_beneficiario.DataSource = controlador.Filtrar(txt_cert_filtrar_ben.Text.ToLower)
+        dgv_cert_certificados.DataSource = Nothing
     End Sub
 End Class

@@ -4,6 +4,7 @@
     Private daoObra As DaoObra
     Private daoRenglonPpto As DaoRenglonPpto
     Private daoCertificado As DaoCertificado
+    Private daoBeneficiario As DaoBeneficiario
     Private ppto As Presupuesto
     Private itemsPpto As List(Of RenglonPpto)
     Private itemsCertificado As List(Of RenglonCertificado)
@@ -12,15 +13,20 @@
     Private _certificado As Certificado
     Private _num_orden As Integer
     Private _propio As Boolean
+    Private _total As Decimal
 
     Public Sub New(ByVal cod_obra As Integer, ByVal cod_ppto As Integer, Optional cod_certificado As Integer = Nothing)
         daoObra = New DaoObra
         daoPresupuesto = New DaoPresupuesto
         daoRenglonPpto = New DaoRenglonPpto
         daoCertificado = New DaoCertificado
+        daoBeneficiario = New DaoBeneficiario
         _obra = daoObra.obtener(cod_obra)
         ppto = daoPresupuesto.obtener(cod_ppto)
         itemsPpto = daoRenglonPpto.listar_ppto(cod_ppto)
+        _total = itemsPpto.Sum(Function(p) p.costo)
+
+
         listaAutoComplete = New AutoCompleteStringCollection()
 
         For Each item As RenglonPpto In itemsPpto
@@ -81,6 +87,10 @@
         End Get
     End Property
 
+    Public Sub eliminarItemCertificado(descripcion As String)
+
+    End Sub
+
     Public ReadOnly Property listaRCert As List(Of RenglonCertificado)
         Get
             Return itemsCertificado
@@ -101,13 +111,17 @@
 
     Public ReadOnly Property total As Decimal
         Get
-            Return itemsPpto.Sum(Function(p) p.costo)
+            Return _total
         End Get
     End Property
 
     Public ReadOnly Property porcentaje_avance As Decimal
         Get
-            Return total_certificado / total
+            Try
+                Return total_certificado / total
+            Catch ex As DivideByZeroException
+                Return 0
+            End Try
         End Get
     End Property
 
@@ -118,8 +132,16 @@
     End Property
 
     Public Function avanceAnterior(text As String) As String
-        Dim item_ppto As RenglonPpto = itemsPpto.Find(Function(e) e.descripcion = text)
-        Return daoCertificado.avance_anterior(item_ppto.cod_r_ppto, _obra.cod_obra)
+        If text.Trim.Length > 0 Then
+            Dim item_ppto As RenglonPpto = itemsPpto.Find(Function(e) e.descripcion = text)
+            Try
+                Return daoCertificado.avance_anterior(item_ppto.cod_r_ppto, _obra.cod_obra) / 100
+            Catch ex As DivideByZeroException
+                Return 0
+            End Try
+
+        End If
+        Return Nothing
     End Function
 
     Public Function costo(ByVal item As String) As Decimal
@@ -148,13 +170,27 @@
     Event InsertedRenglon()
 
     Public Function guardar(monto As Decimal) As Integer
-        _certificado.monto = monto
-        _certificado.cod_estado = 2
-        Return daoCertificado.modificar(_certificado, _certificado.cod_certificado)
+        If _certificado.cod_estado <> 3 Then
+            _certificado.monto = monto
+            _certificado.cod_estado = 2
+            Return daoCertificado.modificar(_certificado, _certificado.cod_certificado)
+        End If
+        Return 0
     End Function
 
     Public Function consolidar() As Integer
+
+        Dim total_Certificado As Decimal = daoCertificado.total_certificado(_obra.cod_obra)
+
+        If total_Certificado = total Then
+            daoObra.final_obra(_obra.cod_obra)
+            daoBeneficiario.final_obra(_obra.cod_beneficiario)
+        End If
+        _certificado.cod_estado = 3
         Return daoCertificado.consolidar(_certificado.cod_certificado)
     End Function
 
+    Public Function yaIngresado(txt_cert_alta_item As TextBox) As Boolean
+        Return False
+    End Function
 End Class

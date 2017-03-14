@@ -19,7 +19,7 @@ Public Class DaoRenglonPpto
 
     Public Function modificar(elemento As RenglonPpto, cod As Integer) As Integer Implements InterfaceDao(Of RenglonPpto).modificar
         Dim consulta As String
-        consulta = "UPDATE dbo.R_PRESUPUESTO SET cod_ppto = " & elemento.cod_ppto & ", item = '" & elemento.item & "',costo = " & elemento.costo.ToString.Replace(",", ".") &
+        consulta = "UPDATE dbo.R_PRESUPUESTO SET cod_ppto = " & elemento.cod_ppto & ", item = '" & elemento.item.Replace(",", ".") & "',costo = " & elemento.costo.ToString.Replace(",", ".") &
             ", descripcion = '" & elemento.descripcion & "' WHERE cod_r_ppto =" & cod
         Dim sal As Integer = Me.execnq(consulta)
         If elemento.costo > 0 Then
@@ -31,7 +31,7 @@ Public Class DaoRenglonPpto
     Public Function guardar(elemento As RenglonPpto) As Integer Implements InterfaceDao(Of RenglonPpto).guardar
         Dim consulta As String
         consulta = "INSERT INTO dbo.R_PRESUPUESTO (cod_ppto ,item ,costo ,descripcion) OUTPUT INSERTED.COD_R_PPTO " &
-                   "VALUES (" & elemento.cod_ppto & ",'" & elemento.item & "'," & elemento.costo.ToString.Replace(",", ".") & ",'" & elemento.descripcion & "')"
+                   "VALUES (" & elemento.cod_ppto & ",'" & elemento.item.Replace(",", ".") & "'," & elemento.costo.ToString.Replace(",", ".") & ",'" & elemento.descripcion & "')"
         Dim sal As Integer = Me.ExecM(consulta)
         If elemento.costo > 0 Then
             Me.execSp("dbo.actualizar_incidencia", elemento.cod_ppto)
@@ -45,8 +45,8 @@ Public Class DaoRenglonPpto
 
     Public Function listar_ppto(cod_ppto As Integer) As List(Of RenglonPpto)
         Dim lista As List(Of RenglonPpto) = New List(Of RenglonPpto)
-
-        Dim ds As Data.DataSet = Me.Exec("SELECT * FROM dbo.R_PRESUPUESTO WHERE cod_ppto = " & cod_ppto & " ORDER BY item ASC;")
+        Debug.Print("SELECT * FROM dbo.R_PRESUPUESTO WHERE cod_ppto = " & cod_ppto & " ORDER BY CONVERT(decimal,item) ASC;")
+        Dim ds As Data.DataSet = Me.Exec("SELECT * FROM dbo.R_PRESUPUESTO WHERE cod_ppto = " & cod_ppto & " ORDER BY CONVERT(decimal,item) ASC;")
 
         For Each row In ds.Tables(0).Rows
             Dim aux As RenglonPpto = New RenglonPpto

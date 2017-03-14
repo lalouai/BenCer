@@ -27,8 +27,7 @@ Public Class DaoCertificado
     End Function
 
     Public Function listar() As List(Of Certificado) Implements InterfaceDao(Of Certificado).listar
-        Throw New NotImplementedException()
-
+        Return Nothing
     End Function
 
     Friend Function listar_by_ben(cod_ben As Integer) As List(Of Certificado)
@@ -62,7 +61,7 @@ Public Class DaoCertificado
     End Function
 
     Public Function obtener(cod As Integer) As Certificado Implements InterfaceDao(Of Certificado).obtener
-        Throw New NotImplementedException()
+        Return Nothing
     End Function
 
     Public Function proximo_numero(cod_obra) As Integer
@@ -77,10 +76,11 @@ Public Class DaoCertificado
     End Function
 
     Public Function avance_anterior(cod_r_ppto As Integer, cod_obra As Integer) As Decimal
-        Dim consulta As String = "SELECT sum(RC.avance) as avance_previo FROM CERTIFICADO C
-                                  INNER JOIN R_CERTIFICADO AS RC ON C.cod_certificado = RC.cod_certificado	
-                                  INNER JOIN OBRA AS O ON C.cod_obra = O.cod_obra
-                                  WHERE O.cod_obra = " & cod_obra & " and RC.cod_r_ppto = " & cod_r_ppto
+        Dim consulta As String = "SELECT sum(RC.avance) as avance_previo FROM CERTIFICADO C " &
+                                 "INNER JOIN R_CERTIFICADO As RC On C.cod_certificado = RC.cod_certificado	" &
+                                 "INNER JOIN OBRA As O On C.cod_obra = O.cod_obra " &
+                                 "WHERE O.cod_obra = " & cod_obra & " And RC.cod_r_ppto = " & cod_r_ppto
+
         Dim ds As Data.DataSet = Me.Exec(consulta)
         Dim salida As Decimal
         If ds.Tables(0).Rows.Count = 1 Then
@@ -93,11 +93,11 @@ Public Class DaoCertificado
 
     Public Function ultimo_certificado(cod_obra As Integer) As Certificado
 
-        Dim consulta As String = "SELECT TOP 1 *
-                                  FROM CERTIFICADO as C
-                                  INNER JOIN ESTADO_CERTIFICACION as EC On C.cod_estado_certificacion = EC.cod_estado
-                                  WHERE c.activo = 1 AND cod_obra = " & cod_obra & "
-                                  ORDER by numero desc"
+        Dim consulta As String = "Select TOP 1 * " &
+                                  "From CERTIFICADO As C " &
+                                  "INNER JOIN ESTADO_CERTIFICACION As EC On C.cod_estado_certificacion = EC.cod_estado " &
+                                  "Where c.activo = 1 And cod_obra = " & cod_obra &
+                                  " ORDER by numero desc"
         Dim salida As Certificado = Nothing
         Dim ds As Data.DataSet = Me.Exec(consulta)
         If ds.Tables(0).Rows.Count > 0 Then
@@ -117,20 +117,18 @@ Public Class DaoCertificado
     End Function
 
     Public Function consolidar(cod_certificado As Integer) As Integer
-        Dim consulta As String
-        consulta = "UPDATE dbo.CERTIFICADO SET cod_estado_certificacion = 3 WHERE cod_certificado =" & cod_certificado
+        Dim consulta As String = "UPDATE dbo.CERTIFICADO Set cod_estado_certificacion = 3 WHERE cod_certificado = " & cod_certificado
+        Debug.Print(consulta)
         Return Me.execnq(consulta)
     End Function
 
     Public Function listarRenglones(cod_obra As Integer, cod_certificado As Integer) As List(Of RenglonCertificado)
         Dim lista As List(Of RenglonCertificado) = New List(Of RenglonCertificado)
-        Dim consulta As String = "SELECT * " &
-                                 "FROM dbo.CERTIFICADO as C " &
-                                 "INNER JOIN R_CERTIFICADO as RC ON C.cod_certificado = RC.cod_certificado " &
-                                 "INNER JOIN R_PRESUPUESTO as RP ON Rc.cod_r_ppto = RP.cod_r_ppto " &
-                                 "WHERE C.activo = 1 AND C.cod_certificado =" & cod_certificado
-
-
+        Dim consulta As String = "Select * " &
+                                 "FROM dbo.CERTIFICADO As C " &
+                                 "INNER JOIN R_CERTIFICADO As RC On C.cod_certificado = RC.cod_certificado " &
+                                 "INNER JOIN R_PRESUPUESTO As RP On Rc.cod_r_ppto = RP.cod_r_ppto " &
+                                 "WHERE C.activo = 1 And C.cod_certificado =" & cod_certificado
 
         Dim ds As Data.DataSet = Me.Exec(consulta)
         If ds.Tables(0).Rows.Count > 0 Then
@@ -171,12 +169,12 @@ Public Class DaoCertificado
 
     Public Function certificadosSinOrden() As List(Of CertificadoSinOrden)
         Dim lista As List(Of CertificadoSinOrden) = New List(Of CertificadoSinOrden)
-        Dim consulta As String = "select c.cod_certificado as cod_certificado, " &
-                                 "       c.numero as certificado, " &
-                                 "       c.fecha_alta as fecha, " &
+        Dim consulta As String = "Select c.cod_certificado As cod_certificado, " &
+                                 "       c.numero As certificado, " &
+                                 "       c.fecha_alta As fecha, " &
                                  "	     c.monto As monto, " &
                                  "       cons.nombre As constructor, " &
-                                 "       cons.cuit as cuit, " &
+                                 "       cons.cuit As cuit, " &
                                  "	     concat(p.nombre, ' ', p.apellido) as beneficiario" &
                                  " From CERTIFICADO As c" &
                                  " inner join OBRA as o on c.cod_obra = o.cod_obra" &
@@ -197,15 +195,16 @@ Public Class DaoCertificado
     Public Function costos(cod_obra As Integer) As Costos
         Dim costs As Costos = New Costos()
 
-        Dim consulta As String = "select (SELECT ISNULL(sum(RPE.costo),0) FROM PRESUPUESTO AS PRE
-INNER JOIN R_PRESUPUESTO AS RPE ON PRE.cod_ppto = RPE.cod_ppto
-INNER JOIN OBRA AS OB ON PRE.cod_ppto = OB.cod_ppto
-WHERE OB.cod_obra = 1) AS COSTO,
-(SELECT ISNULL(sum(monto),0) AS costo from CERTIFICADO as CERTI
-WHERE CERTI.cod_obra = 1 AND CERTI.cod_certificado NOT IN (SELECT COD_CERTIFICADO FROM PAGO) ) AS CERTIFICADO,
-(SELECT ISNULL(SUM(CERTI.monto),0) AS costo FROM PAGO AS PA
-INNER JOIN CERTIFICADO AS CERTI ON PA.cod_certificado = CERTI.cod_certificado
-WHERE CERTI.cod_obra = 1) AS PAGADO"
+        Dim consulta As String = "select (SELECT ISNULL(sum(RPE.costo),0) FROM PRESUPUESTO AS PRE " &
+                                 "INNER JOIN R_PRESUPUESTO As RPE On PRE.cod_ppto = RPE.cod_ppto " &
+                                 "INNER JOIN OBRA AS OB ON PRE.cod_ppto = OB.cod_ppto " &
+                                 "WHERE OB.cod_obra = " & cod_obra & ") AS COSTO, " &
+                                 "(SELECT ISNULL(sum(monto),0) AS costo from CERTIFICADO as CERTI " &
+                                 "WHERE CERTI.cod_obra = " & cod_obra & " And CERTI.cod_certificado Not IN (SELECT COD_CERTIFICADO FROM PAGO) ) AS CERTIFICADO, " &
+                                 "(SELECT ISNULL(SUM(CERTI.monto),0) AS costo FROM PAGO AS PA " &
+                                 "INNER Join CERTIFICADO AS CERTI ON PA.cod_certificado = CERTI.cod_certificado " &
+                                 "WHERE CERTI.cod_obra = " & cod_obra & ") AS PAGADO"
+        Debug.Print(consulta)
 
         Dim ds As Data.DataSet = Me.Exec(consulta)
         If ds.Tables(0).Rows.Count = 1 Then
@@ -216,7 +215,18 @@ WHERE CERTI.cod_obra = 1) AS PAGADO"
 
         End If
         Return costs
-
-
     End Function
+
+    Public Function total_certificado(cod_obra As Integer) As Decimal
+        Dim consulta As String = "SELECT SUM(monto) as monto FROM CERTIFICADO WHERE cod_obra = " & cod_obra
+        Dim ds As Data.DataSet = Me.Exec(consulta)
+        If ds.Tables(0).Rows.Count = 1 Then
+            Dim row = ds.Tables(0).Rows(0)
+            Return row("monto")
+        End If
+        Return 0
+    End Function
+
+
+
 End Class

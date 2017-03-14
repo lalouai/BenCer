@@ -39,6 +39,19 @@ Public Class DaoConstructor
         Return lista
     End Function
 
+    Public Function asociado(cod_constructor As Integer) As Boolean
+        Dim consulta As String = "select * from CONSTRUCTOR as c " &
+                                 "inner join obra as ob on c.cod_constructor = ob.cod_constructor " &
+                                 "where c.cod_constructor = " & cod_constructor
+        Debug.Print(consulta)
+        Dim ds As Data.DataSet = Me.Exec(consulta)
+        If ds.Tables(0).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     Public Function obtener(cod As Integer) As Constructor Implements InterfaceDao(Of Constructor).obtener
         Throw New NotImplementedException()
     End Function

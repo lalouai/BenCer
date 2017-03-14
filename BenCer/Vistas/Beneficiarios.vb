@@ -1,9 +1,9 @@
 ﻿Public Class Beneficiarios
 
     Private WithEvents controlador As ControladorBeneficiarios
+    Private conFinal As Boolean
 
-
-    Public Sub New()
+    Public Sub New(Optional ByVal conFinal As Boolean = False)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
@@ -12,15 +12,28 @@
         controlador = New ControladorBeneficiarios
         dvg_ben.AutoGenerateColumns = False
 
-        dvg_ben.DataSource = controlador.listaBEneficiarios
+        Me.conFinal = conFinal
 
-        Dim btn_cert As New DataGridViewButtonColumn()
-        dvg_ben.Columns.Add(btn_cert)
-        btn_cert.HeaderText = "Certificar"
-        btn_cert.Text = "Certificar"
-        btn_cert.Name = "btn"
-        btn_cert.Width = 100
-        btn_cert.UseColumnTextForButtonValue = True
+        If Not conFinal Then
+            dvg_ben.DataSource = controlador.listaBEneficiarios
+
+            Dim btn_cert As New DataGridViewButtonColumn()
+            dvg_ben.Columns.Add(btn_cert)
+            btn_cert.HeaderText = "Certificar"
+            btn_cert.Text = "Certificar"
+            btn_cert.Name = "btn"
+            btn_cert.Width = 100
+            btn_cert.UseColumnTextForButtonValue = True
+        Else
+            dvg_ben.DataSource = controlador.listarBeneficiariosConFinal
+
+            Dim col As New DataGridViewTextBoxColumn
+            col.DataPropertyName = "fecha_fin"
+            col.HeaderText = "Fecha Final"
+            col.Width = 100
+            col.Name = "colWhateverName"
+            dvg_ben.Columns.Add(col)
+        End If
 
         Dim btn_obra As New DataGridViewButtonColumn()
         dvg_ben.Columns.Add(btn_obra)
@@ -49,21 +62,25 @@
         Dim obra As Obra
         obra = controlador.obtenerObra(ben.cod_beneficiario)
 
+        Debug.Print(obra.ToString)
+
+
+        Dim columna As Integer = e.ColumnIndex
+
+        If conFinal Then
+            columna = 4
+        End If
 
 
         If TypeOf senderGrid.Columns(e.ColumnIndex) Is DataGridViewButtonColumn AndAlso e.RowIndex >= 0 Then
-            If e.ColumnIndex = 3 Then
-                mostrarError("Certificar")
-
+            If columna = 3 Then
                 If obra IsNot Nothing Then
                     Dim certAlta As CertificadoAlta = New CertificadoAlta(obra.cod_obra, obra.cod_ppto)
                     With certAlta
                         .Show()
                     End With
                 End If
-            ElseIf e.ColumnIndex = 4 Then
-                mostrarError("Ver obra")
-
+            ElseIf columna = 4 Then
                 If obra IsNot Nothing Then
 
                     Dim dCert As DaoCertificado = New DaoCertificado
@@ -110,14 +127,15 @@
 
                         .obra_alta_costo_total.Text = costos.total.ToString("C2")
                         .obra_alta_avance_financiero.Text = costos.pagado.ToString("C2")
-                        .obra_alta_avance_porcentual.Text = (costos.pagado / costos.total).ToString("P")
+                        Try
+                            .obra_alta_avance_porcentual.Text = (costos.pagado / costos.total).ToString("P")
+                        Catch ex As DivideByZeroException
+                            .obra_alta_avance_porcentual.Text = 0.ToString("P")
+                        End Try
 
                         .grafico(costos.total, costos.pagado, costos.certificado)
-
                         .dgv_obra_alta_pagos.DataSource = dPagos.listar_por_obra(obra.cod_obra)
-
                     End With
-
                     formulario.ShowDialog()
                 End If
             End If

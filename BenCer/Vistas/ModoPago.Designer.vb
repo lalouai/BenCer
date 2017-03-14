@@ -41,6 +41,7 @@ Partial Class ModoPago
         '
         'cmb_mopa_forma_pago
         '
+        Me.cmb_mopa_forma_pago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_mopa_forma_pago.FormattingEnabled = True
         Me.cmb_mopa_forma_pago.Location = New System.Drawing.Point(160, 6)
         Me.cmb_mopa_forma_pago.Name = "cmb_mopa_forma_pago"

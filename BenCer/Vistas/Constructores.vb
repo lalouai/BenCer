@@ -30,11 +30,17 @@
         Dim cons As Constructor
         If dvg_cons.SelectedRows.Count = 1 Then
             cons = dvg_cons.SelectedRows(0).DataBoundItem
-            dismissError()
         Else
             mostrarError("Debe seleccionar una fila para poder eliminarla." & vbCrLf & "Por favor,seleccione una y vuelva a intentarlo.")
             Exit Sub
         End If
+
+        If controlador.consAsociado(cons.cod_constructor) Then
+            mostrarError("Lo siento, " & cons.nombre & "," & vbCrLf & " ya se encuentra asociado a un obra," & vbCrLf &
+                         "hasta que esta finalice, no podrá ser eliminado.")
+            Exit Sub
+        End If
+
 
         Dim result As Integer = MessageBox.Show("Desea eliminar el constructor " & cons.nombre & " del registro?", "Por favor confirme", MessageBoxButtons.YesNo)
 
@@ -82,15 +88,11 @@
             .cuit = cuit
         End With
 
-        'Dim dt As List(Of Constructor) = DirectCast(dvg_cons.DataSource, List(Of Constructor))
         If modo.Equals("agregar") Then
             fila.cod_constructor = controlador.guardarItem(fila)
-            '    dt.Add(fila)
+
         ElseIf modo.Equals("actualizar") Then
             fila.cod_constructor = cod_constructor
-            '    Dim constructor As Constructor = dt.Find(Function(el) el.cod_constructor = fila.cod_constructor)
-            '    dt.Remove(constructor)
-            '    dt.Add(fila)
             controlador.actualizarItem(fila)
             modo = "agregar"
         End If
@@ -115,9 +117,11 @@
     Private Sub mostrarError(txt As String) Handles controlador.mostrarError
         lbl_cons_error.Text = txt
         lbl_cons_error.Visible = True
+        dismisser.Enabled = True
     End Sub
 
-    Private Sub dismissError() Handles controlador.dismissError
+    Private Sub dismissError() Handles controlador.dismissError, dismisser.Tick
+        dismisser.Enabled = False
         lbl_cons_error.Visible = False
         lbl_cons_error.Text = ""
     End Sub

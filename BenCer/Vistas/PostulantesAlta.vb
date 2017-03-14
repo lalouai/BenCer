@@ -81,7 +81,7 @@
                 controlador.actualizarPersona(txt_pos_dni.Text, txtNombre.Text, txtApellido.Text, cmbTipoDoc.SelectedIndex, cmbEstado.SelectedIndex)
                 RaiseEvent guardado()
             Else
-                MsgBox("algo fallo")
+                texto_error("No pude actualizar, verifique la información e intente nuevamente")
             End If
         Else
             If cmbTipoDoc.SelectedIndex = 0 Then
@@ -136,10 +136,6 @@
     Public Event guardado()
     Private Sub cerrar() Handles controlador.cerrar
         Me.Close()
-    End Sub
-
-    Private Sub btn_agregar_fliar_Click(sender As Object, e As EventArgs) Handles btn_agregar_fliar.Click
-        'dgv_familiares.Rows.Add()
     End Sub
 
     Private Sub dgv_familiares_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_familiares.CellValueChanged

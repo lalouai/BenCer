@@ -73,6 +73,12 @@ Public Class ObraAlta
     End Property
 
     Public Sub grafico(total As Decimal, cobrado As Decimal, certificado As Decimal)
+        '''
+        '''     MODIFICAR LOS DATOS EN EL GRÁFICO
+        ''' 
+        ''' 
+        '''
+
         With Me.obra_alta_grafico
             .Legends.Clear()
             .Series.Clear()
@@ -198,7 +204,7 @@ Public Class ObraAlta
                     End If
                 End If
             Else
-                MsgBox("Lo siento, pero tanto el programa" & vbCrLf &
+                mostrarError("Lo siento, pero tanto el programa" & vbCrLf &
                        "como el prototipo son datos requeridos" & vbCrLf &
                        "Por favor revise el formulario y vuelva a intentar")
                 Exit Sub
@@ -232,9 +238,11 @@ Public Class ObraAlta
     Private Sub mostrarError(txt As String)
         lbl_obra_alta_error.Text = txt
         lbl_obra_alta_error.Visible = True
+        dismisser.Enabled = True
     End Sub
 
-    Private Sub dismissError()
+    Private Sub dismissError() Handles dismisser.Tick
+        dismisser.Enabled = False
         lbl_obra_alta_error.Visible = False
         lbl_obra_alta_error.Text = ""
     End Sub

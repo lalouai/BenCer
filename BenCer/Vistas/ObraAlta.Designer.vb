@@ -22,13 +22,14 @@ Partial Class ObraAlta
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.lbl_obra_alta_titulo = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txt_obra_alta_cod_persona = New System.Windows.Forms.TextBox()
@@ -72,6 +73,7 @@ Partial Class ObraAlta
         Me.obra_alta_costo_total = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lbl_obra_alta_error = New System.Windows.Forms.Label()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgv_obra_alta_resultados, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -212,6 +214,7 @@ Partial Class ObraAlta
         '
         'cmb_obra_alta_constructor
         '
+        Me.cmb_obra_alta_constructor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_obra_alta_constructor.Enabled = False
         Me.cmb_obra_alta_constructor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmb_obra_alta_constructor.FormattingEnabled = True
@@ -261,6 +264,7 @@ Partial Class ObraAlta
         '
         'cmb_obra_alta_programa
         '
+        Me.cmb_obra_alta_programa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_obra_alta_programa.Enabled = False
         Me.cmb_obra_alta_programa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmb_obra_alta_programa.FormattingEnabled = True
@@ -271,6 +275,7 @@ Partial Class ObraAlta
         '
         'cmb_obra_alta_prototipo
         '
+        Me.cmb_obra_alta_prototipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_obra_alta_prototipo.Enabled = False
         Me.cmb_obra_alta_prototipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmb_obra_alta_prototipo.FormattingEnabled = True
@@ -394,8 +399,8 @@ Partial Class ObraAlta
         'fecha
         '
         Me.fecha.DataPropertyName = "fecha_pago"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle1
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
         Me.fecha.ReadOnly = True
@@ -403,8 +408,8 @@ Partial Class ObraAlta
         'cod_pago
         '
         Me.cod_pago.DataPropertyName = "cod_pago"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cod_pago.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cod_pago.DefaultCellStyle = DataGridViewCellStyle2
         Me.cod_pago.HeaderText = "Orden Pago"
         Me.cod_pago.Name = "cod_pago"
         Me.cod_pago.ReadOnly = True
@@ -412,8 +417,8 @@ Partial Class ObraAlta
         'cod_certificado
         '
         Me.cod_certificado.DataPropertyName = "cod_certificado"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.cod_certificado.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.cod_certificado.DefaultCellStyle = DataGridViewCellStyle3
         Me.cod_certificado.HeaderText = "Certificado"
         Me.cod_certificado.Name = "cod_certificado"
         Me.cod_certificado.ReadOnly = True
@@ -421,10 +426,10 @@ Partial Class ObraAlta
         'monto
         '
         Me.monto.DataPropertyName = "monto"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Format = "C2"
-        DataGridViewCellStyle12.NullValue = Nothing
-        Me.monto.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "C2"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.monto.DefaultCellStyle = DataGridViewCellStyle4
         Me.monto.HeaderText = "Monto"
         Me.monto.Name = "monto"
         Me.monto.ReadOnly = True
@@ -474,17 +479,17 @@ Partial Class ObraAlta
         '
         'obra_alta_grafico
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.obra_alta_grafico.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.obra_alta_grafico.Legends.Add(Legend3)
+        ChartArea1.Name = "ChartArea1"
+        Me.obra_alta_grafico.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.obra_alta_grafico.Legends.Add(Legend1)
         Me.obra_alta_grafico.Location = New System.Drawing.Point(9, 19)
         Me.obra_alta_grafico.Name = "obra_alta_grafico"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.obra_alta_grafico.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.obra_alta_grafico.Series.Add(Series1)
         Me.obra_alta_grafico.Size = New System.Drawing.Size(449, 182)
         Me.obra_alta_grafico.TabIndex = 19
         Me.obra_alta_grafico.Text = "Chart1"
@@ -523,11 +528,15 @@ Partial Class ObraAlta
         Me.lbl_obra_alta_error.Text = "error"
         Me.lbl_obra_alta_error.Visible = False
         '
+        'dismisser
+        '
+        Me.dismisser.Interval = 3000
+        '
         'ObraAlta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1146, 701)
+        Me.ClientSize = New System.Drawing.Size(1134, 701)
         Me.Controls.Add(Me.lbl_obra_alta_error)
         Me.Controls.Add(Me.obra_avance)
         Me.Controls.Add(Me.grp_postulantes)
@@ -597,4 +606,5 @@ Partial Class ObraAlta
     Friend WithEvents cod_certificado As DataGridViewTextBoxColumn
     Friend WithEvents monto As DataGridViewTextBoxColumn
     Friend WithEvents lbl_obra_alta_error As Label
+    Friend WithEvents dismisser As Timer
 End Class

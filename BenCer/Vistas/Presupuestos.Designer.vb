@@ -22,9 +22,10 @@ Partial Class Presupuestos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btn_presu_cerrar = New System.Windows.Forms.Button()
         Me.dvg_presupuesto = New System.Windows.Forms.DataGridView()
         Me.item = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,6 +51,8 @@ Partial Class Presupuestos
         Me.btn_presu_consolidar = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.lbl_presu_costo = New System.Windows.Forms.Label()
+        Me.dismisser = New System.Windows.Forms.Timer(Me.components)
+        Me.btn_ppto_imprimir_foja = New System.Windows.Forms.Button()
         CType(Me.dvg_presupuesto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -78,8 +81,8 @@ Partial Class Presupuestos
         'item
         '
         Me.item.DataPropertyName = "item"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.item.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.item.DefaultCellStyle = DataGridViewCellStyle4
         Me.item.HeaderText = "Item"
         Me.item.Name = "item"
         Me.item.ReadOnly = True
@@ -96,9 +99,9 @@ Partial Class Presupuestos
         'Costo_M_Obra
         '
         Me.Costo_M_Obra.DataPropertyName = "costo"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle2.Format = "C2"
-        Me.Costo_M_Obra.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "C2"
+        Me.Costo_M_Obra.DefaultCellStyle = DataGridViewCellStyle5
         Me.Costo_M_Obra.HeaderText = "Costo M de Obra"
         Me.Costo_M_Obra.Name = "Costo_M_Obra"
         Me.Costo_M_Obra.ReadOnly = True
@@ -106,9 +109,9 @@ Partial Class Presupuestos
         'incidencia
         '
         Me.incidencia.DataPropertyName = "incidencia"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Format = "P"
-        Me.incidencia.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "P"
+        Me.incidencia.DefaultCellStyle = DataGridViewCellStyle6
         Me.incidencia.HeaderText = "Incidencia"
         Me.incidencia.Name = "incidencia"
         Me.incidencia.ReadOnly = True
@@ -256,7 +259,7 @@ Partial Class Presupuestos
         '
         'btn_presu_consolidar
         '
-        Me.btn_presu_consolidar.Location = New System.Drawing.Point(773, 139)
+        Me.btn_presu_consolidar.Location = New System.Drawing.Point(773, 146)
         Me.btn_presu_consolidar.Name = "btn_presu_consolidar"
         Me.btn_presu_consolidar.Size = New System.Drawing.Size(142, 23)
         Me.btn_presu_consolidar.TabIndex = 40
@@ -286,11 +289,25 @@ Partial Class Presupuestos
         Me.lbl_presu_costo.Text = "Label1"
         Me.lbl_presu_costo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'dismisser
+        '
+        Me.dismisser.Interval = 3000
+        '
+        'btn_ppto_imprimir_foja
+        '
+        Me.btn_ppto_imprimir_foja.Location = New System.Drawing.Point(773, 117)
+        Me.btn_ppto_imprimir_foja.Name = "btn_ppto_imprimir_foja"
+        Me.btn_ppto_imprimir_foja.Size = New System.Drawing.Size(142, 23)
+        Me.btn_ppto_imprimir_foja.TabIndex = 43
+        Me.btn_ppto_imprimir_foja.Text = "Imprimir"
+        Me.btn_ppto_imprimir_foja.UseVisualStyleBackColor = True
+        '
         'Presupuestos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(925, 576)
+        Me.Controls.Add(Me.btn_ppto_imprimir_foja)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.lbl_presu_costo)
         Me.Controls.Add(Me.btn_presu_consolidar)
@@ -345,4 +362,6 @@ Partial Class Presupuestos
     Friend WithEvents descripcion As DataGridViewTextBoxColumn
     Friend WithEvents Costo_M_Obra As DataGridViewTextBoxColumn
     Friend WithEvents incidencia As DataGridViewTextBoxColumn
+    Friend WithEvents dismisser As Timer
+    Friend WithEvents btn_ppto_imprimir_foja As Button
 End Class

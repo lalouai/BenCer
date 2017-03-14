@@ -40,15 +40,30 @@ Public Class DaoPresupuesto
                                          " FROM dbo.PRESUPUESTO AS P INNER JOIN TIPO_OBRA AS OT ON P.cod_tipo_obra = OT.cod_tipo_obra " &
                                          "WHERE P.cod_ppto = " & cod & ";")
 
-        Dim aux = ds.Tables(0).Rows(0)
+        If ds.Tables(0).Rows.Count > 0 Then
+            Dim aux = ds.Tables(0).Rows(0)
         presu.cod_ppto = aux("cod_ppto")
         presu.codTipoObra = aux("cod_tipo_obra")
         presu.tipo_obra = aux("descripcion")
         presu.estado = aux("estado")
         presu.items = daoRenglones.listar_ppto(presu.cod_ppto)
+            Return presu
+        End If
+        Return Nothing
+    End Function
 
-        Return presu
+    Public Function pptoAsociado(cod_proto As Integer) As Integer
+        Dim consulta As String = "select count(cod_obra) as cantidad_obras from presupuesto as pe " &
+                                 "inner join OBRA as ob on pe.cod_ppto = ob.cod_ppto " &
+                                 "where pe.cod_ppto = " & cod_proto
+        Dim ds As Data.DataSet = Me.Exec(consulta)
+        If ds.Tables(0).Rows.Count = 1 Then
+            Dim aux = ds.Tables(0).Rows(0)
+            Debug.Print("Cantidad de Obras " & aux("cantidad_obras"))
+            Return aux("cantidad_obras")
+        End If
 
+        Return 0
     End Function
 
     Public Sub eliminarPptoCompleto(cod_proto As Object)
@@ -59,7 +74,6 @@ Public Class DaoPresupuesto
 
     Public Function obtener_ppto_cod_tipo(ByVal cod As Integer) As Presupuesto
         Dim presu As Presupuesto = New Presupuesto
-
 
         Dim ds As Data.DataSet = Me.Exec("SELECT P.cod_ppto as cod_ppto, OT.descripcion as descripcion, P.cod_tipo_obra as cod_tipo_obra, P.estado as estado" &
                                          " FROM dbo.PRESUPUESTO AS P INNER JOIN TIPO_OBRA AS OT ON P.cod_tipo_obra = OT.cod_tipo_obra " &
@@ -74,7 +88,6 @@ Public Class DaoPresupuesto
         Else
             presu = Nothing
         End If
-
 
         Return presu
     End Function
